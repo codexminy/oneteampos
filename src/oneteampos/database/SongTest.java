@@ -1,5 +1,5 @@
 package oneteampos.database;
 
 public class SongTest {
-	int test;
+	int test = 10;
 }
