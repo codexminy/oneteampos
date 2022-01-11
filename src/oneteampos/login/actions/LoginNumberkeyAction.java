@@ -13,12 +13,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import main.MainFrame;
-import main.mainContainer.MainPanel;
+
 import oneteampos.database.DBConnector;
 import oneteampos.datamodel.Staff;
 import oneteampos.login.components.LoginStaffIDJLabel;
 import oneteampos.login.components.LoginStaffNameJLabel;
+import oneteampos.main.MainFrame;
+import oneteampos.main.mainContainer.MainPanel;
 
 
 public class LoginNumberkeyAction implements MouseListener{

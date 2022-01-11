@@ -7,7 +7,8 @@ import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import main.MainFrame;
+import oneteampos.main.MainFrame;
+
 
 
 public class LoginStaffNameJLabel extends JLabel{

@@ -1,4 +1,4 @@
-package main.mainComponent;
+package oneteampos.main.mainComponent;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -10,9 +10,9 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
-import main.MainFrame;
-import main.mainAction.MainButtonEnterAction;
-import main.mainAction.MainButtonMouseAction;
+import oneteampos.main.MainFrame;
+import oneteampos.main.mainAction.MainButtonMouseAction;
+
 
 public class MainButton extends JButton {
 	

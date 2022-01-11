@@ -1,11 +1,11 @@
-package main;
+package oneteampos.main;
 
 import javax.swing.JFrame;
 
-import main.mainContainer.MainPanel;
 import oneteampos.login.components.LoginJPanel;
 import oneteampos.login.components.LoginStaffIDJLabel;
 import oneteampos.login.components.LoginStaffNameJLabel;
+import oneteampos.main.mainContainer.MainPanel;
 
 public class MainFrame extends JFrame {
 	

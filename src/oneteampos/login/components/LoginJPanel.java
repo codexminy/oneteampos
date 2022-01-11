@@ -9,8 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import main.MainFrame;
+
 import oneteampos.login.actions.LoginNumberkeyAction;
+import oneteampos.main.MainFrame;
 
 
 public class LoginJPanel extends JPanel{

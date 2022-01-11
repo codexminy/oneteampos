@@ -1,4 +1,4 @@
-package main.mainContainer;
+package oneteampos.main.mainContainer;
 
 import java.awt.CardLayout;
 import java.awt.GridLayout;
@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import main.MainFrame;
-import main.mainComponent.MainButton;
+import oneteampos.main.MainFrame;
+import oneteampos.main.mainComponent.MainButton;
+
+
 
 public class MainPanel {
 	

@@ -1,4 +1,4 @@
-package main.mainAction;
+package oneteampos.main.mainAction;
 
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
