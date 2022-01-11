@@ -28,6 +28,7 @@ public class MainPanel {
 
 		cardPanel.add(gridPanel);
 //		cardPanel.add(mainNames[0], menuPanel.getPanel());
+		cardPanel.setVisible(false);
 	}
 	
 	private void createMainBtns() {
@@ -38,5 +39,13 @@ public class MainPanel {
 	
 	public JPanel getCardPanel() {
 		return this.cardPanel;
+	}
+
+	public void setVisibleTrue() {
+		cardPanel.setVisible(true);
+	}
+	
+	public void setVisibleFalse() {
+		cardPanel.setVisible(false);
 	}
 }

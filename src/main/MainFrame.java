@@ -3,6 +3,9 @@ package main;
 import javax.swing.JFrame;
 
 import main.mainContainer.MainPanel;
+import oneteampos.login.components.LoginJPanel;
+import oneteampos.login.components.LoginStaffIDJLabel;
+import oneteampos.login.components.LoginStaffNameJLabel;
 
 public class MainFrame extends JFrame {
 	
@@ -10,10 +13,14 @@ public class MainFrame extends JFrame {
 	public final static int FRAME_HEIGHT = 720;
 	
 	private MainPanel mainPanel;
+	private LoginStaffIDJLabel loginStfIdLabel;
+	private LoginStaffNameJLabel loginStfNameLabel;
 	
 	public MainFrame() {
 		this.mainPanel = new MainPanel(this);
-		add(mainPanel.getCardPanel());
+		this.loginStfIdLabel = new LoginStaffIDJLabel(this);
+		this.loginStfNameLabel = new LoginStaffNameJLabel(this);
+//		add(mainPanel.getCardPanel());
 		settings();
 	}
 
@@ -30,7 +37,16 @@ public class MainFrame extends JFrame {
 		return this.mainPanel;
 	}
 	
+	public LoginStaffIDJLabel getLoginStaffIDJLabel() {
+		return this.loginStfIdLabel;
+	}
+	
+	public LoginStaffNameJLabel getStaffNameJLabel() {
+		return this.loginStfNameLabel;
+	}
+	
 	public static void main(String[] args) {
-		new MainFrame();
+		MainFrame mframe = new MainFrame();
+		new LoginJPanel(mframe);
 	}
 }
