@@ -12,8 +12,8 @@ import oneteampos.menu.container.MenuRightPanel;
 
 public class MenuPanel extends JPanel {
 	
-	private JPanel leftPanel; // 메뉴 왼쪽 패널
-	private JPanel rightPanel; // 메뉴 오른쪽 패널(장바구니)
+	private MenuLeftPanel leftPanel; // 메뉴 왼쪽 패널
+	private MenuRightPanel rightPanel; // 메뉴 오른쪽 패널(장바구니)
 
 	public MenuPanel(MainFrame mainFrame) {
 		this.leftPanel = new MenuLeftPanel(mainFrame);
@@ -25,5 +25,13 @@ public class MenuPanel extends JPanel {
 		
 		add(leftPanel, Gbl.getSetting(gbc, 0.6, 0.1, 0, 0));
 		add(rightPanel, Gbl.getSetting(gbc, 0.4, 0.1, 1, 0));
+	}
+	
+	public MenuLeftPanel getLeftPanel() {
+		return this.leftPanel;
+	}
+	
+	public MenuRightPanel getRightPanel() {
+		return this.rightPanel;
 	}
 }

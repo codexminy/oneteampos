@@ -15,6 +15,7 @@ public class MainPanel {
 	
 	private final static String[] mainNames = new String[] {"메뉴", "매출", "발주", "사원"};
 	private MainFrame mainFrame;
+	private MenuPanel menuPanel;
 	private JPanel cardPanel;
 	private JPanel gridPanel;
 	
@@ -22,11 +23,12 @@ public class MainPanel {
 		this.mainFrame = mainFrame;
 		this.cardPanel = new JPanel(new CardLayout());
 		this.gridPanel = new JPanel(new GridLayout());
+		this.menuPanel = new MenuPanel(mainFrame);
 		
 		createMainBtns();
 
 		cardPanel.add(gridPanel);
-		cardPanel.add(mainNames[0], new MenuPanel(mainFrame));
+		cardPanel.add(mainNames[0], menuPanel);
 		cardPanel.setVisible(false);
 	}
 	
@@ -34,6 +36,10 @@ public class MainPanel {
 		for(int i=0; i<mainNames.length; ++i) {
 			gridPanel.add(new MainButton(mainNames[i], mainFrame));
 		}
+	}
+	
+	public MenuPanel getMenuPanel() {
+		return this.menuPanel;
 	}
 	
 	public JPanel getCardPanel() {

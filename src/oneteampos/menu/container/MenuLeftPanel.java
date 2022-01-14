@@ -41,7 +41,9 @@ public class MenuLeftPanel extends JPanel {
 	private CafeMenuData cafeMenuData;
 	private JButton nextBtn;
 	private JButton prevBtn;
-
+	private JLabel infoId;
+	private JLabel infoName;
+	
 	public MenuLeftPanel(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
 		this.menuManagePanel = new MenuManagePanel(mainFrame, this);
@@ -50,20 +52,22 @@ public class MenuLeftPanel extends JPanel {
 		this.cafeMenuData = new CafeMenuData();
 		this.prevBtn = new JButton(" ◀ ");
 		this.nextBtn = new JButton(" ▶ ");
+		this.infoId = new JLabel();
+		this.infoName = new JLabel();
 		
 		JPanel menuPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, xgap, 0));
 		JPanel infoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, xgap, hgap));
 		JPanel settingPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, xgap, hgap));
 		JPanel receiptPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, xgap, 0));
 		JPanel movePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, xgap, 0));
-		JLabel info = new JLabel("0001 홍길동");
 		JButton menuSettingbtn = new JButton("메뉴 관리");
 		JButton receiptBtn = new JButton("영수증");
-
+		
 		receiptPanel.add(receiptBtn);
 		movePanel.add(prevBtn);
 		movePanel.add(nextBtn);
-		infoPanel.add(info);
+		infoPanel.add(infoId);
+		infoPanel.add(infoName);
 		settingPanel.add(menuSettingbtn);
 		
 		menuSettingbtn.addActionListener(new MenuSettingAction(mainFrame, menuManagePanel));
@@ -184,5 +188,13 @@ public class MenuLeftPanel extends JPanel {
 	
 	public JPanel getCardMenuPanel() {
 		return this.cardMenuPanel;
+	}
+
+	public JLabel getInfoIdLabel() {
+		return this.infoId;
+	}
+	
+	public JLabel getInfoNameLabel() {
+		return this.infoName;
 	}
 }
