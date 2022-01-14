@@ -14,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 import oneteampos.database.DBConnector;
 import oneteampos.datamodel.Stock;
@@ -69,7 +70,13 @@ public class StockListJPanel extends JPanel{
 			}
 		}
 		
-		JTable stock_table = new JTable(rowData, columnNames);
+		DefaultTableModel model = new DefaultTableModel(rowData, columnNames){
+			public boolean isCellEditable(int i, int c) {
+				return false;
+			}
+		};
+		
+		JTable stock_table = new JTable(model);
 		
 		setSizeColumnWidth(stock_table);
 		
@@ -104,7 +111,6 @@ public class StockListJPanel extends JPanel{
 
 		
 		for(int i =0; i < table.getColumnCount(); ++i) {
-//			table.getColumn(table.getColumnName(i)).setPreferredWidth(i);
 			table.getColumn(table.getColumnName(i)).setCellRenderer(celAlignCenter);
 		}
 		

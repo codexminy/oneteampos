@@ -141,12 +141,17 @@ public class OrderListJPanel extends JPanel{
 
 		
 		if(num == 1) {
-			smodel = new DefaultTableModel(rowData, columnNames); 
+			smodel = new DefaultTableModel(rowData, columnNames) {
+				public boolean isCellEditable(int i, int c) {
+					return false;
+				}
+			};
+
 			storeOrderTable = new JTable(smodel);
 			setSizeColumnWidth(storeOrderTable);	
 			// 컴포넌트를 스크롤 가능한 형태로 보여주기 위해 사용된다.
 			JScrollPane sp = new JScrollPane(storeOrderTable);
-			setSelection(storeOrderTable); // 클릭 안되게 막기
+//			setSelection(storeOrderTable); // 클릭 안되게 막기
 			
 			sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 			sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -156,7 +161,11 @@ public class OrderListJPanel extends JPanel{
 			return sp;
 			
 		} else {
-			DefaultTableModel model = new DefaultTableModel(rowData, columnNames);
+			DefaultTableModel model = new DefaultTableModel(rowData, columnNames) {
+				public boolean isCellEditable(int i, int c) {
+					return false;
+				}
+			};
 			itemTable = new JTable(model);
 			itemTable.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 			
