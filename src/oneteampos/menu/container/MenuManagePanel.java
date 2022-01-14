@@ -99,7 +99,7 @@ public class MenuManagePanel {
 
 	public DefaultTableModel inputMenuData() {
 		model = new DefaultTableModel();
-		String sql = "SELECT menu_id AS \"메뉴ID\", menu_name AS \"메뉴이름\", price AS \"가격\", menu_type AS \"종류\" FROM tempmenu ORDER BY menu_id";
+		String sql = "SELECT menu_id AS \"메뉴ID\", menu_name AS \"메뉴이름\", price AS \"가격\", menu_type AS \"종류\" FROM menu ORDER BY menu_id";
 		
 		try (
 			Connection conn = DBConnector.getConnection();
