@@ -18,8 +18,8 @@ public class MainFrame extends JFrame {
 	
 	public MainFrame() {
 		this.mainPanel = new MainPanel(this);
-		this.loginStfIdLabel = new LoginStaffIDJLabel(this);
-		this.loginStfNameLabel = new LoginStaffNameJLabel(this);
+		this.loginStfIdLabel = new LoginStaffIDJLabel();
+		this.loginStfNameLabel = new LoginStaffNameJLabel();
 //		add(mainPanel.getCardPanel());
 		settings();
 	}

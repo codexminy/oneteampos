@@ -9,7 +9,7 @@ public class Staff {
 	Integer stf_id;
 	String stf_name;
 	Integer job_id;
-	Date hire_date;
+	String hire_date;
 	Integer salary;
 	String tel;
 	String address;
@@ -18,7 +18,7 @@ public class Staff {
 		stf_id = rs.getInt("stf_id");
 		stf_name = rs.getString("stf_name");
 		job_id = rs.getInt("job_id");
-		hire_date = rs.getDate("hire_date");
+		hire_date = rs.getString("hire_date");
 		salary = rs.getInt("salary");
 		tel = rs.getString("tel");
 		address = rs.getString("address");

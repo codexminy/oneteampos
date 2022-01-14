@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
 import oneteampos.main.MainFrame;
+import oneteampos.main.mainAction.MainButtonEnterAction;
 import oneteampos.main.mainAction.MainButtonMouseAction;
 
 
@@ -25,7 +26,7 @@ public class MainButton extends JButton {
 		setBorder(new LineBorder(Color.LIGHT_GRAY));
 		setFont(new Font(Font.DIALOG_INPUT, Font.PLAIN, 20));
 		setFocusable(false);
-//		addActionListener(new MainButtonEnterAction(mainFrame));
+		addActionListener(new MainButtonEnterAction(mainFrame));
 		addMouseListener(new MainButtonMouseAction());
 	}
 }
