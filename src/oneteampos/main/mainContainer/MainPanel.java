@@ -3,10 +3,12 @@ package oneteampos.main.mainContainer;
 import java.awt.CardLayout;
 import java.awt.GridLayout;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import oneteampos.main.MainFrame;
 import oneteampos.main.mainComponent.MainButton;
+import oneteampos.members.MenuJTabaleExam;
 import oneteampos.menu.MenuPanel;
 
 
@@ -18,12 +20,14 @@ public class MainPanel {
 	private MenuPanel menuPanel;
 	private JPanel cardPanel;
 	private JPanel gridPanel;
+	private JFrame member;
 	
 	public MainPanel(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
 		this.cardPanel = new JPanel(new CardLayout());
 		this.gridPanel = new JPanel(new GridLayout());
 		this.menuPanel = new MenuPanel(mainFrame);
+		this.member = new MenuJTabaleExam();
 		
 		createMainBtns();
 
@@ -40,6 +44,10 @@ public class MainPanel {
 	
 	public MenuPanel getMenuPanel() {
 		return this.menuPanel;
+	}
+	
+	public JFrame getMember() {
+		return this.member;
 	}
 	
 	public JPanel getCardPanel() {

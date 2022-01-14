@@ -67,7 +67,7 @@ public class MenuJTabaleExam extends JFrame implements ActionListener {
     	
     	setSize(1280, 720);
     	setLocationRelativeTo(null);
-    	setVisible(true);
+    	setVisible(false);
     	
     	super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	
@@ -84,9 +84,9 @@ public class MenuJTabaleExam extends JFrame implements ActionListener {
     		jt.setRowSelectionInterval(0, 0);    	
     }
 
-    public static void main(String[] args) {
-		new MenuJTabaleExam();
-	}
+//    public static void main(String[] args) {
+//		new MenuJTabaleExam();
+//	}
     
 	@Override
 	public void actionPerformed(ActionEvent e) {
