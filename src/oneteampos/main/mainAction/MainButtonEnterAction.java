@@ -21,13 +21,13 @@ public class MainButtonEnterAction implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//		JButton btn = (JButton)e.getSource();
-//		CardLayout card = (CardLayout) mainFrame.getMainPanel().getCardPanel().getLayout();
-//		card.show(mainFrame.getMainPanel().getCardPanel(), btn.getText());
+		JButton btn = (JButton)e.getSource();
+		CardLayout card = (CardLayout) mainFrame.getMainPanel().getCardPanel().getLayout();
+		card.show(mainFrame.getMainPanel().getCardPanel(), btn.getText());
+		
 		if(e.toString().contains("발주")) {
 			mainFrame.getMainPanel().setVisibleFalse();
 			new OrderJPanel(mainFrame);
-			
 		}
 		
 		
