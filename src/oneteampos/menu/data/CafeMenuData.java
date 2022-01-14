@@ -18,7 +18,7 @@ public class CafeMenuData {
 
 	public ArrayList<MenuData> insertMenuData() {
 		ArrayList<MenuData> list = new ArrayList<>();
-		String sql = "SELECT * FROM tempmenu";
+		String sql = "SELECT * FROM menu";
 		
 		try (
 			Connection conn = DBConnector.getConnection();

@@ -108,6 +108,9 @@ public class CartJPanel extends JPanel{
 		orderTable.setCellSelectionEnabled(false);
 		orderTable.setFocusable(false);
 		
+		// 테이블 수정 금지
+		setSelection(orderTable);
+		
 		// 텍스트 좌측정렬
 		DefaultTableCellRenderer celAlignLeft = new DefaultTableCellRenderer();
 		celAlignLeft.setHorizontalAlignment(JLabel.LEFT);
@@ -129,7 +132,11 @@ public class CartJPanel extends JPanel{
 		}
 		
 		// 모델 생성
-		dmodel = new DefaultTableModel(columnNames, 0);
+		dmodel = new DefaultTableModel(columnNames, 0) {
+			public boolean isCellEditable(int i, int c) {
+				return false;
+			}
+		};
 		// 테이블 생성
 		deleteTable = new JTable(dmodel);
 		// 테이블 속성 지정
@@ -171,6 +178,11 @@ public class CartJPanel extends JPanel{
 		
 		add(totalLabel);
 		add(totalPriceLabel);
+	}
+	
+	public void setSelection(JTable table) { // 클릭 안되게 막는 메서드
+		table.setCellSelectionEnabled(false);
+		table.setFocusable(false);
 	}
 	
 	public ArrayList<Store_order> getStoreOrderList(){ // 디비에 들어갈 발주 데이터
