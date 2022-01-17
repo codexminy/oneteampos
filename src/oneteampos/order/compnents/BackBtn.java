@@ -5,6 +5,7 @@ import java.awt.Cursor;
 import java.awt.Font;
 
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 import oneteampos.login.actions.LoginNumberkeyAction;
 import oneteampos.main.MainFrame;
@@ -14,9 +15,9 @@ import oneteampos.order.cotainer.OrderJPanel;
 public class BackBtn extends JButton{
 	
 	MainFrame mainframe;
-	OrderJPanel orderPanel;
+	JPanel orderPanel;
 	
-	public BackBtn(MainFrame mainframe , OrderJPanel orderPanel ) {
+	public BackBtn(MainFrame mainframe , JPanel jpanel, String panelName ) {
 		super("<");
 		setFont(new Font("고딕", Font.BOLD, 20));
 
@@ -27,7 +28,7 @@ public class BackBtn extends JButton{
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
 		// 뒤로 가기 액션 (MainPanel로 돌아감)
-		addMouseListener(new BackBtnListener(mainframe , orderPanel));
+		addMouseListener(new BackBtnListener(mainframe , jpanel, panelName));
 	
 	}
 }

@@ -71,7 +71,7 @@ public class AddOrderBtnListener implements MouseListener{
 		JTable table = orderListPanel.getCartPanel().getOrderTable();
 		DefaultTableModel model = (DefaultTableModel)table.getModel();
 		String[] strArr  = new String[2];
-		strArr[0] = item_name;
+		strArr[0] = item_name; 
 		strArr[1] = item_amount + "";
 		model.addRow(strArr);
 		

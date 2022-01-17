@@ -45,7 +45,7 @@ public class OrderJPanel extends JPanel{
 		addLoginInfoLabel();
 		
 		// 버튼 추가
-		add(new BackBtn(mainframe , this));
+		add(new BackBtn(mainframe , this , "orderJPanel"));
 		add(stockListBtn); //  재고 버튼
 		add(orderListBtn); // 발주 버튼
 		add(stockListPanel); // 재고 판넬 

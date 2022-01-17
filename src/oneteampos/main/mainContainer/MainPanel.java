@@ -10,17 +10,19 @@ import oneteampos.main.MainFrame;
 import oneteampos.main.mainComponent.MainButton;
 import oneteampos.members.MenuJTabaleExam;
 import oneteampos.menu.MenuPanel;
+import oneteampos.staff.containers.StaffJPanel;
 
 
 
 public class MainPanel {
 	
-	private final static String[] mainNames = new String[] {"메뉴", "매출", "발주", "사원"};
+	private final static String[] mainNames = new String[] {"메뉴", "매출", "발주", "사원", "회원"};
 	private MainFrame mainFrame;
 	private MenuPanel menuPanel;
 	private JPanel cardPanel;
 	private JPanel gridPanel;
 	private JFrame member;
+	private StaffJPanel staffPanel;
 	
 	public MainPanel(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
@@ -34,6 +36,7 @@ public class MainPanel {
 		cardPanel.add(gridPanel);
 		cardPanel.add(mainNames[0], menuPanel);
 		cardPanel.setVisible(false);
+	
 	}
 	
 	private void createMainBtns() {

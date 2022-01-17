@@ -81,7 +81,9 @@ public class StoreOrderBtnListener implements MouseListener{
 
 			String sql3 = "INSERT INTO order_list VALUES (order_list_list_id_seq.NEXTVAL , ?, ?, ?)";
 
-			try (Connection conn = DBConnector.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql3);
+			try (
+				Connection conn = DBConnector.getConnection(); 
+				PreparedStatement pstmt = conn.prepareStatement(sql3);
 
 			) {
 
