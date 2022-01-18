@@ -29,8 +29,7 @@ public class MainButtonEnterAction implements ActionListener {
 		
 		if(btn.getText().equals("회원")) {
 			mainFrame.getMainPanel().getMember().setVisible(true);
-		}
-		
+		}	
 		if(e.toString().contains("발주")) {
 			mainFrame.getMainPanel().setVisibleFalse();
 			new OrderJPanel(mainFrame);

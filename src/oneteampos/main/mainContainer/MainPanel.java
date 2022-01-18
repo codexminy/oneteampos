@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 
 import oneteampos.main.MainFrame;
 import oneteampos.main.mainComponent.MainButton;
-import oneteampos.members.MenuJTabaleExam;
+import oneteampos.members.MemberJPanel;
 import oneteampos.menu.MenuPanel;
 import oneteampos.staff.containers.StaffJPanel;
 
@@ -21,7 +21,7 @@ public class MainPanel {
 	private MenuPanel menuPanel;
 	private JPanel cardPanel;
 	private JPanel gridPanel;
-	private JFrame member;
+	private MemberJPanel member;
 	private StaffJPanel staffPanel;
 	
 	public MainPanel(MainFrame mainFrame) {
@@ -29,7 +29,7 @@ public class MainPanel {
 		this.cardPanel = new JPanel(new CardLayout());
 		this.gridPanel = new JPanel(new GridLayout());
 		this.menuPanel = new MenuPanel(mainFrame);
-		this.member = new MenuJTabaleExam();
+		this.member = new MemberJPanel();
 		
 		createMainBtns();
 
@@ -49,7 +49,7 @@ public class MainPanel {
 		return this.menuPanel;
 	}
 	
-	public JFrame getMember() {
+	public MemberJPanel getMember() {
 		return this.member;
 	}
 	
