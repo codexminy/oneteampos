@@ -135,6 +135,7 @@ public class PaymentDialog extends JDialog {
 					rp.model.removeRow(0);
 				}
 				rp.cancelBtn.setVisible(false);
+				rp.isDisCnt = false;
 //				for(int i=0; i<mdp.getMenuIdList().size(); ++i) {
 //					for(int j=0; j<mdp.getMenuIdList().get(i).size(); ++j) {
 //						updateCartData(mdp.getMenuIdList().get(i).get(j), mdp.getMenuCntList().get(i).get(j));
@@ -261,6 +262,7 @@ public class PaymentDialog extends JDialog {
 					rp.getDiscountCash().setVisible(false);
 					rp.getTotalPrice().setVisible(false);
 					
+					rp.isDisCnt = false;
 					
 					dispose();
 
@@ -270,8 +272,6 @@ public class PaymentDialog extends JDialog {
 					}
 					
 					rp.cancelBtn.setVisible(false);
-					rp.isDisCnt = false;
-					
 //					MenuDetailsPanel mdp = mainFrame.getMainPanel().getMenuPanel().getLeftPanel().getMenuDetailsPanel();
 //					System.out.println(mdp.getMenuIdList().size());
 //					for(int i=0; i<mdp.getMenuIdList().size(); ++i) {

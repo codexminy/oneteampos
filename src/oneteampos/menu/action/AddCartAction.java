@@ -33,6 +33,7 @@ public class AddCartAction implements ActionListener {
 		if(result == JOptionPane.YES_OPTION) {
 			
 			if(rp.isDisCnt) {
+				System.out.println(rp.isDisCnt);
 				JOptionPane.showMessageDialog(null, "할인&적립을 취소해주세요!", "Message", JOptionPane.WARNING_MESSAGE);
 				mdp.dispose();
 			} else {
