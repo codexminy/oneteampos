@@ -11,8 +11,6 @@ import oneteampos.main.mainComponent.MainButton;
 import oneteampos.members.MenuJTabaleExam;
 import oneteampos.menu.MenuPanel;
 
-
-
 public class MainPanel {
 	
 	private final static String[] mainNames = new String[] {"메뉴", "매출", "발주", "사원"};

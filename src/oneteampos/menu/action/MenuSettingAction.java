@@ -8,12 +8,9 @@ import oneteampos.menu.container.MenuManagePanel;
 
 public class MenuSettingAction implements ActionListener {
 	
-	private MainFrame mainFrame;
 	private MenuManagePanel menuManagePanel;
-	private boolean isOn;
 	
-	public MenuSettingAction(MainFrame mainFrame, MenuManagePanel menuManagePanel) {
-		this.mainFrame = mainFrame;
+	public MenuSettingAction(MenuManagePanel menuManagePanel) {
 		this.menuManagePanel = menuManagePanel;
 	}
 	

@@ -121,7 +121,7 @@ public class LoginNumberkeyAction implements MouseListener{
 					mainframe.getLoginStaffIDJLabel().setText(id);
 					mainframe.getStaffNameJLabel().setText(staff.get(0).getStfName());
 					mainPanel.getMenuPanel().getLeftPanel().getInfoIdLabel().setText(id);
-					mainPanel.getMenuPanel().getLeftPanel().getInfoNameLabel().setText(staff.get(0).getStfName());
+					mainPanel.getMenuPanel().getLeftPanel().getInfoNameLabel().setText("  " + staff.get(0).getStfName());
 					
 					System.out.println("로그인 성공!");
 					return;

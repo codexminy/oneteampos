@@ -10,7 +10,7 @@ public class Gbl {
 		return gbc;
 	}
 	
-	public static GridBagConstraints getSetting(GridBagConstraints gbc, double weightx, double weighty, int gridx, int gridy) {
+	public static GridBagConstraints setting(GridBagConstraints gbc, double weightx, double weighty, int gridx, int gridy) {
 		gbc.weightx = weightx;
 		gbc.weighty = weighty;
 		gbc.gridx = gridx;
@@ -18,7 +18,7 @@ public class Gbl {
 		return gbc;
 	}
 	
-	public static GridBagConstraints getSetting(GridBagConstraints gbc, double weightx, double weighty, int gridx, int gridy, int gridWidth, int gridHeight) {
+	public static GridBagConstraints setting(GridBagConstraints gbc, double weightx, double weighty, int gridx, int gridy, int gridWidth, int gridHeight) {
 		gbc.weightx = weightx;
 		gbc.weighty = weighty;
 		gbc.gridx = gridx;
