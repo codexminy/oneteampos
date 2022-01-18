@@ -33,6 +33,7 @@ public class MainPanel {
 
 		cardPanel.add(gridPanel);
 		cardPanel.add(mainNames[0], menuPanel);
+		cardPanel.add(mainNames[4], member);
 		cardPanel.setVisible(false);
 	
 	}

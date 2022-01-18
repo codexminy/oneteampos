@@ -27,9 +27,9 @@ public class MainButtonEnterAction implements ActionListener {
 		CardLayout card = (CardLayout) mainFrame.getMainPanel().getCardPanel().getLayout();
 		card.show(mainFrame.getMainPanel().getCardPanel(), btn.getText());
 		
-		if(btn.getText().equals("회원")) {
-			mainFrame.getMainPanel().getMember().setVisible(true);
-		}	
+//		if(btn.getText().equals("회원")) {
+//			mainFrame.getMainPanel().getMember().setVisible(true);
+//		}	
 		if(e.toString().contains("발주")) {
 			mainFrame.getMainPanel().setVisibleFalse();
 			new OrderJPanel(mainFrame);

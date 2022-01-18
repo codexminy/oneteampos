@@ -44,6 +44,7 @@ public class MemberJPanel extends JPanel implements ActionListener {
     
     // 화면 구성 및 이벤트 등록
     public MemberJPanel() {
+    	setLayout(new BorderLayout());
     	
     	// 메뉴바 > 메뉴 추가
 		b.add(m);
@@ -68,6 +69,7 @@ public class MemberJPanel extends JPanel implements ActionListener {
     	
     	if (dt.getRowCount() > 0)
     		jt.setRowSelectionInterval(0, 0);
+    	
     }
 
 //    public static void main(String[] args) {
