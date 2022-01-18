@@ -12,8 +12,6 @@ import oneteampos.members.MemberJPanel;
 import oneteampos.menu.MenuPanel;
 import oneteampos.staff.containers.StaffJPanel;
 
-
-
 public class MainPanel {
 	
 	private final static String[] mainNames = new String[] {"메뉴", "매출", "발주", "사원", "회원"};
