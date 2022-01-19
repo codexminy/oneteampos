@@ -34,20 +34,21 @@ public class StaffKeyListener implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 		JTextField txt = (JTextField)e.getSource();
 		attribute = txt.getText();
-		if(idx == 0) {
-			staffJframe.getStaffjoinjobs().setStf_name(attribute);
-		} else if (idx == 1) {
-			staffJframe.getStaffjoinjobs().setJob_name(attribute);
-		} else if (idx == 2) {
-			staffJframe.getStaffjoinjobs().setHire_date(attribute);
-		} else if (idx == 3) {
-			staffJframe.getStaffjoinjobs().setSalary(attribute);
-		} else if (idx == 4) {
-			staffJframe.getStaffjoinjobs().setTel(attribute);
-		} else if (idx == 5) {
-			staffJframe.getStaffjoinjobs().setAddress(attribute);
+		if(!attribute.equals("")) {
+			if(idx == 0) {
+				staffJframe.getStaffjoinjobs().setStf_name(attribute);
+			} else if (idx == 1) {
+				staffJframe.getStaffjoinjobs().setJob_name(attribute);
+			} else if (idx == 2) {
+				staffJframe.getStaffjoinjobs().setHire_date(attribute);
+			} else if (idx == 3) {
+				staffJframe.getStaffjoinjobs().setSalary(attribute);
+			} else if (idx == 4) {
+				staffJframe.getStaffjoinjobs().setTel(attribute);
+			} else if (idx == 5) {
+				staffJframe.getStaffjoinjobs().setAddress(attribute);
+			}
 		}
-	
 		 
 	}
 

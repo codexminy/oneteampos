@@ -34,6 +34,7 @@ import oneteampos.staff.components.UpdateStaffBtn;
 public class StaffInfoJPanel extends JPanel{
 	
 	private ArrayList<StaffJoinJobs> staffInfo = new ArrayList<>();
+	StaffJPanel staffPanel;
 	DefaultTableModel model;
 	JTable staffInfoTable;
 	AddStaffBtn addStaffBtn;
@@ -41,8 +42,8 @@ public class StaffInfoJPanel extends JPanel{
 	DeleteStaffBtn deleteStaffBtn;
 	StaffJoinJobs staffJoinJobs = new StaffJoinJobs();
 	
-	public StaffInfoJPanel() {
-		
+	public StaffInfoJPanel(StaffJPanel staffPanel) {
+		this.staffPanel = staffPanel;
 		setBounds(0, 100, 1280, 680);
 		setBackground(Color.WHITE);
 		setLayout(null);
@@ -171,5 +172,9 @@ public class StaffInfoJPanel extends JPanel{
 	public  ArrayList<StaffJoinJobs> getStaffInfoList() {
 		return staffInfo;
 	}
-
+	
+	public StaffJPanel getStaffJpanel() {
+		return staffPanel;
+	}
+	
 }

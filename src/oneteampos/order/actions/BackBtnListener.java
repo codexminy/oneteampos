@@ -5,8 +5,10 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
+import oneteampos.datamodel.ReceiptInfo;
 import oneteampos.main.MainFrame;
 import oneteampos.order.cotainer.OrderJPanel;
+import oneteampos.receipt.container.ReceiptJPanel;
 import oneteampos.staff.containers.LoginStaffJPanel;
 import oneteampos.staff.containers.StaffJPanel;
 
@@ -33,9 +35,16 @@ public class BackBtnListener implements MouseListener {
 			((StaffJPanel)jpanel).setVisibleFalse();
 		} else if (panelName.contains("LoginStaffPanel")) {
 			((LoginStaffJPanel)jpanel).setVisibleFalse();
+		} else if (panelName.equals("receiptPanel")) {
+			((ReceiptJPanel)jpanel).setVisible(false);
 		}
-		// 메인 패널 보이기
-		mainframe.getMainPanel().setVisibleTrue();
+		
+		if(panelName.equals("receiptPanel")) {
+			mainframe.getMainPanel().setVisibleTrue();
+		}else {
+			// 메인 패널 보이기
+			mainframe.getMainPanel().setVisibleTrue();
+		}
 		
 	}
 
