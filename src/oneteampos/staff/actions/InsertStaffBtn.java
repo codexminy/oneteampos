@@ -9,12 +9,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import oneteampos.database.DBConnector;
 import oneteampos.datamodel.StaffJoinJobs;
 import oneteampos.staff.containers.StaffInfoJFrame;
+import oneteampos.staff.containers.StaffInfoJPanel;
+import oneteampos.staff.containers.StaffJPanel;
 
 public class InsertStaffBtn implements MouseListener {
 	
@@ -78,9 +81,16 @@ public class InsertStaffBtn implements MouseListener {
 					model.addRow(row);
 					
 					staffInfoFrame.dispose();
-			
+					
+					StaffJPanel staffPanel = staffInfoFrame.getStaffInfoJPanel().getStaffJpanel();
+					
+					staffInfoFrame.getStaffInfoJPanel().setVisible(false);
+					
+					staffPanel.add(new StaffInfoJPanel(staffPanel));
+					
 					//성공 팝업
 					JOptionPane.showMessageDialog(staffInfoFrame, "사원 등록이 완료되었습니다.");
+					
 				} else {
 					//실패 팝업
 					JOptionPane.showMessageDialog(staffInfoFrame, "사원 등록에 실패하였습니다.");

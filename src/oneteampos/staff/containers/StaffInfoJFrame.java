@@ -254,4 +254,6 @@ public class StaffInfoJFrame extends JFrame{
 	public StaffInfoJPanel getStaffInfoJPanel() {
 		return staffInfoPanel;
 	}
+	
+	
 }

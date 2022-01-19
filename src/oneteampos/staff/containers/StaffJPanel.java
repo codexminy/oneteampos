@@ -16,7 +16,7 @@ public class StaffJPanel extends JPanel{
 	  
 	  public StaffJPanel(MainFrame mainframe) {
 		  this.mainframe = mainframe;
-	      this.staffInfoPanel = new StaffInfoJPanel();
+	      this.staffInfoPanel = new StaffInfoJPanel(this);
 	      
 	      add(staffInfoPanel);
 	      
