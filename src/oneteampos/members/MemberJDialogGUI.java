@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class MemberJDailogGUI extends JDialog implements ActionListener {
+public class MemberJDialogGUI extends JDialog implements ActionListener {
 
 	JPanel pw=new JPanel(new GridLayout(6,1));
     JPanel pc=new JPanel(new GridLayout(6,1));
@@ -43,7 +43,7 @@ public class MemberJDailogGUI extends JDialog implements ActionListener {
 
 	MemberDefaultJTableDAO dao = new MemberDefaultJTableDAO();
 	
-	public MemberJDailogGUI(MemberJPanel me, String index) {
+	public MemberJDialogGUI(MemberJPanel me, String index) {
 		this.me = me;
 		
 		if(index.equals("회원등록")) {

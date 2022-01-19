@@ -71,8 +71,8 @@ public class MemberDefaultJTableDAO {
     	return result;
     }
 
-    // 회원가입
-    public int memberInsert(MemberJDailogGUI member) {
+    // 회원등록
+    public int memberInsert(MemberJDialogGUI member) {
     	int result = 0;
     	try {
     		ps = con.prepareStatement("INSERT INTO members VALUES "
@@ -87,7 +87,7 @@ public class MemberDefaultJTableDAO {
             result = ps.executeUpdate(); //실행 -> 저장
              
     	} catch (SQLException e) {
-            System.out.println(e + "=> memberJDailogGUI fail");
+            System.out.println(e + "=> memberJDialogGUI fail");
         } finally {
             dbClose();
         }
@@ -139,7 +139,7 @@ public class MemberDefaultJTableDAO {
     }
     
     // 수정하기
-    public int memberUpdate(MemberJDailogGUI member) {
+    public int memberUpdate(MemberJDialogGUI member) {
     	int result = 0;
     	String sql = "UPDATE members "
     			+ "SET phone_number = ?, name = ?, grade_id = ?, sum_amount = ?, point = ? WHERE member_id = ?";

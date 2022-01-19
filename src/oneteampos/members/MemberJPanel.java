@@ -27,7 +27,7 @@ public class MemberJPanel extends JPanel implements ActionListener {
     JMenuItem delete = new JMenuItem("회원삭제");
 	
     // 회원 정보
-	String[] name = { "전화번호", "이름", "회원등급", "구매금액", "포인트" };		 
+	String[] name = { "멤버ID", "전화번호", "이름", "회원등급", "구매금액", "포인트" };		 
     
 	DefaultTableModel dt = new DefaultTableModel(name, 0);
     JTable jt = new JTable(dt);
@@ -71,18 +71,14 @@ public class MemberJPanel extends JPanel implements ActionListener {
     		jt.setRowSelectionInterval(0, 0);
     	
     }
-
-//    public static void main(String[] args) {
-//		new MenuJTabaleExam();
-//	}
     
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == insert) {			// 메뉴 > 가입
-			new MemberJDailogGUI(this, "회원등록");
+		if (e.getSource() == insert) {			// 메뉴 > 등록
+			new MemberJDialogGUI(this, "회원등록");
 			
 		} else if (e.getSource() == update) {	// 메뉴 > 수정
-			new MemberJDailogGUI(this, "정보수정");
+			new MemberJDialogGUI(this, "정보수정");
 			
 		} else if (e.getSource() == delete) {	// 메뉴 > 삭제
 			// 선택된 행과 열의 값 
@@ -93,7 +89,7 @@ public class MemberJPanel extends JPanel implements ActionListener {
 			System.out.println("값" + obj);
 			
 			if (dao.memberDelete(obj.toString()) > 0) {
-				MemberJDailogGUI.messageBox(this, "레코드가 삭제되었습니다.");
+				MemberJDialogGUI.messageBox(this, "레코드가 삭제되었습니다.");
 				
 				// 리스트 갱신
 				dao.memberSelectAll(dt);
@@ -101,7 +97,7 @@ public class MemberJPanel extends JPanel implements ActionListener {
 					jt.setRowSelectionInterval(0, 0);
 				
 			} else {
-				MemberJDailogGUI.messageBox(this, "레코드가 삭제되지 않았습니다.");
+				MemberJDialogGUI.messageBox(this, "레코드가 삭제되지 않았습니다.");
 			}
 			
 		} else if (e.getSource() == search) {	// 검색 버튼 클릭
@@ -114,7 +110,7 @@ public class MemberJPanel extends JPanel implements ActionListener {
 					jt.setRowSelectionInterval(0, 0);
 			} else {
 				if (jtf.getText().trim().equals("")) {
-					MemberJDailogGUI.messageBox(this, "검색할 단어를 입력해주세요.");
+					MemberJDialogGUI.messageBox(this, "검색할 단어를 입력해주세요.");
 					jtf.requestFocus();
 				} else {	// 검색어 입력
 					dao.getMemberSearch(dt, fieldName, jtf.getText());
