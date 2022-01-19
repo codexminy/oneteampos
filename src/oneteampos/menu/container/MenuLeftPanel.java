@@ -5,6 +5,8 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
@@ -64,51 +66,11 @@ public class MenuLeftPanel extends JPanel {
 		JPanel settingPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT,5,0));
 		JPanel receiptPanel = new JPanel(new FlowLayout(FlowLayout.LEFT,0,0));
 		JPanel movePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT,5,0));
-		
-<<<<<<< HEAD
+
 		JButton menuSettingBtn = new MenuBtns("메뉴 관리");
 		JButton receiptBtn = new MenuBtns("영수증");
 		JButton homeBtn = new MenuBtns("<");
 
-=======
-		JPanel menuPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, hgap));
-		JPanel infoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, hgap));
-		JPanel settingPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, hgap));
-		JPanel receiptPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, hgap));
-		JPanel movePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, hgap));
-		JButton menuSettingbtn = new JButton("메뉴 관리");
-		JButton receiptBtn = new JButton("영수증");
-		JButton homeBtn = new JButton("<");
-		
-		homeBtn.addMouseListener(new MouseAdapter() {
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				CardLayout card = (CardLayout)mainFrame.getMainPanel().getCardPanel().getLayout();
-				card.first(mainFrame.getMainPanel().getCardPanel());
-			}
-			
-		});
-		
-		receiptPanel.add(receiptBtn);
-		movePanel.add(prevBtn);
-		movePanel.add(nextBtn);
-		infoPanel.add(infoId);
-		infoPanel.add(infoName);
-		settingPanel.add(menuSettingbtn);
-		settingPanel.add(homeBtn);
-		
-
-		receiptBtn.addMouseListener(new ReceiptBtnListener(mainFrame));
-
->>>>>>> refs/heads/main
-		menuPanel.setBackground(Color.WHITE);
-		infoPanel.setBackground(Color.WHITE);
-		settingPanel.setBackground(Color.WHITE);
-		receiptPanel.setBackground(Color.WHITE);
-		movePanel.setBackground(Color.WHITE);
-		
-<<<<<<< HEAD
 		receiptPanel.add(receiptBtn);
 		movePanel.add(prevBtn);
 		movePanel.add(nextBtn);
@@ -117,14 +79,14 @@ public class MenuLeftPanel extends JPanel {
 		settingPanel.add(menuSettingBtn);
 		settingPanel.add(homeBtn);
 
+		menuPanel.setBackground(Color.WHITE);
+		infoPanel.setBackground(Color.WHITE);
+		settingPanel.setBackground(Color.WHITE);
+		receiptPanel.setBackground(Color.WHITE);
+		movePanel.setBackground(Color.WHITE);
+
 		homeBtn.addMouseListener(new MenuHomeAction(mainFrame));
 		menuSettingBtn.addActionListener(new MenuSettingAction(menuManagePanel));
-=======
-		menuSettingbtn.addActionListener(new MenuSettingAction(menuManagePanel));
-
->>>>>>> refs/heads/main
-		
-
 		receiptBtn.addMouseListener(new ReceiptBtnListener(mainFrame));
 
 		inputMenuPanel(menuNames, menuConditions);

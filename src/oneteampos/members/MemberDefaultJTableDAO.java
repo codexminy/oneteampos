@@ -26,10 +26,10 @@ public class MemberDefaultJTableDAO {
             
             // 로드
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            System.out.println("로딩완료");
+//            System.out.println("로딩완료");
             // 연결
             con = DriverManager.getConnection(url, id, pw);
-            System.out.println("연결완료");
+//            System.out.println("연결완료");
  
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
