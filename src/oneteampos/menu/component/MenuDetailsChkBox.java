@@ -1,4 +1,4 @@
-package oneteampos.menu.compoenet;
+package oneteampos.menu.component;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,6 @@ public class MenuDetailsChkBox extends JCheckBox {
 
 	public MenuDetailsChkBox(String text, MenuDetailsPanel menuDetailsPanel, ArrayList<MenuData> lists) {
 		super(text);
-		
 		addActionListener(new MenuDetailsChkBoxAction(menuDetailsPanel, lists));
 	}
 	

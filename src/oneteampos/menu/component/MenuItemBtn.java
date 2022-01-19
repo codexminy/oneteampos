@@ -1,4 +1,4 @@
-package oneteampos.menu.compoenet;
+package oneteampos.menu.component;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;

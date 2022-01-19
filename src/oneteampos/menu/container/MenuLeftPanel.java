@@ -7,8 +7,12 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Vector;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -20,18 +24,18 @@ import oneteampos.menu.action.MenuNextAction;
 import oneteampos.menu.action.MenuPrevAction;
 import oneteampos.menu.action.MenuSettingAction;
 import oneteampos.menu.allLayouts.Gbl;
-import oneteampos.menu.compoenet.MenuButton;
-import oneteampos.menu.compoenet.MenuItemBtn;
+import oneteampos.menu.component.MenuButton;
+import oneteampos.menu.component.MenuItemBtn;
 import oneteampos.menu.data.CafeMenuData;
 import oneteampos.menu.data.MenuData;
 import oneteampos.receipt.actions.ReceiptBtnListener;
 
 public class MenuLeftPanel extends JPanel {
 	
-	private final static String[] menuNames = new String[] {"세트메뉴", "신메뉴", "커피", "스무디&프라페"};
-	private final static String[] menuConditions = new String[] {"coffee,tea,ade", "frappuccino", "dessert,extra", "temperature,size"};
-	private final static int xgap = 10;
-	private final static int hgap = 20;
+	private final static String[] menuNames = new String[] {"세트메뉴", "신메뉴", "커피", "스무디&프라페", "에이드", "기타음료", "티", "주스", "디저트"};
+	private final static String[] menuConditions = new String[] {"coffee", "frappuccino", "dessert", "temperature", "coffee", "frappuccino", "dessert", "temperature", "coffee"};
+	private final static int xgap = 20;
+	private final static int hgap = 10;
 	private final static int menuSize = 12;
 	private MainFrame mainFrame;
 	private MenuManagePanel menuManagePanel;
@@ -44,11 +48,11 @@ public class MenuLeftPanel extends JPanel {
 	private JButton prevBtn;
 	private JLabel infoId;
 	private JLabel infoName;
-	
+
 	public MenuLeftPanel(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
 		this.menuManagePanel = new MenuManagePanel(mainFrame, this);
-		this.cardMenuPanel = new JPanel(new CardLayout(xgap, hgap));
+		this.cardMenuPanel = new JPanel(new CardLayout());
 		this.buttonGroup = new ButtonGroup();
 		this.cafeMenuData = new CafeMenuData();
 		this.prevBtn = new JButton(" ◀ ");
@@ -56,13 +60,24 @@ public class MenuLeftPanel extends JPanel {
 		this.infoId = new JLabel();
 		this.infoName = new JLabel();
 		
-		JPanel menuPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, xgap, 0));
-		JPanel infoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, xgap, hgap));
-		JPanel settingPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, xgap, hgap));
-		JPanel receiptPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, xgap, 0));
-		JPanel movePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, xgap, 0));
+		JPanel menuPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, hgap));
+		JPanel infoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, hgap));
+		JPanel settingPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, hgap));
+		JPanel receiptPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, hgap));
+		JPanel movePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, hgap));
 		JButton menuSettingbtn = new JButton("메뉴 관리");
 		JButton receiptBtn = new JButton("영수증");
+		JButton homeBtn = new JButton("<");
+		
+		homeBtn.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CardLayout card = (CardLayout)mainFrame.getMainPanel().getCardPanel().getLayout();
+				card.first(mainFrame.getMainPanel().getCardPanel());
+			}
+			
+		});
 		
 		receiptPanel.add(receiptBtn);
 		movePanel.add(prevBtn);
@@ -70,10 +85,19 @@ public class MenuLeftPanel extends JPanel {
 		infoPanel.add(infoId);
 		infoPanel.add(infoName);
 		settingPanel.add(menuSettingbtn);
+		settingPanel.add(homeBtn);
 		
+
 		receiptBtn.addMouseListener(new ReceiptBtnListener(mainFrame));
+
+		menuPanel.setBackground(Color.WHITE);
+		infoPanel.setBackground(Color.WHITE);
+		settingPanel.setBackground(Color.WHITE);
+		receiptPanel.setBackground(Color.WHITE);
+		movePanel.setBackground(Color.WHITE);
 		
-		menuSettingbtn.addActionListener(new MenuSettingAction(mainFrame, menuManagePanel));
+		menuSettingbtn.addActionListener(new MenuSettingAction(menuManagePanel));
+
 		
 		inputMenuPanel(menuNames, menuConditions);
 		createSelectMenuBtn(menuPanel);
@@ -82,12 +106,15 @@ public class MenuLeftPanel extends JPanel {
 		
 		GridBagConstraints gbc = Gbl.getGbc();
 		
-		add(infoPanel, Gbl.getSetting(gbc, 0.1, 0.01, 0, 0, 1, 1));
-		add(settingPanel, Gbl.getSetting(gbc, 0.1, 0.01, 1, 0, 1, 1));
-		add(menuPanel, Gbl.getSetting(gbc, 0.1, 0.03, 0, 1, 2, 1));
-		add(cardMenuPanel, Gbl.getSetting(gbc, 1.0, 1.0, 0, 3, 2, 1));
-		add(receiptPanel, Gbl.getSetting(gbc, 0.1, 0.05, 0, 4, 1, 1));
-		add(movePanel, Gbl.getSetting(gbc, 0.1, 0.05, 1, 4, 1, 1));
+		setBorder(BorderFactory.createEmptyBorder(hgap, xgap, 0, xgap));
+		setBackground(Color.WHITE);
+		
+		add(infoPanel, Gbl.setting(gbc, 0.1, 0.01, 0, 0, 1, 1));
+		add(settingPanel, Gbl.setting(gbc, 0.1, 0.01, 1, 0, 1, 1));
+		add(menuPanel, Gbl.setting(gbc, 0.1, 0.03, 0, 1, 2, 1));
+		add(cardMenuPanel, Gbl.setting(gbc, 1.0, 1.0, 0, 3, 2, 1));
+		add(receiptPanel, Gbl.setting(gbc, 0.1, 0.05, 0, 4, 1, 1));
+		add(movePanel, Gbl.setting(gbc, 0.1, 0.05, 1, 4, 1, 1));
 	}
 
 	public void inputMenuPanel(String[] menuNames, String[] menuConditions) {
@@ -110,19 +137,21 @@ public class MenuLeftPanel extends JPanel {
 		
 		for(int i=0; i<list.size(); ++i) {
 			if(i == 0 && cnt == 0) {
-				gridPanel.add(new JPanel(new GridLayout(3, 4, xgap, xgap)));
+				gridPanel.add(new JPanel(new GridLayout(3, 4, hgap, hgap)));
+				gridPanel.get(index).setBackground(Color.WHITE);
 			}
 			
-			total = condition.contains(list.get(i).getMenuType()) ? total+=1 : total;
-			cnt = condition.contains(list.get(i).getMenuType()) ? cnt+=1 : cnt;
-			
+			total = condition.equals(list.get(i).getMenuType()) ? total+=1 : total;
+			cnt = condition.equals(list.get(i).getMenuType()) ? cnt+=1 : cnt;
+
 			if(cnt > menuSize) {
-				gridPanel.add(new JPanel(new GridLayout(3, 4, xgap, xgap)));
+				gridPanel.add(new JPanel(new GridLayout(3, 4, hgap, hgap)));
 				index++;
-				cnt = 0;
+				gridPanel.get(index).setBackground(Color.WHITE);
+				cnt = 1;
 			}
-			
-			if(condition.contains(list.get(i).getMenuType())) {
+
+			if(condition.equals(list.get(i).getMenuType())) {
 				JPanel innerPanel = new JPanel(new BorderLayout());
 				JLabel menuName = new JLabel(list.get(i).getMenuName(), JLabel.CENTER);
 				JLabel menuPrice = new JLabel("￦ " + list.get(i).getPrice(), JLabel.RIGHT);
@@ -200,4 +229,14 @@ public class MenuLeftPanel extends JPanel {
 	public JLabel getInfoNameLabel() {
 		return this.infoName;
 	}
+	
+	public MenuDetailsPanel getMenuDetailsPanel() {
+		return this.menuDetailsPanel;
+	}
+	
+	public CafeMenuData getCafeMenuData() {
+		return this.cafeMenuData;
+	}
+	
+
 }

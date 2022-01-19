@@ -36,15 +36,14 @@ public class MemberJDailogGUI extends JDialog implements ActionListener {
     JButton confirm;
     JButton reset=new JButton("취소");
  
-    MenuJTabaleExam me;
+    MemberJPanel me;
  
 	JPanel phone_numberCkP =new JPanel(new BorderLayout());
 	JButton phone_numberCkBtn = new JButton("중복확인");
 
 	MemberDefaultJTableDAO dao = new MemberDefaultJTableDAO();
 	
-	public MemberJDailogGUI(MenuJTabaleExam me, String index) {
-		super(me, "회원관리");
+	public MemberJDailogGUI(MemberJPanel me, String index) {
 		this.me = me;
 		
 		if(index.equals("회원등록")) {
