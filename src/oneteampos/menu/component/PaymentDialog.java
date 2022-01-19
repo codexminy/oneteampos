@@ -19,7 +19,6 @@ import javax.swing.JTextField;
 
 import oneteampos.database.DBConnector;
 import oneteampos.main.MainFrame;
-import oneteampos.menu.container.MenuDetailsPanel;
 import oneteampos.menu.container.MenuRightPanel;
 import oneteampos.menu.data.OrderDetailsData;
 import oneteampos.menu.data.OrdersData;
@@ -29,13 +28,11 @@ public class PaymentDialog extends JDialog {
 	private Vector<OrdersData> orders;
 	private Vector<OrderDetailsData> orderDetail;
 	private JLabel cardNum;
-	private MainFrame mainFrame;
-
+	private MenuRightPanel mrp;
 	
-	public PaymentDialog(MainFrame mainFrame) {
+	public PaymentDialog(MainFrame mainFrame, MenuRightPanel mrp) {
 		super(mainFrame, "결제 방법", true);
-		this.mainFrame = mainFrame;
-		
+		this.mrp = mrp;
 		
 		JPanel cardPanel = new JPanel(new CardLayout());
 		
@@ -91,24 +88,31 @@ public class PaymentDialog extends JDialog {
 				CardLayout card = (CardLayout)cardPanel.getLayout();
 				card.show(cardPanel, "카드");
 				
-				MenuRightPanel rp = mainFrame.getMainPanel().getMenuPanel().getRightPanel();
+//				MenuRightPanel rp = mainFrame.getMainPanel().getMenuPanel().getRightPanel();
+				
+//				int row = 0;
+//				int total = Integer.parseInt(rp.getTotalPrice().getText().substring(2).equals("") ? "0" : rp.getTotalPrice().getText().substring(2));
+//				int discnt;
+//				int save;
 				
 				int row = 0;
-				int total = Integer.parseInt(rp.getTotalPrice().getText().substring(2).equals("") ? "0" : rp.getTotalPrice().getText().substring(2));
+				int total = Integer.parseInt(mrp.getTotalPrice().getText().substring(2).equals("") ? "0" : mrp.getTotalPrice().getText().substring(2));
 				int discnt;
 				int save;
 				
 				Object memberId = 0;
 				
-				if(rp.d != null) {
-					row = rp.d.table.getSelectedRow();
-					total = Integer.parseInt(rp.getTotalPrice().getText().substring(2).equals("") ? "0" : rp.getTotalPrice().getText().substring(2));
-					discnt = Integer.parseInt(rp.getDiscountCash().getText().equals("") ? "0" : rp.getDiscountCash().getText());
-					save = Integer.parseInt(rp.d.saveCash.getText().equals("") ? "0" : rp.d.saveCash.getText());
-					memberId = rp.d.table.getValueAt(row, 1);
-					updatePointData(rp.d.table.getColumnName(5), rp.d.point, (String)rp.d.table.getValueAt(row, 2));
-					rp.d.point = 0;
-					rp.d.saveCash.setText("");
+				MemberCheckDialog mcd = mrp.getMemeberCheckDialog();
+
+				if(mcd != null) {
+					row = mcd.getTable().getSelectedRow();
+					total = Integer.parseInt(mrp.getTotalPrice().getText().substring(2).equals("") ? "0" : mrp.getTotalPrice().getText().substring(2));
+					discnt = Integer.parseInt(mrp.getDiscountCash().getText().equals("") ? "0" : mrp.getDiscountCash().getText());
+					save = Integer.parseInt(mcd.getSaveCash().getText().equals("") ? "0" : mcd.getSaveCash().getText());
+					memberId = mcd.getTable().getValueAt(row, 1);
+					updatePointData(mcd.getTable().getColumnName(5), mcd.getPoint(), (String)mcd.getTable().getValueAt(row, 2));
+					mcd.setPoint(0);
+					mcd.getSaveCash().setText("");
 //					updateOrderData(memberId, total + discnt, save, discnt, total);
 //					orders = insertOrderData();
 //					updateOrderDetailsData();
@@ -118,24 +122,47 @@ public class PaymentDialog extends JDialog {
 					discnt = 0;
 					save = 0;
 				}
+
+//				if(rp.d != null) {
+//					row = rp.d.table.getSelectedRow();
+//					total = Integer.parseInt(rp.getTotalPrice().getText().substring(2).equals("") ? "0" : rp.getTotalPrice().getText().substring(2));
+//					discnt = Integer.parseInt(rp.getDiscountCash().getText().equals("") ? "0" : rp.getDiscountCash().getText());
+//					save = Integer.parseInt(rp.d.saveCash.getText().equals("") ? "0" : rp.d.saveCash.getText());
+//					memberId = rp.d.table.getValueAt(row, 1);
+//					updatePointData(rp.d.table.getColumnName(5), rp.d.point, (String)rp.d.table.getValueAt(row, 2));
+//					rp.d.point = 0;
+//					rp.d.saveCash.setText("");
+////					updateOrderData(memberId, total + discnt, save, discnt, total);
+////					orders = insertOrderData();
+////					updateOrderDetailsData();
+////					orderDetail = insertOrderDetailData();
+//				} else {
+//					memberId = null;
+//					discnt = 0;
+//					save = 0;
+//				}
+				
 				updateOrderData(memberId, total + discnt, save, discnt, total);
 				orders = insertOrderData();
 				updateOrderDetailsData();
 				orderDetail = insertOrderDetailData();
 				updatePaymentData("card", cardNum.getText().replaceAll("-", ""));
 				excute();
-				rp.getDiscountCash().setText("");
-				rp.getTotalPrice().setText("￦ 0");
-				rp.getDiscountCash().setVisible(false);
-				rp.getTotalPrice().setVisible(false);
+				mrp.getDiscountCash().setText("");
+				mrp.getTotalPrice().setText("￦ 0");
+				mrp.getDiscountCash().setVisible(false);
+				mrp.getTotalPrice().setVisible(false);
 				
 				
-				for(int i=0; i<=rp.model.getRowCount(); ++i) {
-					System.out.println(rp.model.getRowCount());
-					rp.model.removeRow(0);
+				for(int i=0; i<=mrp.model.getRowCount(); ++i) {
+					System.out.println(mrp.model.getRowCount());
+					mrp.model.removeRow(0);
 				}
-				rp.cancelBtn.setVisible(false);
-				rp.isDisCnt = false;
+				mrp.getCancelBtn().setVisible(false);
+				mrp.setIsDisCnt(false);
+
+//				rp.cancelBtn.setVisible(false);
+//				rp.isDisCnt = false;
 //				for(int i=0; i<mdp.getMenuIdList().size(); ++i) {
 //					for(int j=0; j<mdp.getMenuIdList().get(i).size(); ++j) {
 //						updateCartData(mdp.getMenuIdList().get(i).get(j), mdp.getMenuCntList().get(i).get(j));
@@ -173,12 +200,10 @@ public class PaymentDialog extends JDialog {
 		
 		JButton enter = new JButton("입력");
 		enter.setBounds(230, 70, 100, 30);
-
-		MenuRightPanel rp = mainFrame.getMainPanel().getMenuPanel().getRightPanel();
 		
 		JLabel totalName = new JLabel("결제 금액");
 		totalName.setBounds(30, 110, 50, 30);
-		JLabel totalCash = new JLabel(rp.getTotalPrice().getText().substring(2));
+		JLabel totalCash = new JLabel(mrp.getTotalPrice().getText().substring(2));
 		totalCash.setBounds(100, 110, 70, 30);
 		JLabel totalWon = new JLabel("원");
 		totalWon.setBounds(180, 110, 50, 30);
@@ -222,24 +247,31 @@ public class PaymentDialog extends JDialog {
 			public void mouseClicked(MouseEvent e) {
 				if(cashGo.isEnabled()) {
 					JOptionPane.showMessageDialog(null, "결제가 완료되었습니다.");
-					MenuRightPanel rp = mainFrame.getMainPanel().getMenuPanel().getRightPanel();
+//					MenuRightPanel rp = mainFrame.getMainPanel().getMenuPanel().getRightPanel();
+					
+//					int row = 0;
+//					int total = Integer.parseInt(rp.getTotalPrice().getText().substring(2).equals("") ? "0" : rp.getTotalPrice().getText().substring(2));
+//					int discnt;
+//					int save;
 					
 					int row = 0;
-					int total = Integer.parseInt(rp.getTotalPrice().getText().substring(2).equals("") ? "0" : rp.getTotalPrice().getText().substring(2));
+					int total = Integer.parseInt(mrp.getTotalPrice().getText().substring(2).equals("") ? "0" : mrp.getTotalPrice().getText().substring(2));
 					int discnt;
 					int save;
 					
 					Object memberId = 0;
 					
-					if(rp.d != null) {
-						row = rp.d.table.getSelectedRow();
-						total = Integer.parseInt(rp.getTotalPrice().getText().substring(2).equals("") ? "0" : rp.getTotalPrice().getText().substring(2));
-						discnt = Integer.parseInt(rp.getDiscountCash().getText().equals("") ? "0" : rp.getDiscountCash().getText());
-						save = Integer.parseInt(rp.d.saveCash.getText().equals("") ? "0" : rp.d.saveCash.getText());
-						memberId = rp.d.table.getValueAt(row, 1);
-						updatePointData(rp.d.table.getColumnName(5), rp.d.point, (String)rp.d.table.getValueAt(row, 2));
-						rp.d.point = 0;
-						rp.d.saveCash.setText("");
+					MemberCheckDialog mcd = mrp.getMemeberCheckDialog();
+					
+					if(mcd != null) {
+						row = mcd.getTable().getSelectedRow();
+						total = Integer.parseInt(mrp.getTotalPrice().getText().substring(2).equals("") ? "0" : mrp.getTotalPrice().getText().substring(2));
+						discnt = Integer.parseInt(mrp.getDiscountCash().getText().equals("") ? "0" : mrp.getDiscountCash().getText());
+						save = Integer.parseInt(mcd.getSaveCash().getText().equals("") ? "0" : mcd.getSaveCash().getText());
+						memberId = mcd.getTable().getValueAt(row, 1);
+						updatePointData(mcd.getTable().getColumnName(5), mcd.getPoint(), (String)mcd.getTable().getValueAt(row, 2));
+						mcd.setPoint(0);
+						mcd.getSaveCash().setText("");
 //						updateOrderData(memberId, total + discnt, save, discnt, total);
 //						orders = insertOrderData();
 //						updateOrderDetailsData();
@@ -250,6 +282,27 @@ public class PaymentDialog extends JDialog {
 						save = 0;
 						
 					}
+					
+//					if(rp.d != null) {
+//						row = rp.d.table.getSelectedRow();
+//						total = Integer.parseInt(rp.getTotalPrice().getText().substring(2).equals("") ? "0" : rp.getTotalPrice().getText().substring(2));
+//						discnt = Integer.parseInt(rp.getDiscountCash().getText().equals("") ? "0" : rp.getDiscountCash().getText());
+//						save = Integer.parseInt(rp.d.saveCash.getText().equals("") ? "0" : rp.d.saveCash.getText());
+//						memberId = rp.d.table.getValueAt(row, 1);
+//						updatePointData(rp.d.table.getColumnName(5), rp.d.point, (String)rp.d.table.getValueAt(row, 2));
+//						rp.d.point = 0;
+//						rp.d.saveCash.setText("");
+////						updateOrderData(memberId, total + discnt, save, discnt, total);
+////						orders = insertOrderData();
+////						updateOrderDetailsData();
+////						orderDetail = insertOrderDetailData();
+//					} else {
+//						memberId = null;
+//						discnt = 0;
+//						save = 0;
+//						
+//					}
+					
 					updateOrderData(memberId, total + discnt, save, discnt, total);
 					orders = insertOrderData();
 					updateOrderDetailsData();
@@ -257,21 +310,23 @@ public class PaymentDialog extends JDialog {
 					updatePaymentData("cash", null);
 					excute();
 					
-					rp.getDiscountCash().setText("");
-					rp.getTotalPrice().setText("￦ 0");
-					rp.getDiscountCash().setVisible(false);
-					rp.getTotalPrice().setVisible(false);
+					mrp.getDiscountCash().setText("");
+					mrp.getTotalPrice().setText("￦ 0");
+					mrp.getDiscountCash().setVisible(false);
+					mrp.getTotalPrice().setVisible(false);
 					
-					rp.isDisCnt = false;
+					mrp.getCancelBtn().setVisible(false);
+					mrp.setIsDisCnt(false);
+					
+//					rp.isDisCnt = false;
 					
 					dispose();
 
-					for(int i=0; i<=rp.model.getRowCount(); ++i) {
-						System.out.println(rp.model.getRowCount());
-						rp.model.removeRow(0);
+					for(int i=0; i<=mrp.model.getRowCount(); ++i) {
+						System.out.println(mrp.model.getRowCount());
+						mrp.model.removeRow(0);
 					}
-					
-					rp.cancelBtn.setVisible(false);
+//					rp.cancelBtn.setVisible(false);
 //					MenuDetailsPanel mdp = mainFrame.getMainPanel().getMenuPanel().getLeftPanel().getMenuDetailsPanel();
 //					System.out.println(mdp.getMenuIdList().size());
 //					for(int i=0; i<mdp.getMenuIdList().size(); ++i) {
@@ -311,8 +366,7 @@ public class PaymentDialog extends JDialog {
 		}
 		
 		g.setBounds(200, 200, 150, 150);
-		
-		
+
 		cashBg.add(cashTitle);
 		cashBg.add(takeName);
 		cashBg.add(takeCash);
@@ -326,13 +380,10 @@ public class PaymentDialog extends JDialog {
 		cashBg.add(change);
 		cashBg.add(changeCash);
 
-		
 		cardPanel.add("첫화면", bg);
 		cardPanel.add("카드", cardBg);
 		cardPanel.add("현금", cashBg);
-		
-		
-		
+
 		add(cardPanel);
 		
 		setSize(400, 400);
@@ -341,10 +392,9 @@ public class PaymentDialog extends JDialog {
 	}
 	
 	private void excute() {
-		MenuRightPanel rp = mainFrame.getMainPanel().getMenuPanel().getRightPanel();
-		for(int i=0; i<rp.menuIdList.size(); ++i) {
-			for(int j=0; j<rp.menuIdList.get(i).size(); ++j) {
-				updateCartData(rp.menuIdList.get(i).get(j), rp.menuCntList.get(i).get(j));
+		for(int i=0; i<mrp.menuIdList.size(); ++i) {
+			for(int j=0; j<mrp.menuIdList.get(i).size(); ++j) {
+				updateCartData(mrp.menuIdList.get(i).get(j), mrp.menuCntList.get(i).get(j));
 			}
 		}
 	}

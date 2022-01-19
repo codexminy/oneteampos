@@ -7,12 +7,9 @@ import javax.swing.JPanel;
 
 public class LinePanel extends JPanel {
 
-//	MenuDetailsPanel menuDetailsPanel;
-	
 	private int width;
 	
-	public LinePanel(/*MenuDetailsPanel menuDetailsPanel*/int width) {
-//		this.menuDetailsPanel = menuDetailsPanel;
+	public LinePanel(int width) {
 		this.width = width;
 	}
 	

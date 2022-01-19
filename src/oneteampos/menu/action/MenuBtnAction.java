@@ -1,26 +1,27 @@
 package oneteampos.menu.action;
 
 import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-import javax.swing.JToggleButton;
+import javax.swing.JRadioButton;
 
 import oneteampos.menu.container.MenuLeftPanel;
 
-public class MenuBtnAction implements ActionListener {
+public class MenuBtnAction extends MouseAdapter {
 	
 	private MenuLeftPanel menuLeftPanel;
-	
+
 	public MenuBtnAction(MenuLeftPanel menuLeftPanel) {
 		this.menuLeftPanel = menuLeftPanel;
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		JToggleButton btn = (JToggleButton)e.getSource();
+	public void mouseClicked(MouseEvent e) {
+		JRadioButton btn = (JRadioButton)e.getSource();
 		CardLayout card = (CardLayout)menuLeftPanel.getCardMenuPanel().getLayout();
 		card.show(menuLeftPanel.getCardMenuPanel(), btn.getText());
 	}
-
 }

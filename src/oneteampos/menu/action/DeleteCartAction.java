@@ -23,7 +23,7 @@ public class DeleteCartAction extends MouseAdapter {
 		MenuRightPanel rp = mainFrame.getMainPanel().getMenuPanel().getRightPanel();
 		JTable cart = (JTable)e.getSource();
 		
-		if(rp.isDisCnt) {
+		if(rp.getIsDiscnt()) {
 			JOptionPane.showMessageDialog(null, "할인&적립을 취소해주세요!", "Message", JOptionPane.WARNING_MESSAGE);
 		} else {
 			DefaultTableModel dtm = (DefaultTableModel)cart.getModel();

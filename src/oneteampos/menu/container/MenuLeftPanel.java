@@ -26,6 +26,7 @@ import oneteampos.menu.component.MenuItemBtn;
 import oneteampos.menu.component.MenuLabel;
 import oneteampos.menu.data.CafeMenuData;
 import oneteampos.menu.data.MenuData;
+import oneteampos.receipt.actions.ReceiptBtnListener;
 
 public class MenuLeftPanel extends JPanel {
 	
@@ -85,6 +86,9 @@ public class MenuLeftPanel extends JPanel {
 		homeBtn.addMouseListener(new MenuHomeAction(mainFrame));
 		menuSettingBtn.addActionListener(new MenuSettingAction(menuManagePanel));
 		
+
+		receiptBtn.addMouseListener(new ReceiptBtnListener(mainFrame));
+
 		inputMenuPanel(menuNames, menuConditions);
 		createSelectMenuBtn(menuPanel);
 

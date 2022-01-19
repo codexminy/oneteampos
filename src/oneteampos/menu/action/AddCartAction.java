@@ -11,7 +11,6 @@ import javax.swing.JRadioButton;
 
 import oneteampos.main.MainFrame;
 import oneteampos.menu.container.MenuDetailsPanel;
-import oneteampos.menu.container.MenuLeftPanel;
 import oneteampos.menu.container.MenuRightPanel;
 import oneteampos.menu.data.MenuData;
 
@@ -32,8 +31,7 @@ public class AddCartAction implements ActionListener {
 		
 		if(result == JOptionPane.YES_OPTION) {
 			
-			if(rp.isDisCnt) {
-				System.out.println(rp.isDisCnt);
+			if(rp.getIsDiscnt()) {
 				JOptionPane.showMessageDialog(null, "할인&적립을 취소해주세요!", "Message", JOptionPane.WARNING_MESSAGE);
 				mdp.dispose();
 			} else {
@@ -121,7 +119,7 @@ public class AddCartAction implements ActionListener {
 //			p.add(new JLabel(word));
 //			p.add(new ItemChkBox());
 				
-				rp.getCartPanel().add(new JLabel(word));
+//				rp.getCartPanel().add(new JLabel(word));
 				
 				rp.getModel().addRow(list);
 				

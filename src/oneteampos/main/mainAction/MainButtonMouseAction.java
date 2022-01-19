@@ -1,5 +1,6 @@
 package oneteampos.main.mainAction;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -13,12 +14,15 @@ public class MainButtonMouseAction extends MouseAdapter {
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		btn = (JButton)e.getSource();
-		btn.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 20));
+		btn.setForeground(Color.WHITE);
+		btn.setBackground(Color.GRAY);
+		
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e) {
 		btn = (JButton)e.getSource();
-		btn.setFont(new Font(Font.DIALOG_INPUT, Font.PLAIN, 20));
+		btn.setForeground(Color.BLACK);
+		btn.setBackground(Color.WHITE);
 	}
 }
