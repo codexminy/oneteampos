@@ -8,6 +8,7 @@ import javax.swing.JButton;
 
 import oneteampos.main.MainFrame;
 import oneteampos.order.cotainer.OrderJPanel;
+import oneteampos.sales.containers.SalesPanel;
 import oneteampos.staff.containers.LoginStaffJPanel;
 import oneteampos.staff.containers.StaffJPanel;
 
@@ -36,6 +37,9 @@ public class MainButtonEnterAction implements ActionListener {
 		} else if((btn.getText().equals("사원"))){
 			mainFrame.getMainPanel().setVisibleFalse();
 			new LoginStaffJPanel(mainFrame);
+		} else if(btn.getText().equals("매출")) {
+			mainFrame.getMainPanel().setVisibleFalse();
+			new SalesPanel(mainFrame);
 		}
 
 		
