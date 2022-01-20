@@ -146,7 +146,7 @@ public class DailySalesJPanel extends JPanel{
 					// 1개월 전 
 					Calendar cal = Calendar.getInstance();
 					cal.setTime(now);
-					cal.add(Calendar.MONTH, -1);
+					cal.add(Calendar.MONTH, -3);
 					fstField.setText(fm.format(cal.getTime()));
 					// 날짜 차이 계산
 					Date startDate = cal.getTime();
@@ -168,7 +168,7 @@ public class DailySalesJPanel extends JPanel{
 					// 1개월 후
 					Calendar cal = Calendar.getInstance();
 					cal.setTime(now);
-					cal.add(Calendar.MONTH, 1);
+					cal.add(Calendar.MONTH, 3);
 					sndField.setText(fm.format(cal.getTime()));
 					// 날짜 차이 계산
 					Date AfterDate = cal.getTime();
@@ -207,7 +207,7 @@ public class DailySalesJPanel extends JPanel{
 					// 1개월 전 
 					Calendar cal = Calendar.getInstance();
 					cal.setTime(now);
-					cal.add(Calendar.MONTH, -1);
+					cal.add(Calendar.MONTH, -6);
 					fstField.setText(fm.format(cal.getTime()));
 					// 날짜 차이 계산
 					Date startDate = cal.getTime();
@@ -229,7 +229,7 @@ public class DailySalesJPanel extends JPanel{
 					// 1개월 후
 					Calendar cal = Calendar.getInstance();
 					cal.setTime(now);
-					cal.add(Calendar.MONTH, 1);
+					cal.add(Calendar.MONTH, 6);
 					sndField.setText(fm.format(cal.getTime()));
 					// 날짜 차이 계산
 					Date AfterDate = cal.getTime();

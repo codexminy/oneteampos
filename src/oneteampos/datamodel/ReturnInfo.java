@@ -65,7 +65,7 @@ public class ReturnInfo {
 	}
 
 	public String getTotalAmount(String paytype) {
-		return pay_type.equals("paytype".equals("현금")? "cash" : "card") ? payment_amount+"" : "";
+		return pay_type.equals(paytype.equals("현금")? "cash" : "card") ? payment_amount+"" : "";
 	}
 
 	public String getPoint() {

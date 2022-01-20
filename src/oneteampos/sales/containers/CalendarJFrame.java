@@ -63,7 +63,7 @@ public class CalendarJFrame extends JFrame implements ActionListener, WindowList
 			setLocation(250, 250);
 			
 		} else {
-			setLocation(250, 400);
+			setLocation(400, 250);
 		}
 		
 	}
