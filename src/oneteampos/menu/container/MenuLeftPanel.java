@@ -16,31 +16,33 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 import oneteampos.main.MainFrame;
-import oneteampos.menu.action.MenuHomeAction;
-import oneteampos.menu.action.MenuNextAction;
-import oneteampos.menu.action.MenuPrevAction;
-import oneteampos.menu.action.MenuSettingAction;
-import oneteampos.menu.component.MenuBtns;
-import oneteampos.menu.component.MenuChoiceBtn;
-import oneteampos.menu.component.MenuEmptyBtn;
-import oneteampos.menu.component.MenuInfoLabel;
-import oneteampos.menu.component.MenuItemBtn;
-import oneteampos.menu.component.MenuLabel;
+import oneteampos.menu.action.Menu_homeAction;
+import oneteampos.menu.action.Menu_nextPageAction;
+import oneteampos.menu.action.Menu_prevPageAction;
+import oneteampos.menu.action.MenuManage_turnOnAction;
+import oneteampos.menu.component.Menu_btn;
+import oneteampos.menu.component.Menu_categoryBtn;
+import oneteampos.menu.component.Menu_emptyBtn;
+import oneteampos.menu.component.Menu_loginInfoLabel;
+import oneteampos.menu.component.Menu_itemBtn;
+import oneteampos.menu.component.Menu_itemLabel;
 import oneteampos.menu.data.CafeMenuData;
 import oneteampos.menu.data.MenuData;
+import oneteampos.menu.etc.ChangeStr;
+import oneteampos.menu.etc.CommonVar;
 import oneteampos.receipt.actions.ReceiptBtnListener;
 
-public class MenuLeftPanel extends JPanel {
+public class MenuLeftPanel extends JPanel implements CommonVar {
 	
 	private final static String[] menuNames = new String[] {"세트메뉴", "신메뉴", "커피", "스무디&프라페", "에이드", "기타음료", "티", "주스", "디저트"};
 	private final static String[] menuConditions = new String[] {"coffee", "frappuccino", "dessert", "temperature", "coffee", "frappuccino", "dessert", "temperature", "coffee"};
-	private final static int xgap = 10;
-	private final static int hgap = 10;
-	private final static int gap = 20;
+//	private final static int xgap = 10;
+//	private final static int hgap = 10;
+//	private final static int gap = 20;
 	private final static int menuSize = 12;
 	private MainFrame mainFrame;
-	private MenuManagePanel menuManagePanel;
-	private MenuDetailsPanel menuDetailsPanel;
+	private MenuManage_dialog menuManagePanel;
+	private MenuDetail_dialog menuDetailsPanel;
 	private JPanel mainMenuPanel;
 	private JPanel cardMenuPanel;
 	private ButtonGroup buttonGroup;
@@ -52,14 +54,14 @@ public class MenuLeftPanel extends JPanel {
 
 	public MenuLeftPanel(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
-		this.menuManagePanel = new MenuManagePanel(mainFrame, this);
+		this.menuManagePanel = new MenuManage_dialog(mainFrame, this);
 		this.cardMenuPanel = new JPanel(new CardLayout());
 		this.buttonGroup = new ButtonGroup();
 		this.cafeMenuData = new CafeMenuData();
-		this.prevBtn = new MenuBtns(" ◀ ");
-		this.nextBtn = new MenuBtns(" ▶ ");
-		this.infoId = new MenuInfoLabel();
-		this.infoName = new MenuInfoLabel();
+		this.prevBtn = new Menu_btn(" ◀ ");
+		this.nextBtn = new Menu_btn(" ▶ ");
+		this.infoId = new Menu_loginInfoLabel();
+		this.infoName = new Menu_loginInfoLabel();
 
 		JPanel menuPanel = new JPanel(new GridLayout(1,1,5,5));
 		JPanel infoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT,0,0));
@@ -67,9 +69,9 @@ public class MenuLeftPanel extends JPanel {
 		JPanel receiptPanel = new JPanel(new FlowLayout(FlowLayout.LEFT,0,0));
 		JPanel movePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT,5,0));
 
-		JButton menuSettingBtn = new MenuBtns("메뉴 관리");
-		JButton receiptBtn = new MenuBtns("영수증");
-		JButton homeBtn = new MenuBtns("<");
+		JButton menuSettingBtn = new Menu_btn("메뉴 관리");
+		JButton receiptBtn = new Menu_btn("영수증");
+		JButton homeBtn = new Menu_btn("<");
 
 		receiptPanel.add(receiptBtn);
 		movePanel.add(prevBtn);
@@ -85,8 +87,8 @@ public class MenuLeftPanel extends JPanel {
 		receiptPanel.setBackground(Color.WHITE);
 		movePanel.setBackground(Color.WHITE);
 
-		homeBtn.addMouseListener(new MenuHomeAction(mainFrame));
-		menuSettingBtn.addActionListener(new MenuSettingAction(menuManagePanel));
+		homeBtn.addMouseListener(new Menu_homeAction(mainFrame));
+		menuSettingBtn.addActionListener(new MenuManage_turnOnAction(menuManagePanel));
 		receiptBtn.addMouseListener(new ReceiptBtnListener(mainFrame));
 
 		inputMenuPanel(menuNames, menuConditions);
@@ -147,10 +149,11 @@ public class MenuLeftPanel extends JPanel {
 
 			if(condition.equals(list.get(i).getMenuType())) {
 				JPanel innerPanel = new JPanel(new BorderLayout());
-				JLabel menuName = new MenuLabel(list.get(i).getMenuName(), JLabel.CENTER);
-				JLabel menuPrice = new MenuLabel("￦ " + list.get(i).getPrice(), JLabel.RIGHT);
-				menuDetailsPanel = new MenuDetailsPanel(mainFrame, list.get(i), list);
-				JButton btn = new MenuItemBtn(menuDetailsPanel, menuName, menuPrice);
+				JLabel menuName = new Menu_itemLabel(list.get(i).getMenuName(), JLabel.CENTER);
+//				JLabel menuPrice = new Menu_itemLabel("￦ " + list.get(i).getPrice(), JLabel.RIGHT);
+				JLabel menuPrice = new Menu_itemLabel(ChangeStr.setCashMark(list.get(i).getPrice()), JLabel.RIGHT);
+				menuDetailsPanel = new MenuDetail_dialog(mainFrame, list.get(i), list);
+				JButton btn = new Menu_itemBtn(menuDetailsPanel, menuName, menuPrice);
 				
 				innerPanel.setOpaque(false);
 				innerPanel.add(menuName, "Center");
@@ -172,20 +175,20 @@ public class MenuLeftPanel extends JPanel {
 			innerCardPanel.add(condition, gridPanel.get(i));
 			if(i == index) {
 				for(int j=0; j<total; ++j) {
-					gridPanel.get(i).add(new MenuEmptyBtn());
+					gridPanel.get(i).add(new Menu_emptyBtn());
 				}
 			}
 		}
 		
-		nextBtn.addActionListener(new MenuNextAction(innerCardPanel));
-		prevBtn.addActionListener(new MenuPrevAction(innerCardPanel));
+		nextBtn.addActionListener(new Menu_nextPageAction(innerCardPanel));
+		prevBtn.addActionListener(new Menu_prevPageAction(innerCardPanel));
 		
 		return innerCardPanel;
 	}
 	
 	public void createSelectMenuBtn(JPanel menuPanel) {
 		for(int i=0; i<menuNames.length; ++i) {
-			JRadioButton btn = new MenuChoiceBtn(this, menuNames[i], mainFrame);
+			JRadioButton btn = new Menu_categoryBtn(this, menuNames[i], mainFrame);
 			if(i == 0) btn.setSelected(true);
 			if(btn.isSelected()) {
 				CardLayout c = (CardLayout)cardMenuPanel.getLayout();
@@ -196,7 +199,7 @@ public class MenuLeftPanel extends JPanel {
 		}
 	}
 
-	public MenuManagePanel getMenuManagePanel() {
+	public MenuManage_dialog getMenuManagePanel() {
 		return this.menuManagePanel;
 	}
 	
@@ -224,7 +227,7 @@ public class MenuLeftPanel extends JPanel {
 		return this.infoName;
 	}
 	
-	public MenuDetailsPanel getMenuDetailsPanel() {
+	public MenuDetail_dialog getMenuDetailsPanel() {
 		return this.menuDetailsPanel;
 	}
 	

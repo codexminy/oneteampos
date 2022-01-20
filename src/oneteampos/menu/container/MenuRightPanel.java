@@ -14,22 +14,21 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import oneteampos.main.MainFrame;
-import oneteampos.menu.action.MemberCheckAction;
-import oneteampos.menu.action.MenuCancelAction;
-import oneteampos.menu.action.PayAcion;
-import oneteampos.menu.component.CartBtns;
-import oneteampos.menu.component.CartLabel;
-import oneteampos.menu.component.MemberCheckDialog;
-import oneteampos.menu.component.MenuCart;
-import oneteampos.menu.component.RightPanels;
+import oneteampos.menu.action.Member_inquiryAction;
+import oneteampos.menu.action.Cart_discountSaveCancelAction;
+import oneteampos.menu.action.Payment_turnOnAcion;
+import oneteampos.menu.component.Cart_btn;
+import oneteampos.menu.component.Cart_label;
+import oneteampos.menu.component.Cart_table;
+import oneteampos.menu.component.Cart_panel;
 
 public class MenuRightPanel extends JPanel {
 	
 	private final static int gap = 20;
-	public Vector<Vector<Object>> menuIdList;
-	public Vector<Vector<Object>> menuCntList;
-	public DefaultTableModel model;
-	private MemberCheckDialog mcd;
+	private Vector<Vector<Object>> menuIdList;
+	private Vector<Vector<Object>> menuCntList;
+	private DefaultTableModel model;
+	private Member_inquiryDialog mcd;
 	private JPanel totalPanel;
 	private JPanel totalPricePanel;
 	private JPanel payPanel;
@@ -39,35 +38,30 @@ public class MenuRightPanel extends JPanel {
 	private JTable cart;
 	private boolean isDiscnt;
 	private JButton cancelBtn;
-	
-	public void setMemberCheckDialog(MemberCheckDialog mcd) {
-		this.mcd = mcd;
-	}
-	
+
 	public MenuRightPanel(MainFrame mainFrame, MenuLeftPanel leftPanel) {
-		this.totalPanel = new RightPanels();
-		this.totalPricePanel = new RightPanels(new GridLayout());
-		this.totalPrice = new CartLabel("￦ 0");
-		this.payPanel = new RightPanels(new FlowLayout(FlowLayout.RIGHT, 5, 5));
+		this.totalPanel = new Cart_panel();
+		this.totalPricePanel = new Cart_panel(new GridLayout());
+		this.totalPrice = new Cart_label("0");
+		this.payPanel = new Cart_panel(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 		this.model = new DefaultTableModel() {@Override public boolean isCellEditable(int row, int column) {return false;}};
-		this.disPanel = new RightPanels(new GridLayout());
-		this.discountCash = new JLabel();
+		this.disPanel = new Cart_panel(new GridLayout());
+		this.discountCash = new Cart_label("0");
 		this.menuIdList = new Vector<>();
 		this.menuCntList = new Vector<>();
-//		this.mcd = new MemberCheckDialog(mainFrame);
 		
 		totalPanel.setLayout(new BoxLayout(totalPanel, BoxLayout.Y_AXIS));
 		model.setDataVector(new Object[][] {{"","","","",""}}, new Object[] {"메뉴이름","사이즈","금액","수량","선택"});
 		model.removeRow(0);
-		cart = new MenuCart(mainFrame, model);
+		cart = new Cart_table(mainFrame, model);
 
-		JLabel title = new CartLabel("선택한 메뉴");
-		JLabel discount = new CartLabel("할인 금액");
-		JLabel total = new CartLabel("결제 금액");
+		JLabel title = new Cart_label("선택한 메뉴");
+		JLabel discount = new Cart_label("할인 금액");
+		JLabel total = new Cart_label("결제 금액");
 		
-		JButton payBtn = new CartBtns("결제");
-		JButton memberCheck = new CartBtns("회원조회");
-		cancelBtn = new CartBtns("할인&적립취소");
+		JButton payBtn = new Cart_btn("결제");
+		JButton memberCheck = new Cart_btn("회원조회");
+		cancelBtn = new Cart_btn("할인&적립취소");
 		
 		cancelBtn.setVisible(false);
 		discountCash.setVisible(false);
@@ -90,19 +84,10 @@ public class MenuRightPanel extends JPanel {
 		totalPanel.add(totalPricePanel);
 		totalPanel.add(payPanel);
 
-		cancelBtn.addMouseListener(new MenuCancelAction(this));
-		payBtn.addMouseListener(new PayAcion(mainFrame, this));
-		memberCheck.addMouseListener(new MemberCheckAction(mainFrame, this));
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		cancelBtn.addMouseListener(new Cart_discountSaveCancelAction(this));
+		payBtn.addMouseListener(new Payment_turnOnAcion(mainFrame, this));
+		memberCheck.addMouseListener(new Member_inquiryAction(mainFrame, this));
+
 		setLayout(null);
 		setBackground(Color.DARK_GRAY);
 		setBorder(BorderFactory.createEmptyBorder(20, 20, 13, 20));
@@ -129,7 +114,7 @@ public class MenuRightPanel extends JPanel {
 		return this.discountCash;
 	}
 	
-	public MemberCheckDialog getMemeberCheckDialog() {
+	public Member_inquiryDialog getMemeberCheckDialog() {
 		return this.mcd;
 	}
 
@@ -145,8 +130,20 @@ public class MenuRightPanel extends JPanel {
 		return this.cart;
 	}
 	
+	public Vector<Vector<Object>> getMenuIdList() {
+		return this.menuIdList;
+	}
+	
+	public Vector<Vector<Object>> getMenuCntList() {
+		return this.menuCntList;
+	}
+	
 	public void setIsDisCnt(boolean b) {
 		this.isDiscnt = b;
+	}
+	
+	public void setMemberCheckDialog(Member_inquiryDialog mcd) {
+		this.mcd = mcd;
 	}
 }
 

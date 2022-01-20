@@ -154,8 +154,8 @@ public class MemberJDialogGUI extends JDialog implements ActionListener {
 	}
 	
 	// 메세지 박스
-	public static void messageBox(Object obj , String message) {
-		JOptionPane.showMessageDialog((Component)obj , message);
+	public static void messageBox(MemberJDialogGUI obj, String message) {
+		JOptionPane.showMessageDialog(null, message);
 	}			
 }
 

@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class MemberDefaultJTableDAO {
@@ -101,7 +102,6 @@ public class MemberDefaultJTableDAO {
     		st = con.createStatement();
     		// member_id 순서로 정렬해서 조회
     		rs = st.executeQuery("SELECT * FROM members order by member_id");
-    		
     		// 기존 데이터 지우기
     		for (int i = 0; i < t_model.getRowCount();) {
     			t_model.removeRow(0);

@@ -27,7 +27,7 @@ public class MainPanel {
 		this.cardPanel = new JPanel(new CardLayout());
 		this.gridPanel = new JPanel(new GridLayout());
 		this.menuPanel = new MenuPanel(mainFrame);
-		this.member = new MemberJPanel();
+		this.member = new MemberJPanel(mainFrame);
 		
 		createMainBtns();
 
