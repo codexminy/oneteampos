@@ -11,6 +11,6 @@ public class DashJLabel extends JLabel{
 		super("~");
 		setBounds(420, 20, 50, 50);
 		setBackground(Color.WHITE);
-		setFont(new Font("돋움", Font.BOLD, 20));
+		setFont(new Font(Font.DIALOG, Font.BOLD, 20));
 	}
 }

@@ -31,6 +31,7 @@ public class MonthlyResultJPanel extends JPanel{
 	public MonthlyResultJPanel( Date startDate, long calDateDays) {
 		setBounds(0, 30, 1280, 500);
 		setBackground(Color.white);
+		setLayout(null);
 		
 		this.startDate = startDate;
 		this.calDateDays = calDateDays;
@@ -138,8 +139,8 @@ public void addDayTable(String sql) {
 		}
 		
 		table.setRowHeight(table.getRowHeight()+20);
-		table.setFont(new Font("돋움", Font.PLAIN , 18));
-		table.getTableHeader().setFont(new Font("돋움", Font.BOLD, 20));
+		table.setFont(new Font("나눔스퀘어", Font.PLAIN , 14));
+		table.getTableHeader().setFont(new Font("나눔스퀘어", Font.BOLD, 15));
 
 	}
 }

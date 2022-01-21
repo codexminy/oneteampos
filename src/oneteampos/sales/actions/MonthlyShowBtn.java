@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 
 import oneteampos.sales.containers.DailyResultPanel;
 import oneteampos.sales.containers.MonthlyResultJPanel;
@@ -42,6 +43,10 @@ public class MonthlyShowBtn implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		
+		JRadioButton btn = (JRadioButton)e.getSource();
+		btn.setSelected(false);
+		
 		// 년도와 달 가져오기
 				String fst = monthlySalesJPanel.getFstField().getText();
 				String snd = monthlySalesJPanel.getSndField().getText();

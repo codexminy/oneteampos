@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 
 import oneteampos.sales.containers.DailyResultPanel;
 import oneteampos.sales.containers.DailySalesJPanel;
@@ -22,6 +23,8 @@ public class DailyShowBtn implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		JRadioButton btn = (JRadioButton) e.getSource();
+		btn.setSelected(false);
 		// 날짜 계산
 		String fst = dailySalesJPanel.getFstField().getText();
 		String snd = dailySalesJPanel.getSndField().getText();

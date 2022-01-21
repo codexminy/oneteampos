@@ -30,8 +30,15 @@ public class FirstJTextFieldListener implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(!dailySalesJPanel.getSndField().getText().equals("")) {
-			dailySalesJPanel.getSndField().setText("");
+		if(dailySalesJPanel != null) {
+			if(!dailySalesJPanel.getSndField().getText().equals("")) {
+				dailySalesJPanel.getSndField().setText("");
+			}
+		}
+		if(monthlySalesJPanel != null) {
+			if(!monthlySalesJPanel.getSndField().getText().equals("")) {
+				monthlySalesJPanel.getSndField().setText("");
+			}
 		}
 		if(dailySalesJPanel != null) {
 			JTextField fstfeild = (JTextField) e.getSource();

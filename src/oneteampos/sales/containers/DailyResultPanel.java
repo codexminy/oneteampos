@@ -32,6 +32,7 @@ public class DailyResultPanel extends JPanel{
 	public DailyResultPanel( Date startDate, long calDateDays) {
 		setBounds(0, 30, 1280, 500);
 		setBackground(Color.white);
+		setLayout(null);
 		
 		this.sql = sql;
 		this.startDate = startDate;

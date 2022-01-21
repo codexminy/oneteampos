@@ -11,6 +11,6 @@ public class PeriodJLabel extends JLabel{
 		super("기간 설정 : ");
 		setBounds(130, 20, 150, 50);
 		setBackground(Color.WHITE);
-		setFont(new Font("돋움", Font.BOLD, 20));
+		setFont(new Font(Font.DIALOG, Font.BOLD, 20));
 	}
 }

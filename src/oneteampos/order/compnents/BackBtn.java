@@ -14,48 +14,21 @@ import javax.swing.JPanel;
 
 import oneteampos.main.MainFrame;
 import oneteampos.order.actions.BackBtnListener;
+import oneteampos.sales.containers.RoundedButton;
 
-public class BackBtn extends JButton{
+public class BackBtn extends RoundedButton{
 	
 	MainFrame mainframe;
 	JPanel orderPanel;
 	
 	public BackBtn(MainFrame mainframe , JPanel jpanel, String panelName ) {
 		super("<");
-		setFont(new Font("고딕", Font.BOLD, 20));
 
-		setBorderPainted(true);
 		setBounds(1180, 10, 48, 40);
-		setBackground(Color.WHITE);
 		setFocusable(false);
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
-		// 뒤로 가기 액션 (MainPanel로 돌아감)
+		setBorderPainted(false);
 		addMouseListener(new BackBtnListener(mainframe , jpanel, panelName));
-	
 	}
-	
-	@Override
-	public void paint(Graphics g) {
-		Graphics2D g2d = (Graphics2D)g;
-		
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2d.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
-		
-		if(getModel().isSelected()) {
-			g2d.setColor(new Color(44, 108, 212));
-		} else if(getModel().isRollover()) {
-			g2d.setColor(new Color(44, 108, 212));
-		}
-		
-		FontMetrics fm = g2d.getFontMetrics();
-		Rectangle sb = fm.getStringBounds(getText(), g2d).getBounds();
-		
-		int tx = (getWidth() - sb.width) / 2;
-		int ty = (getHeight() - sb.height) / 2 + fm.getAscent();
 
-		g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 25, 25);
-		g2d.setColor(Color.WHITE);
-		g2d.drawString(getText(), tx, ty);
-	}
 }

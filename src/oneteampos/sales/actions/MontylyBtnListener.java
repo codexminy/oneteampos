@@ -1,5 +1,7 @@
 package oneteampos.sales.actions;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -21,9 +23,8 @@ public class MontylyBtnListener implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		MonthlyBtn monthlyBtn = (MonthlyBtn)e.getSource();
 		
-		// 버튼 강조
-		monthlyBtn.setFocus();
-		salesPanel.getDailyBtn().setClearFocus();
+		salesPanel.getDailyBtn().setSelected(false);
+		
 		// 패널 바꾸기
 		if(!salesPanel.getMonthlySalesPanel().getFstField().getText().equals("")) {
 			salesPanel.getMonthlySalesPanel().setVisibleFalse();
@@ -35,6 +36,7 @@ public class MontylyBtnListener implements MouseListener {
 		} else {
 			salesPanel.getDailySalesPanel().setVisibleFalse();
 			salesPanel.getMonthlySalesPanel().setVisibleTrue();
+			
 		}
 	}
 
@@ -52,8 +54,7 @@ public class MontylyBtnListener implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override

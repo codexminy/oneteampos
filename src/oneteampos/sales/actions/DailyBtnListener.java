@@ -26,11 +26,9 @@ public class DailyBtnListener implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		DailyBtn dailyBtn = (DailyBtn)e.getSource();
-		
-		
-		// 버튼 강조
-		dailyBtn.setFocus();
-		salesPanel.getMonthlyBtn().setClearFocus();
+	
+		salesPanel.getMonthlyBtn().setSelected(false);
+	
 		// 프레임 바꾸기
 		if(!salesPanel.getDailySalesPanel().getFstField().getText().equals("")) {
 			salesPanel.getDailySalesPanel().setVisibleFalse();
