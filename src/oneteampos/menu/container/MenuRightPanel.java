@@ -10,21 +10,22 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import oneteampos.main.MainFrame;
-import oneteampos.menu.action.Member_inquiryAction;
 import oneteampos.menu.action.Cart_discountSaveCancelAction;
+import oneteampos.menu.action.Member_turnOnAction;
 import oneteampos.menu.action.Payment_turnOnAcion;
+import oneteampos.menu.component.All_label;
+import oneteampos.menu.component.All_opaquePanel;
 import oneteampos.menu.component.Cart_btn;
-import oneteampos.menu.component.Cart_label;
 import oneteampos.menu.component.Cart_table;
-import oneteampos.menu.component.Cart_panel;
+import oneteampos.menu.etc.CommonVariable;
 
-public class MenuRightPanel extends JPanel {
+public class MenuRightPanel extends JPanel implements CommonVariable {
 	
-	private final static int gap = 20;
 	private Vector<Vector<Object>> menuIdList;
 	private Vector<Vector<Object>> menuCntList;
 	private DefaultTableModel model;
@@ -40,13 +41,13 @@ public class MenuRightPanel extends JPanel {
 	private JButton cancelBtn;
 
 	public MenuRightPanel(MainFrame mainFrame, MenuLeftPanel leftPanel) {
-		this.totalPanel = new Cart_panel();
-		this.totalPricePanel = new Cart_panel(new GridLayout());
-		this.totalPrice = new Cart_label("0");
-		this.payPanel = new Cart_panel(new FlowLayout(FlowLayout.RIGHT, 5, 5));
+		this.totalPanel = new All_opaquePanel();
+		this.totalPricePanel = new All_opaquePanel(new GridLayout());
+		this.totalPrice = new All_label("0");
+		this.payPanel = new All_opaquePanel(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 		this.model = new DefaultTableModel() {@Override public boolean isCellEditable(int row, int column) {return false;}};
-		this.disPanel = new Cart_panel(new GridLayout());
-		this.discountCash = new Cart_label("0");
+		this.disPanel = new All_opaquePanel(new GridLayout());
+		this.discountCash = new All_label("0");
 		this.menuIdList = new Vector<>();
 		this.menuCntList = new Vector<>();
 		
@@ -55,14 +56,19 @@ public class MenuRightPanel extends JPanel {
 		model.removeRow(0);
 		cart = new Cart_table(mainFrame, model);
 
-		JLabel title = new Cart_label("선택한 메뉴");
-		JLabel discount = new Cart_label("할인 금액");
-		JLabel total = new Cart_label("결제 금액");
+		JScrollPane sc = new JScrollPane(cart, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		
+		sc.getViewport().setBackground(Color.WHITE);
+		cart.setGridColor(Color.LIGHT_GRAY);
+		
+		JLabel title = new All_label("선택한 메뉴");
+		JLabel discount = new All_label("할인 금액");
+		JLabel total = new All_label("결제 금액");
 		
 		JButton payBtn = new Cart_btn("결제");
 		JButton memberCheck = new Cart_btn("회원조회");
 		cancelBtn = new Cart_btn("할인&적립취소");
-		
+
 		cancelBtn.setVisible(false);
 		discountCash.setVisible(false);
 		totalPrice.setVisible(false);
@@ -72,6 +78,9 @@ public class MenuRightPanel extends JPanel {
 
 		disPanel.add(discount);
 		disPanel.add(discountCash);
+		
+		discount.setVerticalAlignment(JLabel.BOTTOM);
+		discountCash.setVerticalAlignment(JLabel.BOTTOM);
 		
 		payPanel.add(cancelBtn);
 		payPanel.add(memberCheck);
@@ -86,22 +95,27 @@ public class MenuRightPanel extends JPanel {
 
 		cancelBtn.addMouseListener(new Cart_discountSaveCancelAction(this));
 		payBtn.addMouseListener(new Payment_turnOnAcion(mainFrame, this));
-		memberCheck.addMouseListener(new Member_inquiryAction(mainFrame, this));
+		memberCheck.addMouseListener(new Member_turnOnAction(mainFrame, this));
 
-		setLayout(null);
-		setBackground(Color.DARK_GRAY);
-		setBorder(BorderFactory.createEmptyBorder(20, 20, 13, 20));
+		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT,0,0));
+		
+		titlePanel.setOpaque(false);
+		titlePanel.add(title);
+		
+		titlePanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+		sc.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+		totalPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
+
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+		setBackground(Color.WHITE);
 		setBounds(leftPanel.getWidth(), 0, MainFrame.FRAME_WIDTH-leftPanel.getWidth()-15, MainFrame.FRAME_HEIGHT-38);
-		
-		title.setBounds(gap, gap, getWidth()/2, gap);
-		cart.setBounds(gap, title.getHeight()+gap*2, getWidth()-gap*2, (int)(getHeight()*0.7));
-		totalPanel.setBounds(gap, title.getHeight()+cart.getHeight()+gap*3, getWidth()-gap*2, getHeight()-(title.getHeight()+cart.getHeight()+gap*3));
-		
-		add(title);
-		add(cart);
+
+		add(titlePanel);
+		add(sc);
 		add(totalPanel);
 	}
-	
+
 	public JLabel getTotalPrice() {
 		return this.totalPrice;
 	}

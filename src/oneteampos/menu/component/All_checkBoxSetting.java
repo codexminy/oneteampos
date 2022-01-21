@@ -14,6 +14,7 @@ public class All_checkBoxSetting extends DefaultTableCellRenderer {
 	
 	public All_checkBoxSetting(JCheckBox box) {
 		this.box = box;
+		
 	}
 	
 	@Override

@@ -11,7 +11,7 @@ import javax.swing.JTable;
 import oneteampos.main.MainFrame;
 import oneteampos.menu.container.Member_inquiryDialog;
 import oneteampos.menu.container.MenuRightPanel;
-import oneteampos.menu.etc.ChangeStr;
+import oneteampos.menu.etc.ChangeString;
 
 public class Member_svBoxAction implements ActionListener {
 
@@ -37,9 +37,7 @@ public class Member_svBoxAction implements ActionListener {
 			svBox.setSelected(false);
 		} else if (svBox.isSelected()) {
 			mcd.setDiscnt((int)table.getValueAt(row, 5));
-
-//			int total = Integer.parseInt(mrp.getTotalPrice().getText().substring(2));
-			int total = Integer.parseInt(ChangeStr.setErase(mrp.getTotalPrice().getText()));
+			int total = Integer.parseInt(ChangeString.setErase(mrp.getTotalPrice().getText()));
 			double save = (double)table.getValueAt(row, 7);
 			
 			saveCash.setVisible(true);

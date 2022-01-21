@@ -9,7 +9,7 @@ import javax.swing.JTable;
 import oneteampos.main.MainFrame;
 import oneteampos.menu.container.Member_inquiryDialog;
 import oneteampos.menu.container.MenuRightPanel;
-import oneteampos.menu.etc.ChangeStr;
+import oneteampos.menu.etc.ChangeString;
 
 public class Member_selectAction extends MouseAdapter {
 
@@ -25,7 +25,7 @@ public class Member_selectAction extends MouseAdapter {
 	public void mouseClicked(MouseEvent e) {
 		MenuRightPanel mrp = mainFrame.getMainPanel().getMenuPanel().getRightPanel();
 		JTable table = mcd.getTable();
-		JLabel membershipCash = mcd.getMembershipCash();
+		JLabel membershipCash = mcd.getMembershipNum();
 		JLabel saveCash = mcd.getSaveCash();
 		JLabel discountCash = mcd.getDiscountCash();
 		
@@ -34,10 +34,9 @@ public class Member_selectAction extends MouseAdapter {
 		membershipCash.setVisible(true);
 		membershipCash.setText(table.getValueAt(row, 2)+"");
 		
-//		int total = Integer.parseInt(mrp.getTotalPrice().getText().substring(2));
-		int total = Integer.parseInt(ChangeStr.setErase(mrp.getTotalPrice().getText()));
-		double save = (double)table.getValueAt(row, 7);
-		int discnt = (int)table.getValueAt(row, 5);
+		int total = Integer.parseInt(ChangeString.setErase(mrp.getTotalPrice().getText()));
+		double save = (double) table.getValueAt(row, 7);
+		int discnt = (int) table.getValueAt(row, 5);
 		
 		if(mcd.getSvBox().isSelected()) {
 			saveCash.setVisible(true);
@@ -59,5 +58,4 @@ public class Member_selectAction extends MouseAdapter {
 			discountCash.setText(total+"");
 		}
 	}
-	
 }

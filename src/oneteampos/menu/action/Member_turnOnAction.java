@@ -9,12 +9,12 @@ import oneteampos.main.MainFrame;
 import oneteampos.menu.container.Member_inquiryDialog;
 import oneteampos.menu.container.MenuRightPanel;
 
-public class Member_inquiryAction extends MouseAdapter {
+public class Member_turnOnAction extends MouseAdapter {
 
 	private MainFrame mainFrame;
 	private MenuRightPanel mrp;
 	
-	public Member_inquiryAction(MainFrame mainFrame, MenuRightPanel mrp) {
+	public Member_turnOnAction(MainFrame mainFrame, MenuRightPanel mrp) {
 		this.mainFrame = mainFrame;
 		this.mrp = mrp;
 	}

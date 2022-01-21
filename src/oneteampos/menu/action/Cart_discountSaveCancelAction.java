@@ -6,8 +6,9 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import oneteampos.menu.container.Member_inquiryDialog;
 import oneteampos.menu.container.MenuRightPanel;
-import oneteampos.menu.etc.ChangeStr;
+import oneteampos.menu.etc.ChangeString;
 
 public class Cart_discountSaveCancelAction extends MouseAdapter {
 
@@ -24,13 +25,13 @@ public class Cart_discountSaveCancelAction extends MouseAdapter {
 		if(choice == JOptionPane.YES_OPTION) {
 			JLabel totalPrice = mrp.getTotalPrice();
 			JLabel discountCash = mrp.getDiscountCash();
+			Member_inquiryDialog mid = mrp.getMemeberCheckDialog();
 			
-			mrp.getMemeberCheckDialog().setPoint(0);
-//			totalPrice.setText("￦ " + (Integer.parseInt(totalPrice.getText().substring(2)) + Integer.parseInt(discountCash.getText().equals("") ? "0" : discountCash.getText())));
-			totalPrice.setText(ChangeStr.setCashMark(Integer.parseInt(ChangeStr.setErase(totalPrice.getText())) + Integer.parseInt(ChangeStr.setErase(discountCash.getText()))));
-			mrp.getMemeberCheckDialog().getSaveCash().setText("");
+			mid.setPoint(0);
+			totalPrice.setText(ChangeString.setCashMark(Integer.parseInt(ChangeString.setErase(totalPrice.getText())) + Integer.parseInt(ChangeString.setErase(discountCash.getText()))));
+			mid.getSaveCash().setText("");
 			
-			discountCash.setText("");
+			discountCash.setText("0");
 			discountCash.setVisible(false);
 			
 			mrp.getCancelBtn().setVisible(false);

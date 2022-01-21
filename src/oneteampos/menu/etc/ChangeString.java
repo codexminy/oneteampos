@@ -1,8 +1,8 @@
 package oneteampos.menu.etc;
 
-public class ChangeStr {
+public class ChangeString {
 	
-	private ChangeStr() {
+	private ChangeString() {
 		
 	}
 	

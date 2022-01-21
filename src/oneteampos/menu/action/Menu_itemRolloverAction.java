@@ -25,7 +25,7 @@ public class Menu_itemRolloverAction extends MouseAdapter {
 	
 	@Override
 	public void mouseExited(MouseEvent e) {
-		menuName.setForeground(Color.BLACK);
-		menuPrice.setForeground(Color.BLACK);
+		menuName.setForeground(Color.DARK_GRAY);
+		menuPrice.setForeground(Color.DARK_GRAY);
 	}
 }

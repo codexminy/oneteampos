@@ -24,55 +24,27 @@ public class MenuManage_insertAction implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//		int cnt = 0;
-//		
-//		for(int i=0; i<menuLeftPanel.getMenuManagePanel().getRsMenu().getColumnCount(); ++i) {
-//			Object data = menuLeftPanel.getMenuManagePanel().getRsMenu().getValueAt(0, i);
-//			cnt = data.equals("") ? cnt+=1 : cnt;
-//		}
-//		
-//		if(cnt == menuLeftPanel.getMenuManagePanel().getRsMenu().getColumnCount()) {
-//			JOptionPane.showMessageDialog(null, "메뉴를 입력해주세요!", "information", JOptionPane.CANCEL_OPTION);
-//			return;
-//		}
-//		
-//		insertMenu();
-//		new MenuUpdateAction(menuLeftPanel);
-//		
-//		for(int i=0; i<menuLeftPanel.getMenuManagePanel().getRsMenu().getColumnCount(); ++i) {
-//			menuLeftPanel.getMenuManagePanel().getRsMenu().setValueAt("", 0, i);
-//		}
-		
+		MenuLeftPanel mlp = mainFrame.getMainPanel().getMenuPanel().getLeftPanel();
+		JTable rsMenu = mlp.getMenuManage_dialog().getRsMenu();
 		int cnt = 0;
 		
-//		Vector<Object> addList = new Vector<>();
-		
-		MenuLeftPanel mlp = mainFrame.getMainPanel().getMenuPanel().getLeftPanel();
-		JTable rsMenu = mlp.getMenuManagePanel().getRsMenu();
-		
 		for(int i=0; i<rsMenu.getColumnCount(); ++i) {
-			Object data = mlp.getMenuManagePanel().getRsMenu().getValueAt(0, i);
+			Object data = mlp.getMenuManage_dialog().getRsMenu().getValueAt(0, i);
 			cnt = data.equals("") ? cnt+=1 : cnt;
+			
 			if(data.equals("")) {
 				JOptionPane.showMessageDialog(null, "메뉴를 입력해주세요!", "information", JOptionPane.CANCEL_OPTION);
 				return;
-			} else {
-//				addList.add(data);
 			}
 		}
 		
-//		if(cnt == rsMenu.getColumnCount()) {
-//			JOptionPane.showMessageDialog(null, "메뉴를 입력해주세요!", "information", JOptionPane.CANCEL_OPTION);
-//			return;
-//		}
-
 		int check = JOptionPane.showOptionDialog(null, "메뉴를 추가하겠습니까?", "Message", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 		
 		if(check == JOptionPane.YES_OPTION) {
 			JOptionPane.showMessageDialog(null, "메뉴가 추가되었습니다", "추가 완료", JOptionPane.INFORMATION_MESSAGE);
-
 			insertMenu(rsMenu);
 			new MenuManage_updateAction(mainFrame);
+			
 			for(int i=0; i<rsMenu.getColumnCount(); ++i) {
 				rsMenu.setValueAt("", 0, i);
 			}
@@ -86,10 +58,6 @@ public class MenuManage_insertAction implements ActionListener {
 			Connection conn = DBConnector.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 		) {
-//			for(int i=0; i<menuLeftPanel.getMenuManagePanel().getRsMenu().getColumnCount()-1; ++i) {
-//				pstmt.setObject(i+1, menuLeftPanel.getMenuManagePanel().getRsMenu().getValueAt(0, i+1));
-//			}
-			
 			for(int i=0; i<rsMenu.getColumnCount(); ++i) {
 				pstmt.setObject(i+1, rsMenu.getValueAt(0, i));
 			}

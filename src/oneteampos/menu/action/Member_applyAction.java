@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import oneteampos.main.MainFrame;
 import oneteampos.menu.container.Member_inquiryDialog;
 import oneteampos.menu.container.MenuRightPanel;
-import oneteampos.menu.etc.ChangeStr;
+import oneteampos.menu.etc.ChangeString;
 
 public class Member_applyAction extends MouseAdapter {
 
@@ -28,15 +28,13 @@ public class Member_applyAction extends MouseAdapter {
 		MenuRightPanel rp = mainFrame.getMainPanel().getMenuPanel().getRightPanel();
 		
 		if(choice == JOptionPane.YES_OPTION) {
-//			int totalPrice = Integer.parseInt(rp.getTotalPrice().getText().substring(2));
-			int totalPrice = Integer.parseInt(ChangeStr.setErase(rp.getTotalPrice().getText()));
+			int totalPrice = Integer.parseInt(ChangeString.setErase(rp.getTotalPrice().getText()));
 			int discnt = mcd.getDiscnt();
-
 			JLabel discountCash = mcd.getDiscountCash();
 			JLabel saveCash = mcd.getSaveCash();
 			JCheckBox dcBox = mcd.getDcBox();
 			JCheckBox svBox = mcd.getSvBox();
-
+			
 			if(totalPrice >= discnt) {
 				mcd.setPoint(0);
 			} else {
@@ -47,14 +45,10 @@ public class Member_applyAction extends MouseAdapter {
 			
 			if(dcBox.isSelected() && svBox.isSelected()) {
 				mcd.setPoint(discnt - Integer.parseInt(discountCash.getText()) + Integer.parseInt(saveCash.getText()));
-				rp.getDiscountCash().setText(dis+"");
-//				rp.getTotalPrice().setText("￦ " + (totalPrice-dis));
-				rp.getTotalPrice().setText(ChangeStr.setCashMark(totalPrice-dis));
+				setText(rp, dis, totalPrice);
 			} else if(dcBox.isSelected()) {
 				mcd.setPoint(discnt - Integer.parseInt(discountCash.getText()));
-				rp.getDiscountCash().setText(dis+"");
-//				rp.getTotalPrice().setText("￦ " + (totalPrice-dis));
-				rp.getTotalPrice().setText(ChangeStr.setCashMark(totalPrice-dis));
+				setText(rp, dis, totalPrice);
 			} else if(svBox.isSelected()) {
 				mcd.setPoint(discnt + Integer.parseInt(saveCash.getText()));
 			}
@@ -65,5 +59,10 @@ public class Member_applyAction extends MouseAdapter {
 			JOptionPane.showMessageDialog(null, "적용되었습니다.");
 			mcd.dispose();
 		}
+	}
+	
+	private void setText(MenuRightPanel rp, int dis, int totalPrice) {
+		rp.getDiscountCash().setText(dis+"");
+		rp.getTotalPrice().setText(ChangeString.setCashMark(totalPrice-dis));
 	}
 }

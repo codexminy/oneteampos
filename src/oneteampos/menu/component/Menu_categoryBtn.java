@@ -36,7 +36,8 @@ public class Menu_categoryBtn extends JRadioButton {
 		Graphics2D g2d = (Graphics2D)g;
 		
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2d.setFont(new Font(Font.DIALOG, Font.BOLD, 13));
+		g2d.setFont(new Font("나눔스퀘어 Bold", Font.PLAIN, 14));
+		g2d.setColor(new Color(135, 136, 138));
 		
 		if(getModel().isSelected()) {
 			g2d.setColor(new Color(44, 108, 212));
@@ -50,7 +51,7 @@ public class Menu_categoryBtn extends JRadioButton {
 		int tx = (getWidth() - sb.width) / 2;
 		int ty = (getHeight() - sb.height) / 2 + fm.getAscent();
 
-		g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 30, 30);
+		g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 25, 25);
 		g2d.setColor(Color.WHITE);
 		g2d.drawString(text, tx, ty);
 	}

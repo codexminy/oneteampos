@@ -94,7 +94,7 @@ public class ReturnJPanel extends JPanel{
 				} else {
 					if (cnt != 0 && j == 1) {
 						for (int k = 0; k < cnt; ++k) {
-							rowData[i][j] += "└";
+							rowData[i][j] = "└";
 							rowData[i][j] = rowData[i][j].replace("null", "");
 						}
 						rowData[i][j] += returnList.get(i).getRowData(j - 1, 0);

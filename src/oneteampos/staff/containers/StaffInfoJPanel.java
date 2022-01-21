@@ -140,8 +140,9 @@ public class StaffInfoJPanel extends JPanel{
 		}
 
 		table.setRowHeight(30);
-		table.setFont(new Font("돋움", Font.PLAIN, 15));
-		table.getTableHeader().setFont(new Font("Serif", Font.BOLD, 17));
+		table.setFont(new Font(Font.DIALOG, Font.BOLD, 15));
+		table.getTableHeader().setFont(new Font(Font.DIALOG, Font.BOLD, 17));
+
 
 	}
 	

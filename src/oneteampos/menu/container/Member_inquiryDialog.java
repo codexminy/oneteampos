@@ -1,6 +1,6 @@
 package oneteampos.menu.container;
 
-import java.awt.Cursor;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +9,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -22,35 +23,39 @@ import javax.swing.table.DefaultTableModel;
 
 import oneteampos.database.DBConnector;
 import oneteampos.main.MainFrame;
-import oneteampos.menu.action.Member_dcBoxAction;
 import oneteampos.menu.action.Member_applyAction;
 import oneteampos.menu.action.Member_comboBoxAcion;
+import oneteampos.menu.action.Member_dcBoxAction;
+import oneteampos.menu.action.Member_searchAction;
 import oneteampos.menu.action.Member_selectAction;
 import oneteampos.menu.action.Member_svBoxAction;
+import oneteampos.menu.component.All_boxPanel;
+import oneteampos.menu.component.All_btn;
+import oneteampos.menu.component.All_checkBox;
+import oneteampos.menu.component.All_label;
 import oneteampos.menu.component.All_numberPad;
-import oneteampos.menu.action.Member_searchAction;
+import oneteampos.menu.component.All_opaquePanel;
+import oneteampos.menu.component.MenuManage_Table;
 import oneteampos.menu.data.MemberData;
+import oneteampos.menu.etc.CommonVariable;
 
-public class Member_inquiryDialog extends JDialog {
+public class Member_inquiryDialog extends JDialog implements CommonVariable {
 	
-	private final static int DIALOG_W = 720;
-	private final static int DIALOG_H = 720;
-	private final static int GAP = 20;
 	private Vector<Object> col;
 	private Vector<Object> col2;
 	private Vector<MemberData> memberList;
 	private Vector<Vector<Object>> row;
 	private JTable table;
 	private JLabel saveCash;
-	private String item;
-	private int discnt;
-	private int point;
-	private JLabel membershipCash;
+	private JLabel membershipNum;
 	private JLabel discountCash;
 	private JCheckBox dcBox;
 	private JCheckBox svBox;
-	private DefaultTableModel model;
 	private JTextField searchField;
+	private DefaultTableModel model;
+	private String item;
+	private int discnt;
+	private int point;
 
 	public Member_inquiryDialog(MainFrame mainFrame) {
 		super(mainFrame, "회원 조회", true);
@@ -58,98 +63,87 @@ public class Member_inquiryDialog extends JDialog {
 		this.col2 = new Vector<>();
 		this.memberList = insertMemberData();
 		this.row = insertRow();
+		this.searchField = new JTextField();
+		this.model = new DefaultTableModel(row, col) { public boolean isCellEditable(int row, int column) {return false;} };
+		this.table = new MenuManage_Table(model);
+		this.membershipNum = new All_label("");
+		this.saveCash = new All_label("0");
+		this.discountCash = new All_label("0");
+		this.dcBox = new All_checkBox("할인");
+		this.svBox = new All_checkBox("적립");
 
-		JPanel bg = new JPanel(null);
+		All_boxPanel bgBoxPanel = new All_boxPanel("Y", CENTER_ALIGNMENT);
+		All_boxPanel searchBoxPanel = new All_boxPanel(CENTER_ALIGNMENT);
+		All_boxPanel infoCheckBoxPanel = new All_boxPanel("Y", CENTER_ALIGNMENT);
+		All_boxPanel numInfoBoxPanel = new All_boxPanel(CENTER_ALIGNMENT);
+		All_boxPanel applyBoxPanel = new All_boxPanel(CENTER_ALIGNMENT);
 		
-		JLabel memberCheckLabel = new JLabel("회원조회");
-		memberCheckLabel.setBounds(GAP, GAP, DIALOG_W, DIALOG_H/30);
+		JPanel infoPanel = new All_opaquePanel(new GridLayout(3,2));
+		JPanel checkPanel = new All_opaquePanel(new GridLayout());
+		JPanel numPadPanel = new All_numberPad(searchField);
 		
-		JPanel line = new All_LinePanel(DIALOG_W - 60);
-		line.setBounds(GAP, 40, DIALOG_W - 40, 10);
+		JButton searchBtn = new All_btn("검색");
+		JButton apply = new All_btn("적용");
 		
 		JComboBox<Object> combo = new JComboBox<>(col2);
-		combo.setBounds(GAP, 50, DIALOG_W - 580, GAP);
-		
-		item = (String) combo.getSelectedItem();
+		this.item = (String)combo.getSelectedItem();
 
-		combo.addActionListener(new Member_comboBoxAcion(this));
+		JScrollPane sc = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
-		JPanel infoPanel = new JPanel(new GridLayout(3,2));
-		JPanel chkPanel = new JPanel(new GridLayout());
-		
-		infoPanel.setBounds(20, 300, 200, 200);
-		chkPanel.setBounds(20, 530, 200, 50);
-		
-		JLabel membership = new JLabel("멤버십");
-		membershipCash = new JLabel();
-		membershipCash.setVisible(false);
-		
-		JLabel save = new JLabel("적립금");
-		saveCash = new JLabel();
+		JLabel membership = new All_label("멤버십");
+		JLabel save = new All_label("적립금");
+		JLabel discount = new All_label("할인금액");
+
 		saveCash.setVisible(false);
-		
-		JLabel discount = new JLabel("할인금액");
-		discountCash = new JLabel();
 		discountCash.setVisible(false);
 		
+		sc.getViewport().setBackground(Color.WHITE);
+		
+		combo.addActionListener(new Member_comboBoxAcion(this));
+		searchBtn.addMouseListener(new Member_searchAction(this));
+		apply.addMouseListener(new Member_applyAction(mainFrame, this));
+		this.table.addMouseListener(new Member_selectAction(mainFrame, this));
+		this.dcBox.addActionListener(new Member_dcBoxAction(mainFrame, this));
+		this.svBox.addActionListener(new Member_svBoxAction(mainFrame, this));
+
+		bgBoxPanel.setEmptyBorder(GAP, GAP, GAP, GAP);
+		searchBoxPanel.setEmptyBorder(0, 0, GAP/2, 0);
+		numInfoBoxPanel.setEmptyBorder(GAP/2, 0, GAP*2, 0);
+		numInfoBoxPanel.setPnSize(0, 300);
+		infoCheckBoxPanel.setPnSize(DIALOG_W/4, 0);
+		numPadPanel.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 0));
+		
+		searchBoxPanel.add(combo);
+		searchBoxPanel.add(searchField);
+		searchBoxPanel.add(searchBtn);
+
 		infoPanel.add(membership);
-		infoPanel.add(membershipCash);
+		infoPanel.add(membershipNum);
 		infoPanel.add(save);
 		infoPanel.add(saveCash);
 		infoPanel.add(discount);
 		infoPanel.add(discountCash);
 
-		dcBox = new JCheckBox("할인");
-		svBox = new JCheckBox("적립");
-
-		searchField = new JTextField();
-		searchField.setBounds(combo.getWidth()+GAP, 50, DIALOG_W-combo.getWidth()-110-GAP, GAP + 1);
-
-		model = new DefaultTableModel();
-		model.setDataVector(row, col);
+		checkPanel.add(dcBox);
+		checkPanel.add(svBox);
 		
-		table = new JTable(model);
+		infoCheckBoxPanel.add(infoPanel);
+		infoCheckBoxPanel.add(checkPanel);
 		
-		table.addMouseListener(new Member_selectAction(mainFrame, this));
-		dcBox.addActionListener(new Member_dcBoxAction(mainFrame, this));
-		svBox.addActionListener(new Member_svBoxAction(mainFrame, this));
-		
-		JScrollPane sc = new JScrollPane(table);
-		sc.setBounds(GAP, 80, DIALOG_W - 60, DIALOG_H-500);
-		
-		JButton searchBtn = new JButton("검색");
-		searchBtn.setBounds(610, 50, 70, GAP);
-		searchBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		numInfoBoxPanel.add(infoCheckBoxPanel);
+		numInfoBoxPanel.add(numPadPanel);
 
-		searchBtn.addMouseListener(new Member_searchAction(this));
-
-		JPanel numPadPanel = new All_numberPad(searchField);
-		numPadPanel.setBounds(430, 320, 250, 250);
-
-		chkPanel.add(dcBox);
-		chkPanel.add(svBox);
-
-		JButton apply = new JButton("적용");
+		applyBoxPanel.add(apply);
 		
-		apply.setBounds(600, 600, 80, 30);
+		bgBoxPanel.add(searchBoxPanel);
+		bgBoxPanel.add(sc);
+		bgBoxPanel.add(numInfoBoxPanel);
+		bgBoxPanel.add(applyBoxPanel);
 		
-		apply.addMouseListener(new Member_applyAction(mainFrame, this));
-
-		bg.add(memberCheckLabel);
-		bg.add(line);
-		bg.add(combo);
-		bg.add(searchField);
-		bg.add(searchBtn);
-		bg.add(sc);
-		bg.add(numPadPanel);
-		bg.add(infoPanel);
-		bg.add(chkPanel);
-		bg.add(apply);
-		
-		add(bg);
+		add(bgBoxPanel);
 		
 		setSize(DIALOG_W, DIALOG_H);
-		setLocationRelativeTo(null);
+		setLocationRelativeTo(null);	
 	}
 	
 	private Vector<Vector<Object>> insertRow() {
@@ -214,15 +208,15 @@ public class Member_inquiryDialog extends JDialog {
 		) {
 			while(rs.next()) {
 				Vector<Object> innerRow = new Vector<>();
-				innerRow.add(rs.getString(1));
-				innerRow.add(rs.getString(2));
+				innerRow.add(rs.getInt(1));
+				innerRow.add(rs.getInt(2));
 				innerRow.add(rs.getString(3).replaceFirst("(^02|[0-9]{3})([0-9]{3,4})([0-9]{4})$", "$1-$2-$3"));
 				innerRow.add(rs.getString(4));
-				innerRow.add(rs.getString(5));
-				innerRow.add(rs.getString(6));
+				innerRow.add(rs.getInt(5));
+				innerRow.add(rs.getInt(6));
 				innerRow.add(rs.getString(7));
-				innerRow.add(rs.getString(8));
-				innerRow.add(rs.getString(9));
+				innerRow.add(rs.getDouble(8));
+				innerRow.add(rs.getInt(9));
 				row.add(innerRow);
 			}
 			model.setDataVector(row, col);
@@ -271,8 +265,8 @@ public class Member_inquiryDialog extends JDialog {
 		return this.discountCash;
 	}
 	
-	public JLabel getMembershipCash() {
-		return this.membershipCash;
+	public JLabel getMembershipNum() {
+		return this.membershipNum;
 	}
 	
 	public void setPoint(int point) {

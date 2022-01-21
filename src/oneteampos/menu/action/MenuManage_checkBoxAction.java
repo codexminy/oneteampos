@@ -23,27 +23,8 @@ public class MenuManage_checkBoxAction implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//		int row = menuManagePanel.getMenuTable().getSelectedRow();
-//		MenuManagePanel mmp = mainFrame.getMainPanel().getMenuPanel().getLeftPanel().getMenuManagePanel();
-//		
-//		int row = mmp.getMenuTable().getSelectedRow();
-
 		int row = table.getSelectedRow();
-		
-//		if(menuManagePanel.getChkBox().isSelected()) {
-//			menuManagePanel.getList().add(row);
-//		} else {
-//			menuManagePanel.getList().remove(row);
-//		}
-		
-//		if(mmp.getChkBox().isSelected()) {
-//			mainFrame.getMainPanel().getMenuPanel().getList().add(row);
-//			System.out.println(mainFrame.getMainPanel().getMenuPanel().getList());
-//		} else {
-//			mainFrame.getMainPanel().getMenuPanel().getList().remove(row);
-//			System.out.println(mainFrame.getMainPanel().getMenuPanel().getList());
-//		}
-		
+
 		if(box.isSelected()) {
 			mainFrame.getMainPanel().getMenuPanel().getList().add(row);
 		} else {

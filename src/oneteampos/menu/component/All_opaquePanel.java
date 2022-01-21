@@ -4,15 +4,14 @@ import java.awt.LayoutManager;
 
 import javax.swing.JPanel;
 
-public class Cart_panel extends JPanel {
+public class All_opaquePanel extends JPanel {
 	
-	public Cart_panel() {
+	public All_opaquePanel() {
 		setOpaque(false);
 	}
 	
-	public Cart_panel(LayoutManager mgr) {
-		super(mgr);
+	public All_opaquePanel(LayoutManager mgr) {
+		setLayout(mgr);
 		setOpaque(false);
 	}
-	
 }

@@ -12,6 +12,11 @@ public class All_checkBox extends JCheckBox {
 		setHorizontalAlignment(JLabel.CENTER);
 	}
 	
+	public All_checkBox(String text) {
+		setText(text);
+		setOpaque(false);
+	}
+	
 	public void setting(JTable table, String column, JCheckBox box, DefaultTableCellRenderer dtcr) {
 		table.getColumn(column).setCellRenderer(dtcr);
 		table.getColumn(column).setCellEditor(new DefaultCellEditor(box));

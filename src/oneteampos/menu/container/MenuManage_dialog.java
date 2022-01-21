@@ -13,7 +13,6 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -32,15 +31,15 @@ import oneteampos.menu.action.Dialog_windowAction;
 import oneteampos.menu.action.MenuManage_checkBoxAction;
 import oneteampos.menu.action.MenuManage_deleteAction;
 import oneteampos.menu.action.MenuManage_insertAction;
-import oneteampos.menu.action.MenuManage_updateAction;
+import oneteampos.menu.component.All_btn;
 import oneteampos.menu.component.All_checkBox;
 import oneteampos.menu.component.All_checkBoxSetting;
+import oneteampos.menu.component.MenuManage_Table;
 import oneteampos.menu.etc.Gbl;
 
 public class MenuManage_dialog extends JDialog {
 	
 	public DefaultTableModel model;
-//	private TreeSet<Integer> list;
 	private Vector<Object> col;
 	private Vector<Vector<Object>> row;
 	private Object[] col2;
@@ -58,19 +57,17 @@ public class MenuManage_dialog extends JDialog {
 		this.col = new Vector<>();
 		this.row = new Vector<>();
 		this.model = inputMenuData();
-//		this.list = new TreeSet<>();
-//		this.chkBox = new JCheckBox();
 		this.box = new All_checkBox();
 		this.chkBox = box;
-		this.menu = new JTable(model);
-		this.rsMenu = new JTable(new Object[][] {{"","",""}}, col2);
-		this.registrationBtn = new JButton("메뉴 등록");
-		this.deleteBtn = new JButton("메뉴 삭제");
+		this.menu = new MenuManage_Table(model);
+		this.rsMenu = new MenuManage_Table(new Object[][] {{"","",""}}, col2);
+		this.registrationBtn = new All_btn("메뉴 등록");
+		this.deleteBtn = new All_btn("메뉴 삭제");
 		this.dtcr = new All_checkBoxSetting(chkBox);
+		this.menuSc = new JScrollPane(menu);
 		
-		menuSc = new JScrollPane(menu);
 		JScrollPane reMenuSc = new JScrollPane(rsMenu);
-		
+
 		JPanel searchPanel = new JPanel();
 		JPanel btns = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JPanel menuManagePanel = new JPanel(new GridBagLayout());
@@ -83,7 +80,7 @@ public class MenuManage_dialog extends JDialog {
 		JComboBox<Object> combo = new JComboBox<>(col2);
 		
 		JTextField searchField = new JTextField(40);
-		JButton searchBtn = new JButton("검색");
+		JButton searchBtn = new All_btn("검색");
 		
 		searchPanel.add(combo);
 		searchPanel.add(searchField);
@@ -101,13 +98,9 @@ public class MenuManage_dialog extends JDialog {
 			}
 			
 		});
-		
-		
+
 		GridBagConstraints gbc = Gbl.getGbc();
-		
-		tableSetting(menu, false, false);
-		tableSetting(rsMenu, false, false);
-		
+
 		menuListPanel.add(menuListLabel);
 		registerMenuPanel.add(registerMenuLabel);
 		
@@ -122,11 +115,7 @@ public class MenuManage_dialog extends JDialog {
 		menuManagePanel.add(searchPanel, Gbl.setting(gbc, 0.1, 0.01, 0, 5));
 
 		box.setting(menu, "선택", chkBox, dtcr);
-		
-		
-//		menu.getColumn("선택").setCellRenderer(dtcr);
-//		menu.getColumn("선택").setCellEditor(new DefaultCellEditor(chkBox));
-//		chkBox.setHorizontalAlignment(JLabel.CENTER);
+
 		chkBox.addActionListener(new MenuManage_checkBoxAction(mainFrame, menu, chkBox));
 		deleteBtn.addActionListener(new MenuManage_deleteAction(mainFrame));
 		registrationBtn.addActionListener(new MenuManage_insertAction(mainFrame));
@@ -206,29 +195,11 @@ public class MenuManage_dialog extends JDialog {
 		model.setDataVector(row, col);
 		return model;
 	}
-	
-	private void tableSetting(JTable table, boolean reordering, boolean resizing) {
-		table.getTableHeader().setReorderingAllowed(reordering);
-		table.getTableHeader().setResizingAllowed(resizing);
-	}
-	
-//	private DefaultTableCellRenderer dcr = new DefaultTableCellRenderer() {
-//		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-//			JCheckBox chkBox = new JCheckBox();
-//			chkBox.setSelected(((Boolean)value).booleanValue());  
-//			chkBox.setHorizontalAlignment(JLabel.CENTER);
-//			return chkBox;
-//		}
-//	};
-	
+
 	public JTable getMenuTable() {
 		return this.menu;
 	}
-	
-//	public TreeSet<Integer> getList() {
-//		return this.list;
-//	}
-	
+
 	public JCheckBox getChkBox() {
 		return this.chkBox;
 	}

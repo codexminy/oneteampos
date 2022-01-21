@@ -16,6 +16,10 @@ import oneteampos.menu.action.Menu_itemRolloverAction;
 
 public class Menu_itemBtn extends JButton {
 	
+	public Menu_itemBtn() {
+		
+	}
+	
 	public Menu_itemBtn(JDialog menuDetailsPanel, JLabel menuName, JLabel menuPrice) {
 		setContentAreaFilled(false);
 		setBorderPainted(false);
@@ -32,14 +36,12 @@ public class Menu_itemBtn extends JButton {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.setColor(Color.WHITE);
 		
-		if(getModel().isSelected()) {
-			g2d.setColor(Color.DARK_GRAY);
-		} else if(getModel().isRollover()) {
-			g2d.setColor(Color.DARK_GRAY);
+		if(getModel().isRollover()) {
+			g2d.setColor(new Color(44, 108, 212));
 		}
 		
 		g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
-		g2d.setColor(Color.LIGHT_GRAY);
+		g2d.setColor(new Color(44, 108, 212));
 		g2d.drawRoundRect(0, 0, getWidth()-1, getHeight()-1, 15, 15);
 	}
 }

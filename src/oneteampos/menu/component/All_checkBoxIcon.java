@@ -18,7 +18,7 @@ public class All_checkBoxIcon implements Icon {
 	    Color color = bm.isSelected() ?  Color.DARK_GRAY : Color.LIGHT_GRAY;
 	    
 	    g.setColor(color);
-	    g.fillRect(1, 1, 50, 50);
+	    g.fillRect(0, 36, 10, 10);
 	}
 
 	@Override

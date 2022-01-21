@@ -2,36 +2,36 @@ package oneteampos.menu.action;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import oneteampos.menu.container.MenuDetail_dialog;
-import oneteampos.menu.etc.ChangeStr;
+import oneteampos.menu.etc.ChangeString;
 
 public class MenuDetail_plusAction implements ActionListener {
 
-	private MenuDetail_dialog details;
+	private MenuDetail_dialog mdd;
 	
-	public MenuDetail_plusAction(MenuDetail_dialog details) {
-		this.details = details;
+	public MenuDetail_plusAction(MenuDetail_dialog mdd) {
+		this.mdd = mdd;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton)e.getSource();
-//		int sum = Integer.parseInt(details.getTitleList().get(details.getTitleList().size()-1).getText().substring(4));
-		int sum = Integer.parseInt(ChangeStr.setErase(details.getTitleList().get(details.getTitleList().size()-1).getText()));
+		ArrayList<JLabel> titleList = mdd.getTitleList();
+		ArrayList<JLabel> amountLabels = mdd.getAmountLabels();
+		int sum = Integer.parseInt(ChangeString.setErase(titleList.get(titleList.size()-1).getText()));
 
-		for(int i=0; i<details.getAmountLabels().size(); ++i) {
-			if(btn.getName().equals(details.getExtraLabels().get(i).getText())) {
-				JLabel label = details.getAmountLabels().get(i);
+		for(int i=0; i<amountLabels.size(); ++i) {
+			if(btn.getName().equals(mdd.getExtraLabels().get(i).getText())) {
+				JLabel label = amountLabels.get(i);
 				int cnt = Integer.parseInt(label.getText());
 				label.setText((cnt + 1) + "");
-//				int sum2 = Integer.parseInt(details.getExtraAmountLabels().get(i).getText().substring(2));
-				int sum2 = Integer.parseInt(ChangeStr.setErase(details.getExtraAmountLabels().get(i).getText()));
-//				details.getTitleList().get(details.getTitleList().size()-1).setText("￦   " + (sum + sum2) + "");
-				details.getTitleList().get(details.getTitleList().size()-1).setText(ChangeStr.setCashMark(sum+sum2));
+				int sum2 = Integer.parseInt(ChangeString.setErase(mdd.getExtraAmountLabels().get(i).getText()));
+				titleList.get(titleList.size()-1).setText(ChangeString.setCashMark(sum+sum2));
 			}
 		}
 	}
