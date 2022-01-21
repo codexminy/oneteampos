@@ -1,11 +1,14 @@
 package oneteampos.members;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -13,44 +16,52 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import oneteampos.main.MainFrame;
+
 public class MemberJDialogGUI extends JDialog implements ActionListener {
 
-	JPanel pw=new JPanel(new GridLayout(6,1));
-    JPanel pc=new JPanel(new GridLayout(6,1));
-    JPanel ps=new JPanel();
+	private static MainFrame mainFrame;
+	
+	JPanel pw = new JPanel(new GridLayout(6,1,0,40));
+    JPanel pc = new JPanel(new GridLayout(6,1,0,40));
+    //JPanel pc=new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 35));
+    JPanel ps = new JPanel();
+    JPanel title = new JPanel();
  
-    JLabel label_member_id = new JLabel("멤버ID");
+    JLabel label_member_id = new JLabel("멤 버 I D");
     JLabel label_phone_number = new JLabel("전화번호");
-    JLabel label_name=new JLabel("이름");
-    JLabel label_grade_id=new JLabel("등급");
-    JLabel label_sum_amount=new JLabel("누적금액");
-    JLabel label_point=new JLabel("포인트");
+    JLabel label_name = new JLabel("이      름");
+    JLabel label_grade_id = new JLabel("등      급");
+    JLabel label_sum_amount = new JLabel("누적금액");
+    JLabel label_point = new JLabel("포  인  트");
+    
+    JLabel tt = new JLabel("회 원 정 보 관 리");
  
-    JTextField member_id = new JTextField();
-    JTextField phone_number = new JTextField();
-    JTextField name = new JTextField();
-    JTextField grade_id = new JTextField();
-    JTextField sum_amount = new JTextField();
-    JTextField point = new JTextField();
+    RoundJTextField member_id = new RoundJTextField(15);
+    RoundJTextField phone_number = new RoundJTextField(15);
+    RoundJTextField name = new RoundJTextField(15);
+    RoundJTextField grade_id = new RoundJTextField(15);
+    RoundJTextField sum_amount = new RoundJTextField(15);
+    RoundJTextField point = new RoundJTextField(15);
    
-    JButton confirm;
-    JButton reset=new JButton("취소");
+    RoundedButton confirm;
+    RoundedButton reset = new RoundedButton("취소");
  
     MemberJPanel me;
  
-	JPanel phone_numberCkP =new JPanel(new BorderLayout());
-	JButton phone_numberCkBtn = new JButton("중복확인");
+	JPanel phone_numberCkP =new JPanel(new BorderLayout(10, 0));
+	RoundedButton phone_numberCkBtn = new RoundedButton("중복확인");
 
 	MemberDefaultJTableDAO dao = new MemberDefaultJTableDAO();
 	
 	public MemberJDialogGUI(MemberJPanel me, String index) {
 		this.me = me;
-		
+				
 		if(index.equals("회원등록")) {
-			confirm = new JButton(index);
+			confirm = new RoundedButton(index);
 			member_id.setEditable(false);
 		} else {
-			confirm = new JButton("정보수정");
+			confirm = new RoundedButton("정보수정");
 			
 			int row = me.jt.getSelectedRow();	// 선택된 행
 			member_id.setText(me.jt.getValueAt(row, 0).toString());
@@ -66,12 +77,26 @@ public class MemberJDialogGUI extends JDialog implements ActionListener {
 			phone_numberCkBtn.setEnabled(true);
 		}
 		
+		title.add(tt);
+		tt.setFont(new Font("나눔스퀘어 ExtraBold", Font.BOLD, 18));
+				
 		pw.add(label_member_id);
+		label_member_id.setFont(new Font("나눔스퀘어", Font.BOLD, 14));
 		pw.add(label_phone_number);
+		label_phone_number.setFont(new Font("나눔스퀘어", Font.BOLD, 14));
 		pw.add(label_name);
+		label_name.setFont(new Font("나눔스퀘어", Font.BOLD, 14));
 		pw.add(label_grade_id);
+		label_grade_id.setFont(new Font("나눔스퀘어", Font.BOLD, 14));
 		pw.add(label_sum_amount);
+		label_sum_amount.setFont(new Font("나눔스퀘어", Font.BOLD, 14));
 		pw.add(label_point);
+		label_point.setFont(new Font("나눔스퀘어", Font.BOLD, 14));
+		
+		tt.setBorder(BorderFactory.createEmptyBorder(30,20,0,0));
+		pw.setBorder(BorderFactory.createEmptyBorder(30,20,10,20));
+		pc.setBorder(BorderFactory.createEmptyBorder(30,0,10,30));
+		ps.setBorder(BorderFactory.createEmptyBorder(10,10,30,10));
 		
 		phone_numberCkP.add(phone_number, "Center");
 		phone_numberCkP.add(phone_numberCkBtn, "East");
@@ -86,11 +111,14 @@ public class MemberJDialogGUI extends JDialog implements ActionListener {
 		ps.add(confirm);
 		ps.add(reset);
 		
+		add(tt,"North");
 		add(pw,"West");
         add(pc,"Center");
         add(ps,"South");
        
-        setSize(300,500);
+        setSize(400,550);
+        setResizable(false);
+        setBackground(Color.WHITE);
         setLocationRelativeTo(null);
         setVisible(true);
         
@@ -154,8 +182,7 @@ public class MemberJDialogGUI extends JDialog implements ActionListener {
 	}
 	
 	// 메세지 박스
-	public static void messageBox(MemberJDialogGUI obj, String message) {
-		JOptionPane.showMessageDialog(null, message);
+	public static void messageBox(Object obj , String message) {
+		JOptionPane.showMessageDialog((Component)obj , message);
 	}			
 }
-

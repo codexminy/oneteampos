@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JMenuItem;
 
+import oneteampos.main.MainFrame;
 import oneteampos.members.MemberDefaultJTableDAO;
 import oneteampos.members.MemberJDialogGUI;
 import oneteampos.members.MemberJPanel;
@@ -23,7 +24,7 @@ public class MenuBar_clickAction implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JMenuItem menu = (JMenuItem)e.getSource();
 		
-		if (menu == mjp.getInsert()) {			// 메뉴 > 등록
+		if (menu == mjp.getInsert()) {			// 메뉴 > 등록 
 			new MemberJDialogGUI(mjp, "회원등록");
 			
 		} else if (menu == mjp.getUpdate()) {	// 메뉴 > 수정
@@ -38,7 +39,7 @@ public class MenuBar_clickAction implements ActionListener {
 //			System.out.println("값" + obj);
 			
 			if (dao.memberDelete(obj.toString()) > 0) {
-				MemberJDialogGUI.messageBox(null, "레코드가 삭제되었습니다.");
+				MemberJDialogGUI.messageBox(null, "회원정보가 삭제 되었습니다.");
 				
 				// 리스트 갱신
 				dao.memberSelectAll(mjp.getDt());
@@ -46,7 +47,7 @@ public class MenuBar_clickAction implements ActionListener {
 					mjp.getJt().setRowSelectionInterval(0, 0);
 				
 			} else {
-				MemberJDialogGUI.messageBox(null, "레코드가 삭제되지 않았습니다.");
+				MemberJDialogGUI.messageBox(null, "회원정보가 삭제되지 않았습니다.");
 			}
 		}	
 	}
