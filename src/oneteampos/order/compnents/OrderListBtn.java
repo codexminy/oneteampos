@@ -9,8 +9,9 @@ import javax.swing.JButton;
 import oneteampos.order.actions.OrderBtnListener;
 import oneteampos.order.actions.StockBtnListener;
 import oneteampos.order.cotainer.OrderJPanel;
+import oneteampos.sales.containers.RoundedButton;
 
-public class OrderListBtn extends JButton{ // 품목 item 발주  store_order 재고 stock 발주리스트 order_list
+public class OrderListBtn extends RoundedButton{ // 품목 item 발주  store_order 재고 stock 발주리스트 order_list
 	
 	OrderJPanel orderPanel;
 	
@@ -19,23 +20,9 @@ public class OrderListBtn extends JButton{ // 품목 item 발주  store_order �
 	
 		this.orderPanel = orderPanel;
 		setFocusable(false);
-		setClearFocus();
+		setBounds(340, 65, 300, 30);
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
 		addMouseListener(new OrderBtnListener(orderPanel));
-	}
-	
-	public void setFocus() {
-		setFont(new Font("고딕", Font.BOLD, 17));
-		setBounds(340, 65, 300, 30);
-		setBackground(Color.GRAY);
-		setForeground(Color.WHITE);
-	}
-	
-	public void setClearFocus() {
-		setFont(new Font("고딕", Font.BOLD, 15));
-		setBounds(340, 65, 300, 30);
-		setBackground(Color.LIGHT_GRAY);
-		setForeground(Color.BLACK);
 	}
 
 }

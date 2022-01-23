@@ -76,7 +76,7 @@ public class ReceiptJPanel extends JPanel{
 	
 	public void addReceiptLabel() { // 영수증 라벨 속성 지정 , 판넬에 추가
 		receiptLable = new JLabel("영수증");
-		receiptLable.setFont(new Font("고딕", Font.BOLD, 17));
+		receiptLable.setFont(new Font("나눔스퀘어", Font.BOLD, 17));
 		receiptLable.setBounds(30, 65, 300, 30);
 		receiptLable.setBackground(Color.WHITE);
 		

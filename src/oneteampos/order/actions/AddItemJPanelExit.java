@@ -3,13 +3,13 @@ package oneteampos.order.actions;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import oneteampos.order.cotainer.AddItemJPanel;
+import oneteampos.order.cotainer.AddItemJFrame;
 
 public class AddItemJPanelExit implements MouseListener{
 	
-	AddItemJPanel addItemPanel;
+	AddItemJFrame addItemPanel;
 	
-	public AddItemJPanelExit(AddItemJPanel addItemPanel) {
+	public AddItemJPanelExit(AddItemJFrame addItemPanel) {
 		this.addItemPanel = addItemPanel;
 	}
 

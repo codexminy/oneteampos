@@ -1,6 +1,7 @@
      package oneteampos.order.cotainer;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -22,6 +24,7 @@ import oneteampos.datamodel.Items;
 import oneteampos.datamodel.Stock;
 import oneteampos.datamodel.Store_order;
 import oneteampos.order.actions.TableAddItemListener;
+import oneteampos.order.actions.storeOrderTableClickListener;
 
 public class OrderListJPanel extends JPanel{
 
@@ -29,11 +32,14 @@ public class OrderListJPanel extends JPanel{
 	private ArrayList<Store_order> store_order = new ArrayList<>();
 	CartJPanel cartPanel;
 	JTable itemTable;
-	AddItemJPanel addItemPanel;
 	JTable storeOrderTable;
 	DefaultTableModel smodel;
+	AddItemJFrame addItemFrame;
+	OrderJPanel orderPanel;
+	JFrame detailsFrame;
 	
-	public OrderListJPanel() {
+	public OrderListJPanel(OrderJPanel orderPanel) {
+		this.orderPanel = orderPanel;
 		setBounds(0, 100, 1280, 680);
 		setBackground(Color.WHITE);
 		setLayout(null);
@@ -41,14 +47,8 @@ public class OrderListJPanel extends JPanel{
 	
 		// 장바구니 판넬 추가
 		this.cartPanel = new CartJPanel(this);
-		// 장바구니 추가 판넬
-		this.addItemPanel = new AddItemJPanel(this);
-		
-		
-		setAddItemPanelVisibleFalse();
 		add(cartPanel);
-		add(addItemPanel);
-		
+
 		getTable();
 	}
 	
@@ -67,27 +67,27 @@ public class OrderListJPanel extends JPanel{
 		// 품목 데이터
 		setTableData("SELECT * FROM items");
 		// 재고 테이블 만들기 
-		String[] columnNames = {"ITEM_NAME","ITEM_PRICE"};
+		String[] columnNames = {"품목이름","가격"};
 		String[][] rowData = new String[item.size()][columnNames.length];
 		// 구분하기 위한 번호
 		int item_num = 0 ;
 		
 		JScrollPane itemTable = setTable(columnNames, rowData, item_num) ;
-		itemTable.setBounds(100, 70, 500, 250);
-		
+		itemTable.setBounds(100, 60, 500, 240);
+		itemTable.setBackground(new Color(135, 136, 138));
 		// 발주 라벨 
 		setStoreOrderLabel();
 		// 품목 데이터
-		setTableData("SELECT * FROM store_order ORDER BY order_id");
+		setTableData("SELECT order_id, total_pay, TO_CHAR(order_date, 'YYYY-MM-DD') AS order_date FROM store_order ORDER BY order_id");
 		// 발주 테이블 만들기 
-		String[] columnNames_ = {"ORDER_ID", "TOTAL_PAY", "ORDER_DATE"};
+		String[] columnNames_ = {"발주ID", "총금액", "주문일시"};
 		String[][] rowData_ = new String[store_order.size()][columnNames_.length];
 		int	store_num = 1;
 	
 		
 		JScrollPane storeOrderTable = setTable(columnNames_, rowData_, store_num);
-		storeOrderTable.setBounds(100, 400, 500, 150);
-		
+		storeOrderTable.setBounds(100, 358, 500, 200);
+		storeOrderTable.setBackground(new Color(135, 136, 138));
 		
 	}
 	
@@ -111,7 +111,7 @@ public class OrderListJPanel extends JPanel{
 		JLabel stockLabel = new JLabel("품목 목록");
 		
 		stockLabel.setBounds(120, 0, 400, 70);
-		stockLabel.setFont(new Font("돋움", Font.BOLD, 25));
+		stockLabel.setFont(new Font("나눔스퀘어", Font.BOLD, 25));
 		
 		add(stockLabel);
 	}
@@ -119,8 +119,8 @@ public class OrderListJPanel extends JPanel{
 	public void setStoreOrderLabel() {
 		JLabel storeOrderLabel = new JLabel("발주 목록");
 		
-		storeOrderLabel.setBounds(120, 330, 400, 70);
-		storeOrderLabel.setFont(new Font("돋움", Font.BOLD, 25));
+		storeOrderLabel.setBounds(120, 300, 400, 70);
+		storeOrderLabel.setFont(new Font("나눔스퀘어", Font.BOLD, 25));
 		
 		add(storeOrderLabel);
 	}
@@ -148,14 +148,14 @@ public class OrderListJPanel extends JPanel{
 			};
 
 			storeOrderTable = new JTable(smodel);
+			storeOrderTable.addMouseListener(new storeOrderTableClickListener(orderPanel));
 			setSizeColumnWidth(storeOrderTable);	
 			// 컴포넌트를 스크롤 가능한 형태로 보여주기 위해 사용된다.
 			JScrollPane sp = new JScrollPane(storeOrderTable);
-//			setSelection(storeOrderTable); // 클릭 안되게 막기
 			
 			sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 			sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-					
+			sp.setBackground(new Color(135, 136, 138));	
 			add(sp);
 			
 			return sp;
@@ -178,7 +178,7 @@ public class OrderListJPanel extends JPanel{
 			
 			sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 			sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-					
+			sp.setBackground(new Color(135, 136, 138));
 			add(sp);
 			
 			return sp;
@@ -200,8 +200,11 @@ public class OrderListJPanel extends JPanel{
 		}
 		
 		table.setRowHeight(30);
-		table.setFont(new Font("돋움", Font.PLAIN , 15));
-		table.getTableHeader().setFont(new Font("Serif", Font.BOLD, 17));
+		table.setFont(new Font("나눔스퀘어", Font.BOLD, 14));
+		table.getTableHeader().setFont(new Font("나눔스퀘어", Font.BOLD, 15));
+		table.getTableHeader().setBackground(new Color(135, 136, 138));
+		table.getTableHeader().setForeground(Color.WHITE);
+		table.getTableHeader().setPreferredSize(new Dimension(0, 35));
 
 	}
 	
@@ -222,6 +225,10 @@ public class OrderListJPanel extends JPanel{
 		return smodel;
 	}
 	
+	public CartJPanel getCartPanel() {
+		return cartPanel;
+	}
+	
 	public String getItemName(int idx) {  
 		// addItemJPanel에 띄울 메소드 - 품목 이름을 얻는 메소드
 		return item.get(idx).getItemName();
@@ -232,26 +239,19 @@ public class OrderListJPanel extends JPanel{
 		return item.get(idx).getItemPrcie();
 	}
 	
-	public AddItemJPanel getaddItemPanel() {
-		return addItemPanel;
+	public void setAddItemFrame(AddItemJFrame addItemFrame) {
+		this.addItemFrame = addItemFrame;
 	}
 	
-	public void setAddItemPanelVisibleTrue() { 
-		addItemPanel.setVisible(true);
+	public AddItemJFrame getAddItemFrame() {
+		return this.addItemFrame;
 	}
 	
-	public void setAddItemPanelVisibleFalse() {
-		addItemPanel.setVisible(false);
+	public void setDetailsFrame(JFrame detailsFrame) {
+		this.detailsFrame = detailsFrame;
 	}
 	
-	public AddItemJPanel getAddItemPanel() {
-		return addItemPanel;
+	public JFrame getDetailsFrame() {
+		return this.detailsFrame;
 	}
-	
-	public CartJPanel getCartPanel() {
-		return cartPanel;
-	}
-
-	
-	
 }

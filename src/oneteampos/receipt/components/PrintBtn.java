@@ -9,8 +9,9 @@ import oneteampos.receipt.actions.PrintReceiptListener;
 import oneteampos.receipt.actions.ReturnBtnListener;
 import oneteampos.receipt.container.ReceiptJPanel;
 import oneteampos.receipt.container.ReturnJPanel;
+import oneteampos.sales.containers.RoundedButton;
 
-public class PrintBtn extends JButton{
+public class PrintBtn extends RoundedButton{
 
 	public PrintBtn(ReceiptJPanel receiptJPanel, boolean b) {
 		super("출력");

@@ -20,6 +20,9 @@ public class UpdateStaffBtnListener implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		
+		staffInfoPanel.getAddStaffBtn().setSelected(false);
+		staffInfoPanel.getDeleteStaffBtn().setSelected(false);
+		
 		if(staffInfoPanel.getStaffJoinJobs().getSalary() == null && staffInfoPanel.getStaffJoinJobs().getStaffName() == null) {
 			JOptionPane.showMessageDialog(staffInfoPanel, "수정할 사원을 선택하세요");
 		} else {

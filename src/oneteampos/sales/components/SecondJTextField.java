@@ -23,18 +23,20 @@ public class SecondJTextField extends JTextField{
 		setBackground(Color.WHITE);
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
 		setEditable(false);
-		setFont(new Font("나눔스퀘어", Font.PLAIN, 14));
+		setFont(new Font("나눔스퀘어", Font.BOLD, 14));
+		setHorizontalAlignment(JTextField.CENTER);
 		
 		addMouseListener(new SecondJTextFieldListener(salesPanel, dailySalesJPanel));
 	}
 
-	public SecondJTextField(SalesPanel salesPanel2, MonthlySalesJPanel monthlySalesJPanel) {
+	public SecondJTextField(SalesPanel salesPanel, MonthlySalesJPanel monthlySalesJPanel) {
 		this.salesPanel = salesPanel;
 		setBounds(465, 28, 130, 30);
 		setBackground(Color.WHITE);
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
 		setEditable(false);
-		setFont(new Font("나눔스퀘어", Font.PLAIN, 14));
+		setFont(new Font("나눔스퀘어", Font.BOLD, 14));
+		setHorizontalAlignment(JTextField.CENTER);
 		
 		addMouseListener(new SecondJTextFieldListener(salesPanel, monthlySalesJPanel));
 	}

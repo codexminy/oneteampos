@@ -27,6 +27,7 @@ import javax.swing.JTextField;
 
 import oneteampos.database.DBConnector;
 import oneteampos.datamodel.StaffJoinJobs;
+import oneteampos.sales.containers.RoundedButton;
 import oneteampos.staff.actions.InsertStaffBtn;
 import oneteampos.staff.actions.StaffInfoUpdateBtn;
 import oneteampos.staff.actions.StaffKeyListener;
@@ -132,94 +133,81 @@ public class StaffInfoJFrame extends JFrame{
 	}
 
 	public void getStaffName( ) {
-		JLabel nameLabel = new JLabel("이름    : ");
+		JLabel nameLabel = new SetStaffLabel("이름    : ");
 		nameLabel.setBounds(50, 50, 100, 40);
-		nameLabel.setFont(new Font("돋움", Font.BOLD, 20));
 		add(nameLabel);
 		
 		String staffName = "";
-		nameField = new JTextField();
+		nameField = new SetStaffField();
 		nameField.setBounds(145, 50, 270, 40);
-		nameField.setFont(new Font("돋움", Font.BOLD, 17));
-		nameField.addKeyListener(new StaffKeyListener(this, staffName , 0));
-//		nameField.addKeyListener(new StaffKeyListener(this));
-		
+		nameField.addKeyListener(new StaffKeyListener(this, staffName , 0));	
 	
 		add(nameField);
 	}
 	
 	public void getStaffJobName( ) {
-		JLabel jobNameLabel = new JLabel("직책    : ");
+		JLabel jobNameLabel = new SetStaffLabel("직책    : ");
 		jobNameLabel.setBounds(50, 100, 100, 40);
-		jobNameLabel.setFont(new Font("돋움", Font.BOLD, 20));
 		add(jobNameLabel);
 		
 		String staffJobName = "";
-		jobNameField = new JTextField();
+		jobNameField = new SetStaffField();
 		jobNameField.setBounds(145, 100, 270, 40);
-		jobNameField.setFont(new Font("돋움", Font.BOLD, 17));
 		jobNameField.addKeyListener(new StaffKeyListener(this, staffJobName, 1));
 		add(jobNameField);
 	}
 	
 	public void getHireDate( ) {
-		JLabel hireLabel = new JLabel("입사일 : ");
+		JLabel hireLabel = new SetStaffLabel("입사일 : ");
 		hireLabel.setBounds(50, 150, 100, 40);
-		hireLabel.setFont(new Font("돋움", Font.BOLD, 20));
 		add(hireLabel);
 		
 		String hireDate = "";
-		hireField = new JTextField();
+		hireField = new SetStaffField();
 		hireField.setBounds(145, 150, 270, 40);
-		hireField.setFont(new Font("돋움", Font.BOLD, 17));
 		hireField.addKeyListener(new StaffKeyListener(this, hireDate, 2));
 		add(hireField);
 	}
 	
 	public void getSalary( ) {
-		JLabel salaryLabel = new JLabel("월급    : ");
+		JLabel salaryLabel = new SetStaffLabel("월급    : ");
 		salaryLabel.setBounds(50, 200, 100, 40);
-		salaryLabel.setFont(new Font("돋움", Font.BOLD, 20));
 		add(salaryLabel);
 		
 		String salary = "";
-		salaryField = new JTextField();
+		salaryField = new SetStaffField();
 		salaryField.setBounds(145, 200, 270, 40);
-		salaryField.setFont(new Font("돋움", Font.BOLD, 17));
 		salaryField.addKeyListener(new StaffKeyListener(this, salary, 3));
 		add(salaryField);
 	}
 	
 	public void getTel( ) {
-		JLabel telLabel = new JLabel("전화    : ");
+		JLabel telLabel = new SetStaffLabel("전화    : ");
 		telLabel.setBounds(50, 250, 100, 40);
-		telLabel.setFont(new Font("돋움", Font.BOLD, 20));
 		add(telLabel);
 		
 		String tel = "";
-		telField = new JTextField();
+		telField = new SetStaffField();
 		telField.setBounds(145, 250, 270, 40);
-		telField.setFont(new Font("돋움", Font.BOLD, 17));
 		telField.addKeyListener(new StaffKeyListener(this, tel, 4));
 		add(telField);
 	}
 	
 	public void getAddress( ) {
-		JLabel adrLabel = new JLabel("주소    : ");
+		JLabel adrLabel = new SetStaffLabel("주소    : ");
 		adrLabel.setBounds(50, 300, 100, 40);
-		adrLabel.setFont(new Font("돋움", Font.BOLD, 20));
 		add(adrLabel);
 		
 		String address = "";
-		adrField = new JTextField();
+		adrField = new SetStaffField();
 		adrField.setBounds(145, 300, 270, 40);
-		adrField.setFont(new Font("돋움", Font.BOLD, 17));
 		adrField.addKeyListener(new StaffKeyListener(this, address, 5));
 		add(adrField);
 	}
 	
 	public void getInsertBtn() {
-		JButton insertBtn = new JButton("등록");
+		RoundedButton insertBtn = new RoundedButton();
+		insertBtn.setText("등록");
 		insertBtn.setBounds(340, 360, 100, 35);
 		insertBtn.setFont(new Font("돋움", Font.BOLD, 20));
 		insertBtn.setBackground(new Color(247, 245, 247));
@@ -232,8 +220,8 @@ public class StaffInfoJFrame extends JFrame{
 		add(insertBtn);
 	}
 	
-	public JButton addUpdateBtn() {
-		JButton updateBtn = new JButton("수정");
+	public RoundedButton addUpdateBtn() {
+		RoundedButton updateBtn = new RoundedButton("수정");
 		updateBtn.setBounds(340, 360, 100, 35);
 		updateBtn.setFont(new Font("돋움", Font.BOLD, 20));
 		updateBtn.setBackground(new Color(247, 245, 247));
@@ -260,6 +248,30 @@ public class StaffInfoJFrame extends JFrame{
 		return staffInfoPanel;
 	}
 	
+class SetStaffField extends JTextField {
+	
+	public SetStaffField() {
+		setBackground(Color.WHITE);
+		setCursor(new Cursor(Cursor.HAND_CURSOR));
+		setFont(new Font("나눔스퀘어", Font.BOLD, 14));
+		setBorder(null);
+	    setHorizontalAlignment(JTextField.CENTER);
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		g.drawRoundRect(0, 0, getWidth()-1, getHeight()-1, 15, 15);
+		
+	}
+}
 
+class SetStaffLabel extends JLabel {
+	
+	public SetStaffLabel(String labelName) {
+		super(labelName);
+		setFont(new Font("나눔스퀘어", Font.BOLD, 17));
+	}
+}
 	
 }

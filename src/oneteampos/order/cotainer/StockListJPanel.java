@@ -1,6 +1,7 @@
 package oneteampos.order.cotainer;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -18,10 +20,16 @@ import javax.swing.table.DefaultTableModel;
 
 import oneteampos.database.DBConnector;
 import oneteampos.datamodel.Stock;
+import oneteampos.order.actions.StockTableClickListener;
 
 public class StockListJPanel extends JPanel{
 	
-	public StockListJPanel() {
+	private JTable stock_table;
+	private JFrame qtyframe;
+	private OrderJPanel orderPanel;
+	
+	public StockListJPanel(OrderJPanel orderPanel) {
+		this.orderPanel = orderPanel;
 		
 		setBounds(0, 100, 1280, 680);
 		setBackground(Color.WHITE);
@@ -60,7 +68,7 @@ public class StockListJPanel extends JPanel{
 		setStockLabel();
 		
 		// 재고 테이블 만들기 
-		String[] columnNames = {"STOCK_ID", "STOCK_COUNT", "ITEM_NAME"};
+		String[] columnNames = {"재고ID", "수량", "품목이름"};
 		String[][] rowData = new String[stock.size()][columnNames.length];
 		
 		for(int i = 0; i < stock.size(); ++i) {
@@ -76,7 +84,8 @@ public class StockListJPanel extends JPanel{
 			}
 		};
 		
-		JTable stock_table = new JTable(model);
+		stock_table = new JTable(model);
+		stock_table.addMouseListener(new StockTableClickListener(this));
 		
 		setSizeColumnWidth(stock_table);
 		
@@ -85,7 +94,7 @@ public class StockListJPanel extends JPanel{
 		JScrollPane sp = new JScrollPane(stock_table);
 		
 		sp.setBounds(100, 180, 800, 360);
-		
+		sp.setBackground(new Color(135, 136, 138));
 		sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
@@ -97,7 +106,7 @@ public class StockListJPanel extends JPanel{
 		JLabel stockLabel = new JLabel("재고 목록");
 		
 		stockLabel.setBounds(120, 60, 400, 100);
-		stockLabel.setFont(new Font("돋움", Font.BOLD, 35));
+		stockLabel.setFont(new Font("나눔스퀘어", Font.BOLD, 35));
 		
 		add(stockLabel);
 	}
@@ -106,19 +115,33 @@ public class StockListJPanel extends JPanel{
 		// 셀 간격 조정
 		DefaultTableCellRenderer celAlignCenter = new DefaultTableCellRenderer();
 		celAlignCenter.setHorizontalAlignment(JLabel.CENTER);
-		DefaultTableCellRenderer celAlignRight = new DefaultTableCellRenderer();
-		celAlignRight.setHorizontalAlignment(JLabel.RIGHT);
-
 		
 		for(int i =0; i < table.getColumnCount(); ++i) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(celAlignCenter);
 		}
 		
 		table.setRowHeight(table.getRowHeight()+30);
-		table.setFont(new Font("돋움", Font.PLAIN , 20));
-		table.getTableHeader().setFont(new Font("Serif", Font.BOLD, 23));
-
+		table.setFont(new Font("나눔스퀘어", Font.BOLD, 14));
+		table.getTableHeader().setFont(new Font("나눔스퀘어", Font.BOLD, 15));
+		table.getTableHeader().setBackground(new Color(135, 136, 138));
+		table.getTableHeader().setForeground(Color.WHITE);
+		table.getTableHeader().setPreferredSize(new Dimension(0, 40));
 	}
-
+	
+	public JTable getStockTable() {
+		return stock_table;
+	}
+	
+	public void setQtyframe(JFrame frame) {
+		this.qtyframe = frame;
+	}
+	
+	public JFrame getQtyframe() {
+		return this.qtyframe;
+	}
+	
+	public OrderJPanel getOrderPanel() {
+		return this.orderPanel;
+	}
 }
 

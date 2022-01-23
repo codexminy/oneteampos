@@ -1,6 +1,7 @@
 package oneteampos.order.cotainer;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class CartJPanel extends JPanel{
 		JLabel cartLabel = new JLabel("선택한 메뉴");
 		
 		cartLabel.setBounds(12, 20, 250, 30);
-		cartLabel.setFont(new Font("돋움", Font.BOLD, 18));
+		cartLabel.setFont(new Font("나눔스퀘어", Font.BOLD, 18));
 		cartLabel.setForeground(Color.LIGHT_GRAY);
 		
 		add(cartLabel);
@@ -91,7 +92,7 @@ public class CartJPanel extends JPanel{
 		orderTable = new JTable(model);
 		// 테이블 속성 지정
 		orderTable.setBounds(10 , 65, 220, 300);
-		orderTable.setFont(new Font("돋움", Font.PLAIN , 20));
+		orderTable.setFont(new Font("나눔스퀘어", Font.PLAIN , 17));
 		orderTable.setBackground(Color.DARK_GRAY);
 		orderTable.setForeground(Color.LIGHT_GRAY);
 		orderTable.setShowGrid(false);
@@ -141,10 +142,12 @@ public class CartJPanel extends JPanel{
 		deleteTable = new JTable(dmodel);
 		// 테이블 속성 지정
 		deleteTable.setBounds(240 , 65, 30, 300);
-		deleteTable.setFont(new Font("돋움", Font.BOLD , 20));
+		deleteTable.setFont(new Font("나눔스퀘어", Font.BOLD , 17));
 		deleteTable.setBackground(Color.DARK_GRAY);
 		deleteTable.setForeground(Color.LIGHT_GRAY);
 		deleteTable.setShowGrid(false);
+		deleteTable.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		deleteTable.setFocusable(false);
 		// 셀 높이 지정
 		deleteTable.setRowHeight(23);
 		// 한 셀 선택
@@ -168,12 +171,12 @@ public class CartJPanel extends JPanel{
 		// 결제 금액 라벨 생성
 		JLabel totalLabel = new JLabel("결제 금액");
 		totalLabel.setBounds(12, 460, 100, 60);
-		totalLabel.setFont(new Font("돋움", Font.BOLD, 18));
+		totalLabel.setFont(new Font("나눔스퀘어", Font.BOLD, 18));
 		totalLabel.setForeground(Color.LIGHT_GRAY);
 		// totalPriceLabel(결제할 총 금액)라벨 생성
 		totalPriceLabel = new JLabel("0");
 		totalPriceLabel.setBounds(120, 460, 100, 60);
-		totalPriceLabel.setFont(new Font("돋움", Font.BOLD, 21));
+		totalPriceLabel.setFont(new Font("나눔스퀘어", Font.BOLD, 21));
 		totalPriceLabel.setForeground(Color.LIGHT_GRAY);
 		
 		add(totalLabel);

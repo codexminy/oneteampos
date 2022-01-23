@@ -32,8 +32,23 @@ public class Order_list {
 		return item_amount + "";
 	}
 	
+	public String getListID() {
+		return order_id+"";
+	}
+	
 	@Override
 	public String toString() {
 		return String.format("%s , %s, %s , %s \n", list_id, order_id, item_name, item_amount);
+	}
+
+	public String getRowdData(int idx) {
+		String data = "";
+		
+		if(idx == 0) {
+			data = item_name;
+		} else if (idx == 1) {
+			data = item_amount + "";
+		}
+		return data;
 	}
 }

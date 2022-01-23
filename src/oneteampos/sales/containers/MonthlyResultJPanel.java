@@ -29,7 +29,7 @@ public class MonthlyResultJPanel extends JPanel{
 	long calDateDays;
 	
 	public MonthlyResultJPanel( Date startDate, long calDateDays) {
-		setBounds(0, 30, 1280, 500);
+		setBounds(0, 10, 1280, 500);
 		setBackground(Color.white);
 		setLayout(null);
 		
@@ -120,8 +120,8 @@ public void addDayTable(String sql) {
 		// 컴포넌트를 스크롤 가능한 형태로 보여주기 위해 사용된다.
 		JScrollPane sp = new JScrollPane(dayTable);
 		
-		sp.setBounds(100, 180, 800, 400);
-		
+		sp.setBounds(100, 170, 800, 300);
+		sp.setBackground(new Color(135, 136, 138));
 		sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
@@ -141,6 +141,9 @@ public void addDayTable(String sql) {
 		table.setRowHeight(table.getRowHeight()+20);
 		table.setFont(new Font("나눔스퀘어", Font.PLAIN , 14));
 		table.getTableHeader().setFont(new Font("나눔스퀘어", Font.BOLD, 15));
+		table.getTableHeader().setBackground(new Color(135, 136, 138));
+		table.getTableHeader().setForeground(Color.WHITE);
+		table.setRowHeight(30);
 
 	}
 }

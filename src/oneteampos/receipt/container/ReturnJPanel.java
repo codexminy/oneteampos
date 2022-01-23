@@ -120,7 +120,8 @@ public class ReturnJPanel extends JPanel{
 		setSizeColumnWidth(orderMenuTable);
 				
 		sp.setBounds(100, 20, 800, 250);
-				
+		sp.setBackground(new Color(135, 136, 138));
+	
 		sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 				
@@ -158,15 +159,13 @@ public class ReturnJPanel extends JPanel{
 		JScrollPane sp = new JScrollPane(payTable);
 		
 		setSizeColumnWidth(payTable);
-//		payTable.setBounds(100, 270, 800, 300);
 				
 		sp.setBounds(100, 270, 800, 220);
-				
+		sp.setBackground(new Color(135, 136, 138));
 		sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 				
 		add(sp);
-//		add(payTable);
 	}
 	
 	public void setSizeColumnWidth(JTable table) { // 테이블 셀의 너비, 높이 조정
@@ -180,7 +179,7 @@ public class ReturnJPanel extends JPanel{
 		celAlignLeft.setHorizontalAlignment(JLabel.LEFT);
 		
 		if(table.getColumnCount() >2) {
-			table.getTableHeader().setFont(new Font("돋움", Font.BOLD, 18));
+			table.getTableHeader().setFont(new Font("나눔스퀘어", Font.BOLD, 18));
 			for(int i =0; i < table.getColumnCount(); ++i) {
 				if(i == 1) {
 					table.getColumn(table.getColumnName(i)).setCellRenderer(celAlignLeft);
@@ -206,7 +205,9 @@ public class ReturnJPanel extends JPanel{
 		}
 		
 		table.setRowHeight(table.getRowHeight()+15);
-		table.setFont(new Font("돋움", Font.PLAIN , 16));
+		table.setFont(new Font("나눔스퀘어", Font.PLAIN , 16));
+		table.getTableHeader().setBackground(new Color(135, 136, 138));
+		table.getTableHeader().setForeground(Color.WHITE);
 
 	}
 	

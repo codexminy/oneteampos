@@ -1,6 +1,7 @@
 package oneteampos.staff.containers;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -103,6 +104,8 @@ public class StaffInfoJPanel extends JPanel{
 		JScrollPane sp = new JScrollPane(staffInfoTable);
 		
 		sp.setBounds(90, 50, 1100, 340);
+		sp.setBackground(new Color(135, 136, 138));
+		
 		
 		sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -113,8 +116,8 @@ public class StaffInfoJPanel extends JPanel{
 	
 	
 	public void setTableData() { // 데이터 넣는 메소드
-		String sql = "SELECT stf_name, job_name , hire_date, salary, tel , address FROM staff inner join staff_jobs USING(job_id)\r\n"
-				+ "WHERE job_id != 1 ORDER BY job_id, stf_id ASC";
+		String sql = "SELECT stf_name, job_name , TO_CHAR(hire_date, 'YYYY-MM-DD') AS hire_date, salary, tel , address FROM staff inner join staff_jobs USING(job_id)\r\n"
+				+ "WHERE job_id != 1 ORDER BY job_id, stf_id, hire_date ASC";
 		try (Connection conn = DBConnector.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery();) {
@@ -132,16 +135,18 @@ public class StaffInfoJPanel extends JPanel{
 		// 셀 간격 조정
 		DefaultTableCellRenderer celAlignCenter = new DefaultTableCellRenderer();
 		celAlignCenter.setHorizontalAlignment(JLabel.CENTER);
-		DefaultTableCellRenderer celAlignRight = new DefaultTableCellRenderer();
-		celAlignRight.setHorizontalAlignment(JLabel.RIGHT);
 
 		for (int i = 0; i < table.getColumnCount(); ++i) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(celAlignCenter);
 		}
 
 		table.setRowHeight(30);
-		table.setFont(new Font(Font.DIALOG, Font.BOLD, 15));
-		table.getTableHeader().setFont(new Font(Font.DIALOG, Font.BOLD, 17));
+		table.setFont(new Font("나눔스퀘어", Font.BOLD, 14));
+		table.getTableHeader().setFont(new Font("나눔스퀘어", Font.BOLD, 15));
+		table.getTableHeader().setBackground(new Color(135, 136, 138));
+		table.getTableHeader().setForeground(Color.WHITE);
+
+		
 
 
 	}

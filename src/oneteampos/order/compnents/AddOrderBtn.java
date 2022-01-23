@@ -6,15 +6,16 @@ import java.awt.Cursor;
 import javax.swing.JButton;
 
 import oneteampos.order.actions.AddOrderBtnListener;
-import oneteampos.order.cotainer.AddItemJPanel;
+import oneteampos.order.cotainer.AddItemJFrame;
 import oneteampos.order.cotainer.OrderListJPanel;
+import oneteampos.sales.containers.RoundedButton;
 
-public class AddOrderBtn extends JButton{
+public class AddOrderBtn extends RoundedButton{
 	
 	OrderListJPanel orderListPanel;
-	AddItemJPanel addItemPanel;
+	AddItemJFrame addItemPanel;
 	
-	public AddOrderBtn(OrderListJPanel orderListPanel) {
+	public AddOrderBtn(OrderListJPanel orderListPanel, AddItemJFrame addItemJPanel) {
 		super("추가");
 		this.orderListPanel = orderListPanel;
 		
@@ -25,6 +26,6 @@ public class AddOrderBtn extends JButton{
 		setFocusPainted(false);
 		
 		// 추가 리스너
-		addMouseListener(new AddOrderBtnListener(orderListPanel));
+		addMouseListener(new AddOrderBtnListener(orderListPanel , addItemJPanel));
 	}
 }

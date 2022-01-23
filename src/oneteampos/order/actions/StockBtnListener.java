@@ -16,15 +16,17 @@ public class StockBtnListener implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		/*재고 버튼 눌렀을 때*/
 		
-		orderPanel.getStockListBtn().setFocus();
-		orderPanel.getOrderListBtn().setClearFocus();
-		// 재고 판넬 보이기 
-		orderPanel.getStockListJPanel().setVisibleTrue();
-		// 나머지 판넬 가리기
-		orderPanel.getOrderListJPanel().setVisibleFalse();
-		orderPanel.getOrderListJPanel().getaddItemPanel().setVisibleFalse();
+		if(e.isMetaDown()) {
+			
+		} else {
+			/*재고 버튼 눌렀을 때*/
+			orderPanel.getOrderListBtn().setSelected(false);
+			// 재고 판넬 보이기 
+			orderPanel.getStockListJPanel().setVisibleTrue();
+			// 나머지 판넬 가리기
+			orderPanel.getOrderListJPanel().setVisibleFalse();
+		}
 		
 		
 	}

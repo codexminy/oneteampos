@@ -11,6 +11,7 @@ import oneteampos.receipt.components.ReturnBtn;
 import oneteampos.receipt.container.ReceiptJPanel;
 import oneteampos.receipt.container.ReceiptTableJPanel;
 import oneteampos.receipt.container.ReturnJPanel;
+import oneteampos.sales.containers.RoundedButton;
 
 public class PrintReceiptListener implements MouseListener {
 	
@@ -30,8 +31,10 @@ public class PrintReceiptListener implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		
+		
 		if(func) {
-			JButton btn = (JButton)e.getSource();
+			RoundedButton btn = (RoundedButton)e.getSource();
 			btn.setVisible(false);
 			this.receiptJPanel = returnJPanel.getReceiptJPanel();
 			returnJPanel.setVisible(false);

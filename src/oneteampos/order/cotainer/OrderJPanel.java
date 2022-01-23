@@ -29,8 +29,8 @@ public class OrderJPanel extends JPanel{
 		this.mainframe = mainframe;
 		this.stockListBtn = new StockListBtn(this);
 		this.orderListBtn = new OrderListBtn(this);
-		this.stockListPanel = new StockListJPanel();
-		this.orderListPanel = new OrderListJPanel();
+		StockListJPanel stockListPanel = new StockListJPanel(this);
+		orderListPanel = new OrderListJPanel(this);
 		
 		
 		// 판넬 설정 
@@ -48,8 +48,8 @@ public class OrderJPanel extends JPanel{
 		add(new BackBtn(mainframe , this , "orderJPanel"));
 		add(stockListBtn); //  재고 버튼
 		add(orderListBtn); // 발주 버튼
-		add(stockListPanel); // 재고 판넬 
-		add(orderListPanel); // 발주 판넬
+		setStockListPanel(stockListPanel);
+		setOrderListPanel(orderListPanel);
 	
 	}
 	
@@ -91,6 +91,16 @@ public class OrderJPanel extends JPanel{
 
 	public OrderListJPanel getOrderListJPanel() {
 		return orderListPanel;
+	}
+	
+	public void setStockListPanel(StockListJPanel stockListPanel) {
+		this.stockListPanel = stockListPanel;
+		add(stockListPanel);
+	}
+	
+	public void setOrderListPanel(OrderListJPanel orderListPanel) {
+		this.orderListPanel = orderListPanel;
+		add(orderListPanel);
 	}
 	
 	

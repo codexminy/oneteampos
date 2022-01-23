@@ -83,7 +83,7 @@ public class CalendarJFrame extends JFrame implements ActionListener, WindowList
 		cntCenter.setBackground(Color.WHITE);
 		
 		// 라벨 속성
-		selectField.setFont(new Font("돋움", Font.BOLD, 18));
+		selectField.setFont(new Font("나눔스퀘어", Font.BOLD, 14));
 	
 		// 콤보 속성
 		yearCombo.setBackground(Color.WHITE);

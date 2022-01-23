@@ -16,7 +16,8 @@ import javax.swing.table.DefaultTableModel;
 import oneteampos.database.DBConnector;
 import oneteampos.datamodel.Order_list;
 import oneteampos.datamodel.Store_order;
-import oneteampos.order.cotainer.AddItemJPanel;
+import oneteampos.order.compnents.StoreOrderBtn;
+import oneteampos.order.cotainer.AddItemJFrame;
 import oneteampos.order.cotainer.CartJPanel;
 import oneteampos.order.cotainer.OrderJPanel;
 import oneteampos.order.cotainer.OrderListJPanel;
@@ -33,7 +34,9 @@ public class StoreOrderBtnListener implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		/* 발주 버튼 눌렀을 때 리스너 */
-
+		StoreOrderBtn storeOrderBtn = (StoreOrderBtn)e.getSource();
+		storeOrderBtn.setSelected(false);
+		
 		// 토탈 금액 받아오기
 		JLabel totalPriceLabel = cartPanel.getTotalPriceLabel();
 		int totalPrice = Integer.parseInt(totalPriceLabel.getText());
@@ -122,8 +125,7 @@ public class StoreOrderBtnListener implements MouseListener{
 
 			// 6. 발주 성공 팝업
 			// 알림 팝업창 띄우기
-			JOptionPane.showMessageDialog(cartPanel.getOrderListPanel(), "발주가 완료 되었습니다.");
-			cartPanel.getOrderListPanel().getaddItemPanel().setVisibleFalse();
+			JOptionPane.showMessageDialog(cartPanel.getOrderListPanel(), "발주가 완료 되었습니다.");	
 
 			// 7. 발주목록 테이블 갱신
 			OrderListJPanel orderListPanel = cartPanel.getOrderListPanel();
@@ -133,7 +135,7 @@ public class StoreOrderBtnListener implements MouseListener{
 			// 최신 발주 데이터 저장
 			ArrayList<Store_order> soList = new ArrayList<>();
 
-			String sql = "SELECT * FROM store_order WHERE order_id = (SELECT max(order_id) FROM store_order)";
+			String sql = "SELECT order_id, total_pay, TO_CHAR(order_date, 'YYYY-MM-DD') AS order_date FROM store_order WHERE order_id = (SELECT max(order_id) FROM store_order)";
 
 			try (Connection conn = DBConnector.getConnection();
 					PreparedStatement pstmt = conn.prepareStatement(sql);

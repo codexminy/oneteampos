@@ -26,11 +26,11 @@ import oneteampos.sales.actions.monthLableListener;
 public class CalendarJFrame2 extends JFrame implements ActionListener, WindowListener{
 	
 	JPanel bar = new JPanel();
-	JButton lastMonth = new JButton("◀");
+	JButton lastyear = new JButton("◀");
 	JComboBox<Integer> yearCombo = new JComboBox<Integer>();
 	DefaultComboBoxModel<Integer> yearModel = new DefaultComboBoxModel<Integer>();
 	JLabel yLbl = new JLabel("년 ");
-	JButton nextMonth = new JButton("▶");
+	JButton nextyear = new JButton("▶");
 	// 중앙 지역
 	JPanel center = new JPanel(new BorderLayout());
 	// 중앙 상단 지역
@@ -63,28 +63,27 @@ public class CalendarJFrame2 extends JFrame implements ActionListener, WindowLis
 	
 	public void getCalendar(JTextField feild) { // 속성 메소드 
 		// 버튼 속성
-		lastMonth.setBackground(Color.WHITE);
-		lastMonth.setBorderPainted(false);
-		lastMonth.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		lastMonth.setFocusable(false);
-		nextMonth.setBackground(Color.WHITE);
-		nextMonth.setBorderPainted(false);
-		nextMonth.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		lastyear.setBackground(Color.WHITE);
+		lastyear.setBorderPainted(false);
+		lastyear.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		lastyear.setFocusable(false);
+		nextyear.setBackground(Color.WHITE);
+		nextyear.setBorderPainted(false);
+		nextyear.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		nextyear.setFocusable(false);
 	
 		// 판넬 속성
 		cntNorth.setBackground(Color.WHITE);
 		cntCenter.setBackground(Color.WHITE);
 		
 		// 라벨 속성
-		selectField.setFont(new Font("돋움", Font.BOLD, 18));
+		selectField.setFont(new Font("나눔스퀘어", Font.BOLD, 14));
 	
 		// 콤보 속성
 		yearCombo.setBackground(Color.WHITE);
 		
 	
 		year = now.get(Calendar.YEAR);// 2022년
-		month = now.get(Calendar.MONTH) + 1; // 0월 == 1월
-		date = now.get(Calendar.DATE);
 		for (int i = year - 20; i <= year + 50; i++) {
 			yearModel.addElement(i);
 		}
@@ -94,14 +93,13 @@ public class CalendarJFrame2 extends JFrame implements ActionListener, WindowLis
 		add("North", bar);
 		bar.setLayout(new FlowLayout());
 		bar.setSize(300, 400);
-		bar.add(lastMonth);
+		bar.add(lastyear);
 		////////////////////////// 달력/////////////////////////////////////////////
 		bar.add(yearCombo);
 		yearCombo.setModel(yearModel);
 		yearCombo.setSelectedItem(year);
 		bar.add(yLbl);
-	
-		bar.add(nextMonth);
+		bar.add(nextyear);
 		bar.setBackground(Color.WHITE);
 		// 중앙 지역
 		add("Center", center);
@@ -114,9 +112,6 @@ public class CalendarJFrame2 extends JFrame implements ActionListener, WindowLis
 		dayPrint(year);
 		// 이벤트
 		yearCombo.addActionListener(this);
-		
-		lastMonth.addActionListener(this);
-		nextMonth.addActionListener(this);
 		addWindowListener(this);
 		// frame 기본 셋팅
 		setSize(400, 300);
@@ -132,32 +127,21 @@ public class CalendarJFrame2 extends JFrame implements ActionListener, WindowLis
 		if (obj instanceof JButton) {
 			JButton eventBtn = (JButton) obj;
 			int yy = (Integer) yearCombo.getSelectedItem();
-			if (eventBtn.equals(lastMonth)) { // 전달
+			if (eventBtn.equals(lastyear)) { // 전년도
 					yy--;
 				
-			} else if (eventBtn.equals(nextMonth)) { // 다음달
+			} else if (eventBtn.equals(nextyear)) { // 내년
 					yy++;
 			}
 			yearCombo.setSelectedItem(yy);
-		} else if (obj instanceof JComboBox) { // 콤보박스 이벤트 발생시
-			createDayStart();
 		}
 	}
 	
-	private void createDayStart() {
-		cntCenter.setVisible(false); // 패널 숨기기
-		cntCenter.removeAll(); // 날짜 출력한 라벨 지우기
-		dayPrint((Integer) yearCombo.getSelectedItem());
-		cntCenter.setVisible(true); // 패널 재출력
-	}
+
 	
-	// 날짜 출력
+	// 요일 출력
 	public void dayPrint(int y) {
-		Calendar cal = Calendar.getInstance();
-		int week = cal.get(Calendar.DAY_OF_WEEK); // 1일에 대한 요일
-		int lastDate = cal.getActualMaximum(Calendar.DAY_OF_MONTH); // 1월에 대한 마지막 요일
-		
-		for (int i = 0; i < 12; i++) { // 1월 마지막 날까지 숫자를 적어라, 그리고 토요일 일요일은 색깔을 입혀라
+		for (int i = 0; i < 12; i++) { 
 			JLabel month = new JLabel();
 			month.setHorizontalAlignment(JLabel.CENTER);
 			month.setCursor(new Cursor(Cursor.HAND_CURSOR));

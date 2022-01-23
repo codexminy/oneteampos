@@ -23,7 +23,8 @@ public class FirstJTextField extends JTextField{
 		setBackground(Color.WHITE);
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
 		setEditable(false);
-		setFont(new Font("나눔스퀘어", Font.PLAIN, 14));
+		setFont(new Font("나눔스퀘어", Font.BOLD, 14));
+		setHorizontalAlignment(JTextField.CENTER);
 		
 		addMouseListener(new FirstJTextFieldListener(salesPanel , dailySalesJPanel));
 	}
@@ -34,7 +35,8 @@ public class FirstJTextField extends JTextField{
 		setBackground(Color.WHITE);
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
 		setEditable(false);
-		setFont(new Font("나눔스퀘어", Font.PLAIN, 14));
+		setFont(new Font("나눔스퀘어", Font.BOLD, 14));
+		setHorizontalAlignment(JTextField.CENTER);
 		
 		addMouseListener(new FirstJTextFieldListener(salesPanel , monthlySalesJPanel));
 	}

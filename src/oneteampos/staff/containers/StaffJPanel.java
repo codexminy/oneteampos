@@ -60,14 +60,14 @@ public class StaffJPanel extends JPanel{
 	     JLabel boss_name = new JLabel("김사장");
 	     boss_name.setBounds(30, 10, 100, 40);
 	     boss_name.setBackground(Color.WHITE);
-	     boss_name.setFont(new Font("고딕", Font.BOLD, 20));
+	     boss_name.setFont(new Font("나눔스퀘어", Font.BOLD, 20));
 	     boss_name.setVisible(true);
 	     add(boss_name);
 	   }
 	   
 	   public void addStaffLable() {
 		   JLabel staffLabel = new JLabel("사원관리");
-		   staffLabel.setFont(new Font("고딕", Font.BOLD, 17));
+		   staffLabel.setFont(new Font("나눔스퀘어", Font.BOLD, 17));
 		   staffLabel.setBounds(30, 65, 300, 30);
 		   add(staffLabel);
 	   }

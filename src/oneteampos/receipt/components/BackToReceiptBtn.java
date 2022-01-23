@@ -9,8 +9,9 @@ import javax.swing.JButton;
 import oneteampos.receipt.actions.BackToReceiptBtnListener;
 import oneteampos.receipt.container.ReceiptJPanel;
 import oneteampos.receipt.container.ReturnJPanel;
+import oneteampos.sales.containers.RoundedButton;
 
-public class BackToReceiptBtn extends JButton{
+public class BackToReceiptBtn extends RoundedButton{
 	
 	ReceiptJPanel receiptJPanel;
 	

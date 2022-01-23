@@ -8,8 +8,9 @@ import javax.swing.JButton;
 import oneteampos.receipt.actions.ReturnBtnListener;
 import oneteampos.receipt.container.ReceiptJPanel;
 import oneteampos.receipt.container.ReturnJPanel;
+import oneteampos.sales.containers.RoundedButton;
 
-public class ReturnBtn extends JButton{
+public class ReturnBtn extends RoundedButton{
 
 	public ReturnBtn(ReceiptJPanel receiptJPanel, boolean func) {
 		super("반품");

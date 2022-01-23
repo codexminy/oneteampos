@@ -5,15 +5,16 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
 
-import oneteampos.order.cotainer.AddItemJPanel;
+import oneteampos.order.cotainer.AddItemJFrame;
 import oneteampos.order.cotainer.OrderListJPanel;
+import oneteampos.sales.containers.RoundedButton;
 
 public class QtyControlListener implements MouseListener{
 
-	AddItemJPanel addItemPanel;
+	AddItemJFrame addItemPanel;
 	JLabel countLabel;
 	
-	public QtyControlListener(AddItemJPanel addItemPanel) {
+	public QtyControlListener(AddItemJFrame addItemPanel) {
 		this.addItemPanel = addItemPanel;
 		this.countLabel = addItemPanel.getCountLabel();
 	}
@@ -24,6 +25,8 @@ public class QtyControlListener implements MouseListener{
 		
 		int countNum = Integer.parseInt(countLabel.getText());
 		
+		RoundedButton dirBtn = (RoundedButton)e.getSource();
+		dirBtn.setSelected(false);
 		if(e.getSource().toString().contains("◀")) {
 			if(countNum != 0) {
 				countNum -=   1;

@@ -17,7 +17,6 @@ public class ReceiptBtnListener implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-//		mainFrame.getMainPanel().getMenuPanel().setVisible(false);
 		mainFrame.getMainPanel().setVisibleFalse();
 		mainFrame.add(new ReceiptJPanel(mainFrame));
 

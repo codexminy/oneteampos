@@ -30,7 +30,7 @@ public class DailyResultPanel extends JPanel{
 	long calDateDays;
 	
 	public DailyResultPanel( Date startDate, long calDateDays) {
-		setBounds(0, 30, 1280, 500);
+		setBounds(0, 10, 1280, 500);
 		setBackground(Color.white);
 		setLayout(null);
 		
@@ -49,36 +49,29 @@ public class DailyResultPanel extends JPanel{
 		cal.setTime(startDate);
 		
 		for(int i = 0; i <= calDateDays; i++ ) {
-			sql = "SELECT DISTINCT TO_CHAR(p.pay_time, 'YYYY-MM-DD') AS day\r\n"
-					+ ",(select count(*) \r\n"
-					+ "FROM payment p \r\n"
-					+ "INNER JOIN order_details od ON p.order_history_id = od.order_history_id \r\n"
-					+ "INNER JOIN orders o ON o.order_id = od.order_id\r\n"
-					+ "WHERE \r\n"
-					+ "TO_CHAR(p.pay_time, 'YYYY-MM-DD') = TO_DATE('"+day+"', 'YY/MM/DD')) AS cnt_orders\r\n"
-					+ ",(SELECT sum(o.payment_amount) \r\n"
+			sql = "select TO_CHAR(p.pay_time, 'YYYY-MM-DD') AS day, count(*) AS cnt_orders\r\n"
+					+ ", \r\n"
+					+ "(SELECT sum(o.payment_amount) \r\n"
 					+ "FROM payment p \r\n"
 					+ "INNER JOIN order_details od ON p.order_history_id = od.order_history_id \r\n"
 					+ "INNER JOIN orders o ON o.order_id = od.order_id\r\n"
 					+ "WHERE \r\n"
 					+ "TO_CHAR(p.pay_time, 'YYYY-MM-DD') = TO_DATE('"+day+"', 'YY/MM/DD')\r\n"
-					+ "AND p.pay_type = 'card') AS card_amount\r\n"
-					+ ",(SELECT sum(o.payment_amount) \r\n"
+					+ "AND p.pay_type = 'card' AND od.order_confirmation = 'Y') AS card_amount\r\n"
+					+ ",\r\n"
+					+ "(SELECT sum(o.payment_amount) \r\n"
 					+ "FROM payment p \r\n"
 					+ "INNER JOIN order_details od ON p.order_history_id = od.order_history_id \r\n"
 					+ "INNER JOIN orders o ON o.order_id = od.order_id\r\n"
 					+ "WHERE \r\n"
 					+ "TO_CHAR(p.pay_time, 'YYYY-MM-DD') = TO_DATE('"+day+"', 'YY/MM/DD')\r\n"
-					+ "AND p.pay_type = 'cash') AS cash_amount\r\n"
-					+ ", (SELECT sum(o.payment_amount) \r\n"
+					+ "AND p.pay_type = 'cash' AND od.order_confirmation = 'Y' ) AS cash_amount\r\n"
+					+ ",SUM(o.payment_amount) pay_amount\r\n"
 					+ "FROM payment p \r\n"
 					+ "INNER JOIN order_details od ON p.order_history_id = od.order_history_id \r\n"
 					+ "INNER JOIN orders o ON o.order_id = od.order_id\r\n"
-					+ "WHERE \r\n"
-					+ "TO_CHAR(p.pay_time, 'YYYY-MM-DD') = TO_DATE('"+day+"', 'YY/MM/DD')) AS pay_amount\r\n"
-					+ "FROM payment p INNER JOIN order_details od ON p.order_history_id = od.order_history_id \r\n"
-					+ "WHERE \r\n"
-					+ "TO_CHAR(p.pay_time, 'YYYY-MM-DD') = TO_DATE('"+day+"', 'YY/MM/DD')";
+					+ "WHERE od.order_confirmation = 'Y' AND TO_CHAR(p.pay_time, 'YYYY-MM-DD') = TO_DATE('"+day+"', 'YY/MM/DD')\r\n"
+					+ "GROUP BY TO_CHAR(p.pay_time, 'YYYY-MM-DD')";
 			
 			//데이터 넣기
 			try (
@@ -90,7 +83,10 @@ public class DailyResultPanel extends JPanel{
 				while (rs.next()) {
 					dayList.add(new Sales(rs));
 				}
-
+				
+				pstmt.close();
+				rs.close();
+				conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -123,8 +119,8 @@ public class DailyResultPanel extends JPanel{
 		// 컴포넌트를 스크롤 가능한 형태로 보여주기 위해 사용된다.
 		JScrollPane sp = new JScrollPane(dayTable);
 		
-		sp.setBounds(100, 180, 800, 400);
-		
+		sp.setBounds(100, 170, 800, 300);
+		sp.setBackground(new Color(135, 136, 138));
 		sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
@@ -142,8 +138,10 @@ public class DailyResultPanel extends JPanel{
 		}
 		
 		table.setRowHeight(table.getRowHeight()+20);
-		table.setFont(new Font("돋움", Font.PLAIN , 18));
-		table.getTableHeader().setFont(new Font("돋움", Font.BOLD, 20));
-
+		table.setFont(new Font("나눔스퀘어", Font.BOLD, 14));
+		table.getTableHeader().setFont(new Font("나눔스퀘어", Font.BOLD, 15));
+		table.getTableHeader().setBackground(new Color(135, 136, 138));
+		table.getTableHeader().setForeground(Color.WHITE);
+		table.setRowHeight(30);
 	}
 }

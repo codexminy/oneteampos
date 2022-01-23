@@ -30,8 +30,8 @@ public class ReceiptTableJPanel extends JPanel{
 	DefaultTableModel model;
 	JTable receiptInfoTable;
 	ReceiptJPanel receiptJPanel;
-	JButton returnBtn;
-	JButton printBtn;
+	ReturnBtn returnBtn;
+	PrintBtn printBtn;
 	
 	public ReceiptTableJPanel(ReceiptJPanel receiptJPanel) {
 		setBounds(0, 100, 1280, 680);
@@ -58,7 +58,7 @@ public class ReceiptTableJPanel extends JPanel{
 		String sql = "SELECT p.pay_id,  p.pay_type, o.payment_amount \r\n"
 				+ ", o.order_date   , od.order_confirmation \r\n"
 				+ "FROM orders o INNER JOIN order_details od ON o.order_id = od.order_id\r\n"
-				+ "INNER JOIN payment p ON od.order_history_id = p.order_history_id";
+				+ "INNER JOIN payment p ON od.order_history_id = p.order_history_id ORDER BY o.order_date DESC";
 
 		try (Connection conn = DBConnector.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -99,7 +99,7 @@ public class ReceiptTableJPanel extends JPanel{
 		JScrollPane sp = new JScrollPane(receiptInfoTable);
 		
 		sp.setBounds(100, 50, 800, 360);
-		
+		sp.setBackground(new Color(135, 136, 138));
 		sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
@@ -130,8 +130,12 @@ public class ReceiptTableJPanel extends JPanel{
 		}
 		
 		table.setRowHeight(table.getRowHeight()+20);
-		table.setFont(new Font("돋움", Font.PLAIN , 16));
-		table.getTableHeader().setFont(new Font("돋움", Font.BOLD, 18));
+		table.setFont(new Font("나눔스퀘어", Font.BOLD, 14));
+		table.getTableHeader().setFont(new Font("나눔스퀘어", Font.BOLD, 15));
+		table.getTableHeader().setBackground(new Color(135, 136, 138));
+		table.getTableHeader().setForeground(Color.WHITE);
+		table.setRowHeight(30);
+		
 
 	}
 	
@@ -143,11 +147,11 @@ public class ReceiptTableJPanel extends JPanel{
 		return receiptJPanel;
 	}
 	
-	public JButton getReturnBtn() {
+	public ReturnBtn getReturnBtn() {
 		return returnBtn;
 	}
 	
-	public JButton getPrintBtn() {
+	public PrintBtn getPrintBtn() {
 		return printBtn;
 	}
 	

@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
@@ -33,6 +34,7 @@ public class ReturnBtnListener implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+	
 		
 		if(func) { // 반품 누르고 들어온 ReturnJPanel서의 반품버튼
 			
@@ -59,6 +61,40 @@ public class ReturnBtnListener implements MouseListener {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
+				
+				// 적립금 받아오기 
+				
+//				sql = "";
+//				
+//				try (
+//						Connection conn = DBConnector.getConnection();
+//						PreparedStatement pstmt = conn.prepareStatement(sql);
+//						ResultSet rs = pstmt.executeQuery();
+//				) {
+//					row = pstmt.executeUpdate();
+//				} catch (SQLException e1) {
+//					e1.printStackTrace();
+//				}
+				
+				// 포인트 받아오기
+//				
+//				sql = "";
+//				
+//				try (
+//						Connection conn = DBConnector.getConnection();
+//						PreparedStatement pstmt = conn.prepareStatement(sql);
+//				) {
+//					row = pstmt.executeUpdate();
+//				} catch (SQLException e1) {
+//					e1.printStackTrace();
+//				}
+				
+				
+				// 포인트 복구
+				
+				
+				
+				
 				
 				if(row < 0) {
 					// 반품 실패

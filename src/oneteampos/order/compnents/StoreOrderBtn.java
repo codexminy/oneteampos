@@ -8,8 +8,9 @@ import javax.swing.JButton;
 
 import oneteampos.order.actions.StoreOrderBtnListener;
 import oneteampos.order.cotainer.CartJPanel;
+import oneteampos.sales.containers.RoundedButton;
 
-public class StoreOrderBtn extends JButton{
+public class StoreOrderBtn extends RoundedButton{
 	
 	CartJPanel cartPanel;
 	
@@ -21,10 +22,8 @@ public class StoreOrderBtn extends JButton{
 		// 추가 버튼 속성 지정
 		setFocusable(false);
 		setBounds(10, 520, 100, 40);
-		setFont(new Font("돋움", Font.BOLD, 15));
-		setBackground(Color.LIGHT_GRAY);
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
+		setLayout(null);
 		addMouseListener(new StoreOrderBtnListener(cartPanel));
 		
 	}

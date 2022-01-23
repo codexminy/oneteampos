@@ -114,9 +114,11 @@ class NmonthBtn extends RoundedButton {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
 				JRadioButton btn = (JRadioButton)e.getSource();
 				btn.setSelected(false);
 				String fst = fstField.getText();
+		
 				if(fst.equals("")) {
 					// 현재 
 					Date now = Calendar.getInstance().getTime();

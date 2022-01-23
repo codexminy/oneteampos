@@ -15,19 +15,19 @@ import javax.swing.table.DefaultTableModel;
 import oneteampos.database.DBConnector;
 import oneteampos.datamodel.Order_list;
 import oneteampos.datamodel.Stock;
-import oneteampos.order.cotainer.AddItemJPanel;
+import oneteampos.order.cotainer.AddItemJFrame;
 import oneteampos.order.cotainer.CartJPanel;
 import oneteampos.order.cotainer.OrderListJPanel;
 
 public class AddOrderBtnListener implements MouseListener{
 	
 	OrderListJPanel orderListPanel;
-	AddItemJPanel addItemPanel;
+	AddItemJFrame addItemPanel;
 	CartJPanel cartPanel;
 	
-	public AddOrderBtnListener(OrderListJPanel orderListPanel) {
+	public AddOrderBtnListener(OrderListJPanel orderListPanel, AddItemJFrame addItemJPanel) {
 		this.orderListPanel = orderListPanel;
-		this.addItemPanel = orderListPanel.getaddItemPanel();
+		this.addItemPanel = addItemJPanel;
 		this.cartPanel = orderListPanel.getCartPanel();
 		
 	}
@@ -37,7 +37,7 @@ public class AddOrderBtnListener implements MouseListener{
 		/*카트 추가 리스너*/
 		
 		// 담을 품목의 개수 
-		Integer item_amount = Integer.parseInt(orderListPanel.getaddItemPanel().getCountLabel().getText());
+		Integer item_amount = Integer.parseInt(addItemPanel.getCountLabel().getText());
 		
 		if(item_amount == 0) { // 담을 품목이 없을때
 			
@@ -49,7 +49,7 @@ public class AddOrderBtnListener implements MouseListener{
 		// Order_list의 변수들 만들어서 채우주기 
 		String list_num = "order_list_list_id_seq";
 		Integer order_id = 0;
-		String item_name = orderListPanel.getaddItemPanel().getItemNameLabel().getText();
+		String item_name = addItemPanel.getItemNameLabel().getText();
 		
 		// 마지막 발주번호 꺼내오기
 		String sql = "SELECT MAX(order_id) AS max_order FROM store_order";
@@ -85,12 +85,12 @@ public class AddOrderBtnListener implements MouseListener{
 		// CartJPanel에 있는 총가격 라벨 
 		JLabel totalPriceLabel = orderListPanel.getCartPanel().getTotalPriceLabel() ;
 		int totalPrice = Integer.parseInt(totalPriceLabel.getText());
-		totalPrice += (item_amount * Integer.parseInt(orderListPanel.getaddItemPanel().getItemRealPriceLabel().getText()));
+		totalPrice += (item_amount * Integer.parseInt(addItemPanel.getItemRealPriceLabel().getText()));
 		totalPriceLabel.setText(totalPrice + "");
 		orderListPanel.getCartPanel().getTotalPriceLabel().setText(totalPrice + "");
 		
 		// 판넬 닫기
-		orderListPanel.getaddItemPanel().setVisibleFalse();
+		addItemPanel.dispose();
 		
 		}
 		

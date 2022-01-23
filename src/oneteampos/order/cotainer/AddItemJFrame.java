@@ -3,8 +3,13 @@ package oneteampos.order.cotainer;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
@@ -13,8 +18,9 @@ import javax.swing.border.TitledBorder;
 import oneteampos.order.actions.AddItemJPanelExit;
 import oneteampos.order.actions.QtyControlListener;
 import oneteampos.order.compnents.AddOrderBtn;
+import oneteampos.sales.containers.RoundedButton;
 
-public class AddItemJPanel extends JPanel{
+public class AddItemJFrame extends JFrame {
 	
 	OrderListJPanel orderListPanel;
 	JLabel countLabel;
@@ -22,18 +28,16 @@ public class AddItemJPanel extends JPanel{
 	JLabel itemRealPriceLable;
 	AddOrderBtn addOrderBtn;
 	
-	public AddItemJPanel(OrderListJPanel orderListPanel) {
-		super();
-		setBounds(650, 80, 300, 180);
-		setBackground(new Color(228, 227, 230));
+	public AddItemJFrame(OrderListJPanel orderListPanel) {
+		super("발주 아이템 추가");
+		setBounds(650, 200, 290, 240);
+		getContentPane().setBackground(Color.WHITE);
 		setLayout(null);
-		setBorder(new TitledBorder(new LineBorder(Color.DARK_GRAY, 1)));
 		setVisible(true);
 		
 		this.orderListPanel = orderListPanel;
 		this.countLabel = countLabel();
 		
-		exitBtn(); //x버튼
 		addItmeLabel(); // 품목이름 라벨
 		addItemPriceLabel(); // 가격 라벨
 		leftBtn(); // 수량 줄이는 버튼
@@ -42,18 +46,15 @@ public class AddItemJPanel extends JPanel{
 		addItemRealPriceLabel(); // 품목 가격 나오는 라벨
 		add(itemNameLabel);
 		add(countLabel); // 추가할 수량 라벨 
-		this.addOrderBtn = new AddOrderBtn(orderListPanel); // 추가 버튼
+		this.addOrderBtn = new AddOrderBtn(orderListPanel, this); // 추가 버튼
 		add(addOrderBtn);
-		
-		
-		
-		
+
 	}
 	
 	public JLabel countLabel() { // 수량표시 라벨
 		JLabel countLabel = new JLabel("0");
 		countLabel.setBounds(73, 98, 50, 30);
-		countLabel.setFont(new Font("돋움", Font.BOLD, 23));
+		countLabel.setFont(new Font("나눔스퀘어", Font.BOLD, 23));
 		countLabel.setBackground(new Color(228, 227, 230));
 
 		return countLabel;
@@ -63,26 +64,10 @@ public class AddItemJPanel extends JPanel{
 		return countLabel;
 	}
 	
-	public void exitBtn() { // X버튼
-		JButton exitBtn = new JButton("X");
-		exitBtn.setBounds(240, 15, 50, 30);
-		exitBtn.setFont(new Font("돋움", Font.BOLD, 15));
-		exitBtn.setBackground(new Color(228, 227, 230));
-		exitBtn.setBorderPainted(false);
-		exitBtn.setRequestFocusEnabled(false);
-		exitBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		exitBtn.setFocusPainted(false);
-		
-		exitBtn.addMouseListener(new AddItemJPanelExit(this));
-		
-		add(exitBtn);
-		
-	}
-	
 	public void addItmeLabel() { // 품목이름 : 라벨
 		JLabel itemLabel = new JLabel("품목이름 : ");
 		itemLabel.setBounds(20, 20, 100, 50);
-		itemLabel.setFont(new Font("돋움", Font.BOLD, 15));
+		itemLabel.setFont(new Font("나눔스퀘어", Font.BOLD, 15));
 		itemLabel.setBackground(new Color(228, 227, 230));
 		
 		add(itemLabel);
@@ -91,7 +76,7 @@ public class AddItemJPanel extends JPanel{
 	public JLabel addItemNameLabel() { // 선택한 품목이름 
 		JLabel itemNameLabel = new JLabel();
 		itemNameLabel.setBounds(105, 20, 150, 50);
-		itemNameLabel.setFont(new Font("돋움", Font.BOLD, 15));
+		itemNameLabel.setFont(new Font("나눔스퀘어", Font.BOLD, 15));
 		itemNameLabel.setBackground(new Color(228, 227, 230));
 		
 		return itemNameLabel;
@@ -100,7 +85,7 @@ public class AddItemJPanel extends JPanel{
 	public void addItemPriceLabel() { // 가격 :
 		JLabel itemPriceLabel = new JLabel("가격 :");
 		itemPriceLabel.setBounds(20, 50, 100, 50);
-		itemPriceLabel.setFont(new Font("돋움", Font.BOLD, 15));
+		itemPriceLabel.setFont(new Font("나눔스퀘어", Font.BOLD, 15));
 		itemPriceLabel.setBackground(new Color(228, 227, 230));
 		
 		add(itemPriceLabel);
@@ -109,7 +94,7 @@ public class AddItemJPanel extends JPanel{
 	public void addItemRealPriceLabel() { // 선택한 품목의 가격 
 		itemRealPriceLable = new JLabel();
 		itemRealPriceLable.setBounds(80, 50, 100, 50);
-		itemRealPriceLable.setFont(new Font("돋움", Font.BOLD, 15));
+		itemRealPriceLable.setFont(new Font("나눔스퀘어", Font.BOLD, 15));
 		itemRealPriceLable.setBackground(new Color(228, 227, 230));
 		
 		add(itemRealPriceLable);
@@ -120,9 +105,9 @@ public class AddItemJPanel extends JPanel{
 	}
 	
 	public void rightBtn( ) { // 수량 증가버튼
-		JButton rightBtn = new JButton("▶");
+		RoundedButton rightBtn = new RoundedButton("▶");
 		rightBtn.setBounds(100, 100, 50, 30);
-		rightBtn.setFont(new Font("돋움", Font.BOLD, 15));
+		rightBtn.setFont(new Font("나눔스퀘어", Font.BOLD, 15));
 		rightBtn.setBackground(new Color(228, 227, 230));
 		rightBtn.setBorderPainted(false);
 		rightBtn.setRequestFocusEnabled(false);
@@ -137,7 +122,7 @@ public class AddItemJPanel extends JPanel{
 	}
 	
 	public void leftBtn() { // 수량 감소버튼
-		JButton leftBtn = new JButton("◀");
+		RoundedButton leftBtn = new RoundedButton("◀");
 		leftBtn.setBounds(10, 100, 50, 30);
 		leftBtn.setFont(new Font("돋움", Font.BOLD, 15));
 		leftBtn.setBackground(new Color(228, 227, 230));
@@ -170,9 +155,5 @@ public class AddItemJPanel extends JPanel{
 	public void setVisibleFalse() {
 		this.setVisible(false);
 	}
-	
-
-	
-	
 
 }

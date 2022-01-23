@@ -85,8 +85,10 @@ public class StaffInfoUpdateBtn implements MouseListener {
 		staffTabel.setValueAt(stafflist.get(0).getTel(), staffTabel.getSelectedRow(), 5);
 		staffTabel.setValueAt(stafflist.get(0).getAddress(), staffTabel.getSelectedRow(), 6);
 		
+		// 창 닫기 
 		staffInfoFrame.dispose();
-
+		// 선택된 버튼 풀어주기
+		staffInfoFrame.getStaffInfoJPanel().getUpdateStaffBtn().setSelected(false);
 		//성공 팝업
 		JOptionPane.showMessageDialog(staffInfoFrame, "사원 수정이 완료되었습니다.");
 	} else {
