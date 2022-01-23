@@ -3,7 +3,9 @@ package oneteampos.datamodel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -27,25 +29,8 @@ public class Clock extends JLabel{
 				while (aa) {
 					Calendar cal = Calendar.getInstance();
 
-					// String으로 객체를 생성하는것보다
-					// 메모리를 더 효율적으로 사용하기 위해서 StirngBuffer 사용
-
-					StringBuffer now = new StringBuffer();
-
-					now.append(cal.get(Calendar.YEAR));
-					now.append("년");
-					now.append(cal.get(Calendar.MONDAY) + 1);
-					now.append("월");
-					now.append(cal.get(Calendar.DATE));
-					now.append("일");
-					now.append(cal.get(Calendar.HOUR_OF_DAY));
-					now.append("시");
-					now.append(cal.get(Calendar.MINUTE));
-					now.append("분");
-					now.append(cal.get(Calendar.SECOND));
-					now.append("초");
-
-					setText(now.toString());
+					SimpleDateFormat fm = new SimpleDateFormat("yyyy년  MM월  dd일   HH:mm:ss");
+					setText(fm.format(new Date()));
 
 					try {
 
