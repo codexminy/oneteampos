@@ -1,9 +1,10 @@
 package oneteampos.main.mainContainer;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 
-import javax.swing.JFrame;
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import oneteampos.main.MainFrame;
@@ -25,12 +26,15 @@ public class MainPanel {
 	public MainPanel(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
 		this.cardPanel = new JPanel(new CardLayout());
-		this.gridPanel = new JPanel(new GridLayout());
+		this.gridPanel = new JPanel(new GridLayout(1,5,10,0));
 		this.menuPanel = new MenuPanel(mainFrame);
 		this.member = new MemberJPanel(mainFrame);
 		
 		createMainBtns();
-
+		
+		gridPanel.setBackground(Color.WHITE);
+		gridPanel.setBorder(BorderFactory.createEmptyBorder(200, 50, 200, 50));
+		
 		cardPanel.add(gridPanel);
 		cardPanel.add(mainNames[0], menuPanel);
 		cardPanel.add(mainNames[4], member);

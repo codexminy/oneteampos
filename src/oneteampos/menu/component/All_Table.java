@@ -28,7 +28,7 @@ public class All_Table extends JTable {
 		setHeader();
 	}
 	
-	public All_Table(DefaultTableModel dm) {
+	public All_Table(TableModel dm) {
 		setModel(dm);
 		settings();
 		tableAlign();
