@@ -31,7 +31,7 @@ public class MainFrame extends JFrame {
 	}
 
 	private void settings() {
-		setTitle("팀 프로젝트 테스트");
+		setTitle("OneTeamPos");
 		setVisible(true);
 		setResizable(false);
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
