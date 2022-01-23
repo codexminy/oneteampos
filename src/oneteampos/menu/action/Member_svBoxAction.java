@@ -36,9 +36,9 @@ public class Member_svBoxAction implements ActionListener {
 			JOptionPane.showMessageDialog(null, "회원을 선택해주세요!", "Message", JOptionPane.WARNING_MESSAGE);
 			svBox.setSelected(false);
 		} else if (svBox.isSelected()) {
-			mcd.setDiscnt((int)table.getValueAt(row, 5));
+			mcd.setDiscnt((int)table.getValueAt(row, 3));
 			int total = ChangeString.setErase(mrp.getTotalPrice().getText());
-			double save = (double)table.getValueAt(row, 7);
+			double save = (double)table.getValueAt(row, 5);
 			
 			saveCash.setVisible(true);
 			

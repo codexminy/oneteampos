@@ -32,11 +32,11 @@ public class Member_selectAction extends MouseAdapter {
 		int row = table.getSelectedRow();
 		
 		membershipCash.setVisible(true);
-		membershipCash.setText(table.getValueAt(row, 2)+"");
+		membershipCash.setText(table.getValueAt(row, 1)+"");
 		
 		int total = ChangeString.setErase(mrp.getTotalPrice().getText());
-		double save = (double) table.getValueAt(row, 7);
-		int discnt = (int) table.getValueAt(row, 5);
+		double save = (double) table.getValueAt(row, 5);
+		int discnt = (int) table.getValueAt(row, 3);
 		
 		if(mcd.getSvBox().isSelected()) {
 			saveCash.setVisible(true);

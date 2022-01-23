@@ -97,7 +97,7 @@ public class Member_inquiryDialog extends JDialog implements CommonVariable {
 		discountCash.setVisible(false);
 		
 		combo.addActionListener(new Member_comboBoxAcion(this));
-		searchBtn.addMouseListener(new Member_searchAction(this));
+		searchBtn.addMouseListener(new Member_searchAction(this, combo));
 		apply.addMouseListener(new Member_applyAction(mainFrame, this));
 		this.table.addMouseListener(new Member_selectAction(mainFrame, this));
 		this.dcBox.addActionListener(new Member_dcBoxAction(mainFrame, this));
@@ -149,15 +149,15 @@ public class Member_inquiryDialog extends JDialog implements CommonVariable {
 		
 		for(int i=0; i<memberList.size(); ++i) {
 			Vector<Object> innerRow = new Vector<Object>();
-			innerRow.add(memberList.get(i).getGradeId());
+//			innerRow.add(memberList.get(i).getGradeId());
 			innerRow.add(memberList.get(i).getMemberId());
 			innerRow.add(memberList.get(i).getPhoneNumber());
 			innerRow.add(memberList.get(i).getName());
-			innerRow.add(memberList.get(i).getSumAmount());
+//			innerRow.add(memberList.get(i).getSumAmount());
 			innerRow.add(memberList.get(i).getPoint());
 			innerRow.add(memberList.get(i).getGrade());
 			innerRow.add(memberList.get(i).getSave());
-			innerRow.add(memberList.get(i).getThresHold());
+//			innerRow.add(memberList.get(i).getThresHold());
 			row.add(innerRow);
 		}
 		
@@ -166,7 +166,7 @@ public class Member_inquiryDialog extends JDialog implements CommonVariable {
 
 	private Vector<MemberData> insertMemberData() {
 		Vector<MemberData> list = new Vector<>();
-		String sql = "SELECT * FROM members INNER JOIN member_grade USING (grade_id)";
+		String sql = "SELECT * FROM members INNER JOIN member_grade USING (grade_id) ORDER BY member_id";
 		
 		try (
 			Connection conn = DBConnector.getConnection();
@@ -175,15 +175,29 @@ public class Member_inquiryDialog extends JDialog implements CommonVariable {
 		) {
 			ResultSetMetaData meta = rs.getMetaData();
 
-			col2.add(meta.getColumnName(3));
-			col2.add(meta.getColumnName(4));
-			col2.add(meta.getColumnName(6));
-			col2.add(meta.getColumnName(7));
-			col2.add(meta.getColumnName(8));
+			col2.add("멤버ID");
+			col2.add("전화번호");
+			col2.add("이름");
+			col2.add("포인트");
+			col2.add("등급");
+			col2.add("적립률");
 			
-			for(int i=0; i<meta.getColumnCount(); ++i) {
-				col.add(meta.getColumnName(i+1));
-			}
+//			col2.add(meta.getColumnName(3));
+//			col2.add(meta.getColumnName(4));
+//			col2.add(meta.getColumnName(6));
+//			col2.add(meta.getColumnName(7));
+//			col2.add(meta.getColumnName(8));
+			
+			col.add("멤버ID");
+			col.add("전화번호");
+			col.add("이름");
+			col.add("포인트");
+			col.add("등급");
+			col.add("적립률");
+			
+//			for(int i=0; i<meta.getColumnCount(); ++i) {
+//				col.add(meta.getColumnName(i+1));
+//			}
 			
 			while(rs.next()) {
 				list.add(new MemberData(rs));
@@ -196,7 +210,22 @@ public class Member_inquiryDialog extends JDialog implements CommonVariable {
 	}
 	
 	public void searchData(String columnName, String condition, DefaultTableModel model, JTable table) {
-		String sql = String.format("SELECT * FROM members INNER JOIN member_grade USING (grade_id) WHERE %s LIKE '%%%s%%'", columnName, condition);
+		
+		if(columnName.equals("멤버ID")) {
+			columnName = "member_id";
+		} else if(columnName.equals("전화번호")) {
+			columnName = "phone_number";
+		} else if(columnName.equals("이름")) {
+			columnName = "name";
+		} else if(columnName.equals("포인트")) {
+			columnName = "point";
+		} else if(columnName.equals("등급")) {
+			columnName = "grade";
+		} else if(columnName.equals("적립률")) {
+			columnName = "save";
+		}
+
+		String sql = String.format("SELECT * FROM members INNER JOIN member_grade USING (grade_id) WHERE %s LIKE '%%%s%%' ORDER BY member_id", columnName, condition);
 		Vector<Vector<Object>> row = new Vector<>();
 
 		try (
@@ -206,15 +235,15 @@ public class Member_inquiryDialog extends JDialog implements CommonVariable {
 		) {
 			while(rs.next()) {
 				Vector<Object> innerRow = new Vector<>();
-				innerRow.add(rs.getInt(1));
+//				innerRow.add(rs.getInt(1));
 				innerRow.add(rs.getInt(2));
 				innerRow.add(rs.getString(3).replaceFirst("(^02|[0-9]{3})([0-9]{3,4})([0-9]{4})$", "$1-$2-$3"));
 				innerRow.add(rs.getString(4));
-				innerRow.add(rs.getInt(5));
+//				innerRow.add(rs.getInt(5));
 				innerRow.add(rs.getInt(6));
 				innerRow.add(rs.getString(7));
 				innerRow.add(rs.getDouble(8));
-				innerRow.add(rs.getInt(9));
+//				innerRow.add(rs.getInt(9));
 				row.add(innerRow);
 			}
 			model.setDataVector(row, col);

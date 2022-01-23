@@ -37,8 +37,8 @@ public class Payment_executeAction {
 			row = mcd.getTable().getSelectedRow();
 			discnt = ChangeString.setErase(mrp.getDiscountCash().getText());
 			save = ChangeString.setErase(mcd.getSaveCash().getText());
-			memberId = mcd.getTable().getValueAt(row, 1);
-			updatePointData(mcd.getTable().getColumnName(5), mcd.getPoint(), (String)mcd.getTable().getValueAt(row, 2));
+			memberId = mcd.getTable().getValueAt(row, 0);
+			updatePointData("point", mcd.getPoint(), (String)mcd.getTable().getValueAt(row, 1));
 			mcd.setPoint(0);
 			mcd.getSaveCash().setText("");
 		} else {

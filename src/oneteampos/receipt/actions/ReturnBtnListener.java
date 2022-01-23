@@ -71,6 +71,7 @@ public class ReturnBtnListener implements MouseListener {
 				Integer payment_amount = 0;
 				Integer sum_amount = 0;
 				Integer point = 0;
+				Integer discount_amount = 0;
 				
 				try (
 						Connection conn = DBConnector.getConnection();
@@ -83,6 +84,7 @@ public class ReturnBtnListener implements MouseListener {
 						payment_amount = rs.getInt("payment_amount");
 						sum_amount = rs.getInt("sum_amount");
 						point = rs.getInt("point");
+						discount_amount = rs.getInt("discount_amount");
 						
 					}
 				} catch (SQLException e1) {
@@ -91,7 +93,7 @@ public class ReturnBtnListener implements MouseListener {
 				
 				
 				// 포인트 복구
-				sql = "UPDATE members SET point = " + (point - point_save) + ", sum_amount = " + (sum_amount - payment_amount) 
+				sql = "UPDATE members SET point = " + (point - point_save + discount_amount) + ", sum_amount = " + (sum_amount - payment_amount) 
 						+ "WHERE member_id = " + member_id;
 				
 				try (

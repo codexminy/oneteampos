@@ -1,6 +1,7 @@
 package oneteampos.menu.container;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -35,6 +36,7 @@ import oneteampos.menu.action.MenuManage_insertAction;
 import oneteampos.menu.action.MenuManage_refreshAction;
 import oneteampos.menu.component.All_ScrollPane;
 import oneteampos.menu.component.All_Table;
+import oneteampos.menu.component.All_boxPanel;
 import oneteampos.menu.component.All_btn;
 import oneteampos.menu.component.All_checkBox;
 import oneteampos.menu.component.All_checkBoxSetting;
@@ -77,7 +79,7 @@ public class MenuManage_dialog extends JDialog {
 		JScrollPane rsMenuSc = new All_ScrollPane(rsMenu, "N");
 		rsMenuSc.setBorder(BorderFactory.createLineBorder(Color.WHITE));
 		
-		JPanel searchPanel = new All_opaquePanel();
+		JPanel searchPanel = new All_boxPanel(LEFT_ALIGNMENT);
 		JPanel btns = new All_opaquePanel(new FlowLayout(FlowLayout.RIGHT));
 		JPanel menuManagePanel = new All_opaquePanel(new GridBagLayout());
 		JPanel menuListPanel = new All_opaquePanel(new GridLayout());
@@ -87,6 +89,7 @@ public class MenuManage_dialog extends JDialog {
 		All_label registerMenuLabel = new All_label("메뉴 등록", JLabel.CENTER);
 
 		All_comboBox combo = new All_comboBox(col2);
+		combo.setPreferredSize(new Dimension(80, 0));
 		
 		JTextField searchField = new JTextField(40);
 		JButton searchBtn = new All_btn("검색");
@@ -136,7 +139,16 @@ public class MenuManage_dialog extends JDialog {
 	}
 	
 	public void searchData(Object columnName, String condition) {
-		String sql = String.format("SELECT * FROM menu WHERE %s LIKE '%%%s%%'", columnName, condition);
+		
+		if(columnName.equals("메뉴명")) {
+			columnName = "menu_name";
+		} else if(columnName.equals("가격")) {
+			columnName = "price";
+		} else if(columnName.equals("종류")) {
+			columnName = "menu_type";
+		}
+		
+		String sql = String.format("SELECT * FROM menu WHERE %s LIKE '%%%s%%' ORDER BY menu_id", columnName, condition);
 		Vector<Vector<Object>> row = new Vector<>();
 		
 		try (
@@ -181,14 +193,23 @@ public class MenuManage_dialog extends JDialog {
 			ResultSetMetaData meta = rs.getMetaData();
 			
 			col.add("선택");
+			col.add("메뉴번호");
+			col.add("메뉴명");
+			col.add("가격");
+			col.add("종류");
+			
 			col2 = new Object[meta.getColumnCount()-1];
 			
-			for(int i=1; i<=meta.getColumnCount(); ++i) {
-				col.add(meta.getColumnName(i));
-				if(i > 1) {
-					col2[i-2] = meta.getColumnName(i);
-				}
-			}
+			col2[0] = "메뉴명";
+			col2[1] = "가격";
+			col2[2] = "종류";
+			
+//			for(int i=1; i<=meta.getColumnCount(); ++i) {
+//				col.add(meta.getColumnName(i));
+//				if(i > 1) {
+//					col2[i-2] = meta.getColumnName(i);
+//				}
+//			}
 			
 			while(rs.next()) {
 				Vector<Object> innerVt = new Vector<>();

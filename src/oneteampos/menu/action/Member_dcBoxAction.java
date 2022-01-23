@@ -38,7 +38,7 @@ public class Member_dcBoxAction implements ActionListener {
 		} else if(dcBox.isSelected()) {
 			int total = ChangeString.setErase(mrp.getTotalPrice().getText());
 			
-			mcd.setDiscnt((int)table.getValueAt(row, 5));
+			mcd.setDiscnt((int)table.getValueAt(row, 3));
 			int discnt = mcd.getDiscnt();
 			
 			if(total >= discnt) {
