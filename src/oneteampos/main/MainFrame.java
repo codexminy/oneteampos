@@ -1,7 +1,10 @@
 package oneteampos.main;
 
+import java.awt.Image;
+import java.io.File;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import oneteampos.login.components.LoginJPanel;
@@ -24,6 +27,7 @@ public class MainFrame extends JFrame {
 		this.loginStfNameLabel = new LoginStaffNameJLabel();
 		
 		settings();
+		setFaviCon();
 	}
 
 	private void settings() {
@@ -54,5 +58,16 @@ public class MainFrame extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void setFaviCon() {
+		Image image = null; 
+		try { 
+			image = ImageIO.read(new File("image\\icon4.png")); 
+		} catch (IOException e) { 
+			e.printStackTrace(); 
+		} 
+		this.setIconImage(image);
+
 	}
 }
