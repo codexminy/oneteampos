@@ -83,6 +83,10 @@ public class CalendarJFrame2 extends JFrame implements ActionListener, WindowLis
 		nextyear.setBorderPainted(false);
 		nextyear.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		nextyear.setFocusable(false);
+		lastyear.setFont(new Font("나눔스퀘어", Font.BOLD, 20));
+		nextyear.setFont(new Font("나눔스퀘어", Font.BOLD, 20));
+		lastyear.setForeground(Color.BLACK);
+		nextyear.setForeground(Color.BLACK);
 	
 		// 판넬 속성
 		cntNorth.setBackground(Color.WHITE);

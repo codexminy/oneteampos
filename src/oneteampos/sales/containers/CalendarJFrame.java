@@ -88,7 +88,10 @@ public class CalendarJFrame extends JFrame implements ActionListener, WindowList
 		nextMonth.setBackground(Color.WHITE);
 		nextMonth.setBorderPainted(false);
 		nextMonth.setCursor(new Cursor(Cursor.HAND_CURSOR));
-	
+		lastMonth.setFont(new Font("나눔스퀘어", Font.BOLD, 20));
+		nextMonth.setFont(new Font("나눔스퀘어", Font.BOLD, 20));
+		lastMonth.setForeground(Color.BLACK);
+		nextMonth.setForeground(Color.BLACK);
 		// 판넬 속성
 		cntNorth.setBackground(Color.WHITE);
 		cntCenter.setBackground(Color.WHITE);
