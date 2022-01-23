@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import oneteampos.datamodel.Clock;
 import oneteampos.main.MainFrame;
 import oneteampos.order.compnents.BackBtn;
 
@@ -36,6 +37,10 @@ public class StaffJPanel extends JPanel{
 	      
 	      // 버튼 추가
 	      add(new BackBtn(mainframe , this, "staffPanel"));
+	      
+	      // 시계추가
+	      Clock clock = new Clock();
+	      add(clock);
 	      
 
 	}

@@ -21,7 +21,7 @@ public class LoginStaffNameJLabel extends JLabel{
 		setBounds(100, 10, 80, 40);
 		setBackground(Color.WHITE);
 		setVisible(false);
-		setFont(new Font("고딕", Font.PLAIN, 20));
+		setFont(new Font("나눔스퀘어", Font.PLAIN, 20));
 		
 	}
 

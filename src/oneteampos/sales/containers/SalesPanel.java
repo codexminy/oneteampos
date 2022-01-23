@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import oneteampos.datamodel.Clock;
 import oneteampos.main.MainFrame;
 import oneteampos.order.compnents.BackBtn;
 import oneteampos.sales.components.DailyBtn;
@@ -32,6 +33,10 @@ public class SalesPanel extends JPanel{
 		
 		// 로그인 정보 : 사번 + 사원이름
 		addLoginInfoLabel();
+		
+		//시계
+		Clock clock = new Clock();
+		add(clock);
 		
 		//	버튼추가
 		daliyBtn = new DailyBtn(mainframe,this);

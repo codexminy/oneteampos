@@ -23,6 +23,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
 import oneteampos.database.DBConnector;
+import oneteampos.datamodel.Clock;
 import oneteampos.datamodel.ReceiptInfo;
 import oneteampos.main.MainFrame;
 import oneteampos.order.compnents.BackBtn;
@@ -48,6 +49,10 @@ public class ReceiptJPanel extends JPanel{
 		
 		//영수증 라벨 추가
 		addReceiptLabel();
+		
+		// 시계 추가
+		Clock clock = new Clock();
+		add(clock);
 		
 		//테이블 추가 
 		receiptTablePanel = new ReceiptTableJPanel(this);

@@ -15,11 +15,9 @@ public class LoginStaffIDJLabel extends JLabel {
 	
 	public LoginStaffIDJLabel() {
 	
-		
-		
 		setBounds(30, 10, 50, 40);
 		setBackground(Color.WHITE);
-		setFont(new Font("고딕", Font.PLAIN, 20));
+		setFont(new Font("나눔스퀘어", Font.PLAIN, 20));
 		setVisible(false);
 	
 	}

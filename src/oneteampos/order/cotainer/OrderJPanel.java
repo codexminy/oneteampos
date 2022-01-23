@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import oneteampos.datamodel.Clock;
 import oneteampos.main.MainFrame;
 import oneteampos.order.compnents.BackBtn;
 import oneteampos.order.compnents.OrderListBtn;
@@ -40,6 +41,10 @@ public class OrderJPanel extends JPanel{
 		
 		// 메인프레임에 판넬 추가
 		mainframe.add(this);
+		
+		// 시계 추가
+		Clock clock = new Clock();
+		add(clock);
 		
 		// 로그인 정보 : 사번 + 사원이름
 		addLoginInfoLabel();
