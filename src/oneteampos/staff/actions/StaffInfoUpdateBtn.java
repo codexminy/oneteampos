@@ -15,6 +15,8 @@ import javax.swing.table.DefaultTableModel;
 import oneteampos.database.DBConnector;
 import oneteampos.datamodel.StaffJoinJobs;
 import oneteampos.staff.containers.StaffInfoJFrame;
+import oneteampos.staff.containers.StaffInfoJPanel;
+import oneteampos.staff.containers.StaffJPanel;
 
 public class StaffInfoUpdateBtn implements MouseListener {
 	
@@ -89,6 +91,9 @@ public class StaffInfoUpdateBtn implements MouseListener {
 		staffInfoFrame.dispose();
 		// 선택된 버튼 풀어주기
 		staffInfoFrame.getStaffInfoJPanel().getUpdateStaffBtn().setSelected(false);
+		staffInfoFrame.getStaffInfoJPanel().setVisible(false);
+		StaffJPanel staffPanel = staffInfoFrame.getStaffInfoJPanel().getStaffJpanel();
+		staffPanel.add(new StaffInfoJPanel(staffPanel));
 		//성공 팝업
 		JOptionPane.showMessageDialog(staffInfoFrame, "사원 수정이 완료되었습니다.");
 	} else {

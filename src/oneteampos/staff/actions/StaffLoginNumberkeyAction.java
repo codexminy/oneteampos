@@ -16,6 +16,7 @@ import oneteampos.database.DBConnector;
 import oneteampos.datamodel.Staff;
 import oneteampos.main.MainFrame;
 import oneteampos.main.mainContainer.MainPanel;
+import oneteampos.sales.containers.RoundedButton;
 import oneteampos.staff.containers.LoginStaffJPanel;
 import oneteampos.staff.containers.StaffJPanel;
 
@@ -43,11 +44,11 @@ public class StaffLoginNumberkeyAction implements MouseListener {
 	MainFrame mainframe;
 	JPanel loginPanel;
 	JLabel[] inputlabel;
-	JButton keyboard;
+	RoundedButton keyboard;
 	JLabel cntLabel;
 	JLabel loginFailLabel;
 	
-	public StaffLoginNumberkeyAction(MainFrame mainframe,JPanel loginPanel, JLabel[] inputlabel, JButton keyboard, JLabel cntLabel, JLabel loginFailLabel) {
+	public StaffLoginNumberkeyAction(MainFrame mainframe,JPanel loginPanel, JLabel[] inputlabel, RoundedButton keyboard, JLabel cntLabel, JLabel loginFailLabel) {
 		this.mainframe = mainframe;
 		this.loginPanel = loginPanel;
 		this.inputlabel = inputlabel;
@@ -62,7 +63,6 @@ public class StaffLoginNumberkeyAction implements MouseListener {
 
 		// 초기화
 		if (cnt == 4) {
-
 			cnt = 0;
 			for (int i = 0; i < inputlabel.length; ++i) {
 				inputlabel[i].setText("○");
@@ -84,7 +84,9 @@ public class StaffLoginNumberkeyAction implements MouseListener {
 
 			for (int i = 0; i < password.length(); ++i) {
 				if (password.equals(inputpwd)) {
-					
+					for (int j = 0; j < inputlabel.length; ++j) {
+						inputlabel[j].setText("○");
+					}
 					// StaffJPanel로 넘어가기
 					loginPanel.setVisible(false);
 					new StaffJPanel(mainframe);

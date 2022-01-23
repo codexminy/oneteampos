@@ -16,6 +16,7 @@ import oneteampos.database.DBConnector;
 import oneteampos.datamodel.Staff;
 import oneteampos.main.MainFrame;
 import oneteampos.main.mainContainer.MainPanel;
+import oneteampos.sales.containers.RoundedButton;
 
 
 public class LoginNumberkeyAction implements MouseListener{
@@ -41,11 +42,11 @@ public class LoginNumberkeyAction implements MouseListener{
 	MainFrame mainframe;
 	JPanel loginPanel;
 	JLabel[] inputlabel;
-	JButton keyboard;
+	RoundedButton keyboard;
 	JLabel cntLabel;
 	JLabel loginFailLabel;
 	
-	public LoginNumberkeyAction(MainFrame mainframe,JPanel loginPanel, JLabel[] inputlabel, JButton keyboard, JLabel cntLabel, JLabel loginFailLabel) {
+	public LoginNumberkeyAction(MainFrame mainframe,JPanel loginPanel, JLabel[] inputlabel, RoundedButton keyboard, JLabel cntLabel, JLabel loginFailLabel) {
 		this.mainframe = mainframe;
 		this.loginPanel = loginPanel;
 		this.inputlabel = inputlabel;

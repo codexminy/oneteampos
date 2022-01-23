@@ -19,9 +19,6 @@ public class TableAddItemListener implements MouseListener{
 	
 	public TableAddItemListener(OrderListJPanel orderListPanel ) {
 		this.orderListPanel = orderListPanel;
-//		this.addItemPanel = orderListPanel.getaddItemPanel();
-//		this.itemNameLabel = addItemPanel.getItemNameLabel();
-//		this.itemPriceLabel = addItemPanel.getItemRealPriceLabel();
 		table = orderListPanel.getItemTable();
 	}
 

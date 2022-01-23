@@ -44,7 +44,6 @@ public class ItemQtyUpdate implements MouseListener{
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		System.out.println("여기 안들어와?");
 		JTable stockTable = stockListPanel.getStockTable();
 		
 		if(stockListPanel.getQtyframe() != null) {

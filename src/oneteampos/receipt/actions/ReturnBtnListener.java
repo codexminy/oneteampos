@@ -62,37 +62,46 @@ public class ReturnBtnListener implements MouseListener {
 					e1.printStackTrace();
 				}
 				
-				// 적립금 받아오기 
+				// 적립금 받아오기 , 회원 정보 
 				
-//				sql = "";
-//				
-//				try (
-//						Connection conn = DBConnector.getConnection();
-//						PreparedStatement pstmt = conn.prepareStatement(sql);
-//						ResultSet rs = pstmt.executeQuery();
-//				) {
-//					row = pstmt.executeUpdate();
-//				} catch (SQLException e1) {
-//					e1.printStackTrace();
-//				}
+				sql = "SELECT o.member_id AS member_id, point_save, discount_amount, payment_amount, sum_amount, point "
+						+ "from orders o INNER JOIN members m ON o.member_id = m.member_id WHERE order_id ="+id;
+				Integer member_id = 0;
+				Integer point_save = 0;
+				Integer payment_amount = 0;
+				Integer sum_amount = 0;
+				Integer point = 0;
 				
-				// 포인트 받아오기
-//				
-//				sql = "";
-//				
-//				try (
-//						Connection conn = DBConnector.getConnection();
-//						PreparedStatement pstmt = conn.prepareStatement(sql);
-//				) {
-//					row = pstmt.executeUpdate();
-//				} catch (SQLException e1) {
-//					e1.printStackTrace();
-//				}
+				try (
+						Connection conn = DBConnector.getConnection();
+						PreparedStatement pstmt = conn.prepareStatement(sql);
+						ResultSet rs = pstmt.executeQuery();
+				) {
+					while (rs.next()) {
+						member_id =  rs.getInt("member_id");
+						point_save = rs.getInt("point_save");
+						payment_amount = rs.getInt("payment_amount");
+						sum_amount = rs.getInt("sum_amount");
+						point = rs.getInt("point");
+						
+					}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 				
 				
 				// 포인트 복구
+				sql = "UPDATE members SET point = " + (point - point_save) + ", sum_amount = " + (sum_amount - payment_amount) 
+						+ "WHERE member_id = " + member_id;
 				
-				
+				try (
+						Connection conn = DBConnector.getConnection();
+						PreparedStatement pstmt = conn.prepareStatement(sql);
+				) {
+					int result = pstmt.executeUpdate();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 				
 				
 				

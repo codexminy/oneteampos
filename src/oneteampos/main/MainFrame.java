@@ -1,5 +1,7 @@
 package oneteampos.main;
 
+import java.io.IOException;
+
 import javax.swing.JFrame;
 
 import oneteampos.login.components.LoginJPanel;
@@ -47,6 +49,10 @@ public class MainFrame extends JFrame {
 	
 	public static void main(String[] args) {
 		MainFrame mframe = new MainFrame();
-		new LoginJPanel(mframe);
+		try {
+			new LoginJPanel(mframe);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
