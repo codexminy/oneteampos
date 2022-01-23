@@ -3,6 +3,7 @@ package oneteampos.menu.action;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -61,7 +62,7 @@ public class Member_applyAction extends MouseAdapter {
 				} else if(svBox.isSelected()) {
 					mcd.setPoint(discnt - ChangeString.setErase(saveCash.getText()));
 				}
-				
+
 				rp.getDiscountCash().setVisible(true);
 				rp.getCancelBtn().setVisible(true);
 				rp.setIsDisCnt(true);

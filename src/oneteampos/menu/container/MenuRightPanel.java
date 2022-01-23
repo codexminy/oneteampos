@@ -42,6 +42,7 @@ public class MenuRightPanel extends JPanel {
 	private boolean isDiscnt;
 	private JButton cancelBtn;
 	private ArrayList<Integer> prevSum;
+	private JLabel clock;
 
 	public MenuRightPanel(MainFrame mainFrame, MenuLeftPanel leftPanel) {
 		this.totalPanel = new All_opaquePanel();
@@ -62,10 +63,13 @@ public class MenuRightPanel extends JPanel {
 
 		JScrollPane sc = new All_ScrollPane(cart);
 
+		JPanel clockPanel = new All_opaquePanel(null);
+		
 		JLabel discount = new All_label("할인 금액");
 		JLabel total = new All_label("결제 금액");
-		JLabel clock = new Clock();
+		clock = new Clock();
 		clock.setVerticalAlignment(JLabel.TOP);
+		clock.setBounds(105, 0, 250, 30);
 		
 		JButton payBtn = new Cart_btn("결제");
 		JButton memberCheck = new Cart_btn("회원조회");
@@ -75,6 +79,8 @@ public class MenuRightPanel extends JPanel {
 		discountCash.setVisible(false);
 		totalPrice.setVisible(false);
 
+		clockPanel.add(clock);
+		
 		disPanel.add(discount);
 		disPanel.add(discountCash);
 		
@@ -96,7 +102,6 @@ public class MenuRightPanel extends JPanel {
 		payBtn.addMouseListener(new Payment_turnOnAcion(mainFrame, this));
 		memberCheck.addMouseListener(new Member_turnOnAction(mainFrame, this));
 
-		clock.setBorder(BorderFactory.createEmptyBorder(0, 0, 17, 0));
 		sc.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 		totalPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
 		
@@ -105,7 +110,7 @@ public class MenuRightPanel extends JPanel {
 		setBorder(BorderFactory.createEmptyBorder(23, 0, 0, 0));
 		setBounds(leftPanel.getWidth(), 0, MainFrame.FRAME_WIDTH-leftPanel.getWidth()-15, MainFrame.FRAME_HEIGHT-38);
 		
-		add(clock);
+		add(clockPanel);
 		add(sc);
 		add(totalPanel);
 	}
@@ -148,6 +153,10 @@ public class MenuRightPanel extends JPanel {
 	
 	public ArrayList<Integer> getPrevSum() {
 		return this.prevSum;
+	}
+	
+	public JLabel getClock() {
+		return this.clock;
 	}
 	
 	public void setIsDisCnt(boolean b) {
