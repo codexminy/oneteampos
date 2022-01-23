@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class MemberDefaultJTableDAO {
-	
+   
     // 필요한 변수선언
     Connection con;
     Statement st;
@@ -21,7 +21,7 @@ public class MemberDefaultJTableDAO {
     // 로드 연결을 위한 생성자
     public MemberDefaultJTableDAO() {
         try {
-        	String id = "hr"; 
+           String id = "hr"; 
             String pw = "1234";
             String url = "jdbc:oracle:thin:@localhost:1521/XE";
             
@@ -54,32 +54,32 @@ public class MemberDefaultJTableDAO {
     
     // 전화번호 중복 검색 true = 회원가입 가능, false = 이미 회원
     public boolean getPhoneNumChk (String phone_number) {
-    	boolean result = true;
-    	
-    	try {
-    		ps = con.prepareStatement("SELECT * FROM members WHERE phone_number = ?");
-    		ps.setString(1, phone_number.trim());
-    		rs = ps.executeQuery();	// 실행
-    		if (rs.next())
-    			result = false;		// 전화번호가 존재하면 false
-    		
-    	} catch (SQLException e) {
-    		System.out.println(e + "phoneNumChk fail");
-    	} finally {
-    		dbClose();
-    	}
-    	
-    	return result;
+       boolean result = true;
+       
+       try {
+          ps = con.prepareStatement("SELECT * FROM members WHERE phone_number = ?");
+          ps.setString(1, phone_number.trim());
+          rs = ps.executeQuery();   // 실행
+          if (rs.next())
+             result = false;      // 전화번호가 존재하면 false
+          
+       } catch (SQLException e) {
+          System.out.println(e + "phoneNumChk fail");
+       } finally {
+          dbClose();
+       }
+       
+       return result;
     }
 
     // 회원등록
     public int memberInsert(MemberJDialogGUI member) {
-    	int result = 0;
-    	try {
-    		ps = con.prepareStatement("INSERT INTO members VALUES "
-    				+ "(members_member_id_seq.nextval, ?, ?, ?, ?, ?)");
-    		
-    		ps.setString(1, member.phone_number.getText());
+       int result = 0;
+       try {
+          ps = con.prepareStatement("INSERT INTO members VALUES "
+                + "(members_member_id_seq.nextval, ?, ?, ?, ?, ?)");
+          
+          ps.setString(1, member.phone_number.getText());
             ps.setString(2, member.name.getText());
             ps.setInt(3, Integer.parseInt(member.grade_id.getText()));
             ps.setInt(4, Integer.parseInt(member.sum_amount.getText()));
@@ -87,28 +87,29 @@ public class MemberDefaultJTableDAO {
   
             result = ps.executeUpdate(); //실행 -> 저장
              
-    	} catch (SQLException e) {
+       } catch (SQLException e) {
             System.out.println(e + "=> memberJDialogGUI fail");
         } finally {
             dbClose();
         }
  
-        return result;	
+        return result;   
     }
     
     // member의 레코드 조회
     public void memberSelectAll (DefaultTableModel t_model) {
-    	try {
-    		st = con.createStatement();
-    		// member_id 순서로 정렬해서 조회
-    		rs = st.executeQuery("SELECT * FROM members order by member_id");
-    		// 기존 데이터 지우기
-    		for (int i = 0; i < t_model.getRowCount();) {
-    			t_model.removeRow(0);
-    		}
-    		
-    		while (rs.next()) {
-    			 Object data[] = { rs.getInt(1), rs.getString(2), rs.getString(3),
+       try {
+          st = con.createStatement();
+          // member_id 순서로 정렬, 등급id를 등급명으로 출력
+          rs = st.executeQuery("SELECT member_id, phone_number, name, grade, sum_amount, point "
+          		+ "FROM members INNER JOIN member_grade USING (grade_id) order by member_id");
+          // 기존 데이터 지우기
+          for (int i = 0; i < t_model.getRowCount();) {
+             t_model.removeRow(0);
+          }
+          
+          while (rs.next()) {
+              Object data[] = { rs.getInt(1), rs.getString(2), rs.getString(3),
                          rs.getString(4), rs.getInt(5), rs.getInt(6) };
   
                  t_model.addRow(data); //DefaultTableModel에 레코드 추가
@@ -123,7 +124,7 @@ public class MemberDefaultJTableDAO {
     
     // member_id에 해당하는 레코드 삭제하기
     public int memberDelete(String phone_number) {
-    	int result = 0;
+       int result = 0;
         try {
             ps = con.prepareStatement("DELETE members WHERE member_id = ? ");
             ps.setString(1, phone_number.trim());
@@ -140,14 +141,14 @@ public class MemberDefaultJTableDAO {
     
     // 수정하기
     public int memberUpdate(MemberJDialogGUI member) {
-    	int result = 0;
-    	String sql = "UPDATE members "
-    			+ "SET phone_number = ?, name = ?, grade_id = ?, sum_amount = ?, point = ? WHERE member_id = ?";
-    	
-    	try {
-    		ps = con.prepareStatement(sql);
-    		
-    		ps.setString(1, member.phone_number.getText());
+       int result = 0;
+       String sql = "UPDATE members "
+             + "SET phone_number = ?, name = ?, grade_id = ?, sum_amount = ?, point = ? WHERE member_id = ?";
+       
+       try {
+          ps = con.prepareStatement(sql);
+          
+          ps.setString(1, member.phone_number.getText());
             ps.setString(2, member.name.getText());
             ps.setInt(3, Integer.parseInt(member.grade_id.getText()));
             ps.setInt(4, Integer.parseInt(member.sum_amount.getText()));
@@ -155,21 +156,22 @@ public class MemberDefaultJTableDAO {
             ps.setInt(6, Integer.parseInt(member.member_id.getText()));
             
             result = ps.executeUpdate(); //실행 -> 저장
-    	
-    	} catch (SQLException e) {
-    		System.out.println(e + "=> memberUpdate fail");
-    	} finally {
-    		dbClose();
-    	}
-    	
-    	return result;
+       
+       } catch (SQLException e) {
+          System.out.println(e + "=> memberUpdate fail");
+       } finally {
+          dbClose();
+       }
+       
+       return result;
     }
     
     
     // 검색단어에 해당하는 레코드 검색
     public void getMemberSearch(DefaultTableModel dt, String fieldName, String word) {
-        String sql = "SELECT * FROM members WHERE " + fieldName.trim()
-                + " LIKE '%" + word.trim() + "%'";
+        String sql = "SELECT member_id, phone_number, name, grade, sum_amount, point "
+        		+ "FROM members INNER JOIN member_grade USING (grade_id) WHERE " 
+        		+ fieldName.trim() + " LIKE '%" + word.trim() + "%'";
  
         try {
             st = con.createStatement();
@@ -181,7 +183,7 @@ public class MemberDefaultJTableDAO {
             }
  
             while (rs.next()) {
-            	Object data[] = { rs.getInt(1), rs.getString(2), rs.getString(3),
+               Object data[] = { rs.getInt(1), rs.getString(2), rs.getString(3),
                         rs.getString(4), rs.getInt(5), rs.getInt(6) };
  
                 dt.addRow(data);
@@ -194,4 +196,3 @@ public class MemberDefaultJTableDAO {
         } 
     }
 }
-

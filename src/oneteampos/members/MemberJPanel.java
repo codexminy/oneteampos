@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -46,8 +47,8 @@ public class MemberJPanel extends JPanel {
     JScrollPane jsp = new All_ScrollPane(jt);
     
     // 검색창
-    JPanel searchfield = new JPanel(new FlowLayout(FlowLayout.LEFT,0,0));
-    String[] comboName = { "  ALL  ", "  PHONE_NUMBER  ", "  NAME  " };
+    JPanel searchfield = new JPanel();
+    String[] comboName = { "  PHONE_NUMBER  ", "  NAME  " };
     JComboBox combo = new JComboBox(comboName);
     RoundJTextField jtf = new RoundJTextField(20);
     RoundedButton search = new RoundedButton("검색");
@@ -57,46 +58,41 @@ public class MemberJPanel extends JPanel {
     // 화면 구성 및 이벤트 등록
     public MemberJPanel(MainFrame mainFrame) {
     	   	
-    	setLayout(new BorderLayout());
+    	setLayout(null);
+    	setBackground(Color.WHITE);
     	
     	// 로그인 정보 배치
     	loginInfo.add(getLoginInfo);
     	add(loginInfo);
-    	loginInfo.setBounds(100, 30, 90, 25);
+    	loginInfo.setBounds(100, 30, 90, 30);
     	loginInfo.setBackground(Color.WHITE);
-    	getLoginInfo.setFont(new Font("나눔스퀘어", Font.BOLD, 14));
+    	getLoginInfo.setFont(new Font("나눔스퀘어", Font.BOLD, 16));
     	
     	// 상단 메뉴 배치
     	btns.add(insert);
     	btns.add(update);
     	btns.add(delete);
     	btns.add(home);
-    	add(btns, "North");	
-    	btns.setBorder(BorderFactory.createEmptyBorder(20,670,20,0));
+    	add(btns);
+    	btns.setBounds(810, 30, 370, 40);
     	btns.setBackground(Color.WHITE);
-		
-		// 검색창 배치
+		   	
+    	// 회원 정보창
+    	add(jsp); 
+    	jsp.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+    	jsp.setBounds(100, 100, 1080, 450);
+    	dao.memberSelectAll(dt);    	
+    	if (dt.getRowCount() > 0) {
+    		jt.setRowSelectionInterval(0, 0);  	
+    	}
+    	
+    	// 검색창 배치
     	searchfield.add(combo);
     	searchfield.add(jtf);
     	searchfield.add(search);
     	searchfield.setBackground(Color.WHITE);
-    	searchfield.setBorder(BorderFactory.createEmptyBorder(20,400,20,0));
-    	add(searchfield, "South");
-    	
-    	// 회원 정보창
-    	add(jsp, "Center"); 
-    	jsp.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-    	jsp.setBorder(BorderFactory.createEmptyBorder(0,100,20,100));
-    	jsp.setBackground(Color.WHITE);
-//    	jt.setFont(new Font("나눔스퀘어", Font.PLAIN, 14));
-//    	jt.setGridColor(Color.LIGHT_GRAY);
-//    	jt.setForeground(Color.DARK_GRAY);
-    	dao.memberSelectAll(dt);    	
-    	if (dt.getRowCount() > 0) {
-    		jt.setRowSelectionInterval(0, 0);
-    		
-    	
-    	}
+    	add(searchfield);
+    	searchfield.setBounds(0, 600, 1280, 80);
     	
     	insert.addActionListener(new MenuBar_clickAction(this, dao));
     	update.addActionListener(new MenuBar_clickAction(this, dao));
@@ -105,8 +101,8 @@ public class MemberJPanel extends JPanel {
     	home.addActionListener(new MenuBar_homeAction(mainFrame));
     }
 
-
-    public JLabel getLoginInfo() {
+    
+	public JLabel getLoginInfo() {
 		return this.getLoginInfo;	
     }
     
