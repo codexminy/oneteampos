@@ -1,7 +1,6 @@
 package oneteampos.menu.container;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -16,17 +15,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import oneteampos.datamodel.Clock;
 import oneteampos.main.MainFrame;
 import oneteampos.menu.action.Cart_discountSaveCancelAction;
 import oneteampos.menu.action.Member_turnOnAction;
 import oneteampos.menu.action.Payment_turnOnAcion;
 import oneteampos.menu.component.All_ScrollPane;
-import oneteampos.menu.component.All_btn;
 import oneteampos.menu.component.All_label;
 import oneteampos.menu.component.All_opaquePanel;
 import oneteampos.menu.component.Cart_btn;
 import oneteampos.menu.component.Cart_table;
-import oneteampos.menu.etc.CommonVariable;
 
 public class MenuRightPanel extends JPanel {
 	
@@ -66,6 +64,8 @@ public class MenuRightPanel extends JPanel {
 
 		JLabel discount = new All_label("할인 금액");
 		JLabel total = new All_label("결제 금액");
+		JLabel clock = new Clock();
+		clock.setVerticalAlignment(JLabel.TOP);
 		
 		JButton payBtn = new Cart_btn("결제");
 		JButton memberCheck = new Cart_btn("회원조회");
@@ -96,14 +96,16 @@ public class MenuRightPanel extends JPanel {
 		payBtn.addMouseListener(new Payment_turnOnAcion(mainFrame, this));
 		memberCheck.addMouseListener(new Member_turnOnAction(mainFrame, this));
 
+		clock.setBorder(BorderFactory.createEmptyBorder(0, 0, 17, 0));
 		sc.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 		totalPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
 		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setBackground(Color.WHITE);
-		setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+		setBorder(BorderFactory.createEmptyBorder(23, 0, 0, 0));
 		setBounds(leftPanel.getWidth(), 0, MainFrame.FRAME_WIDTH-leftPanel.getWidth()-15, MainFrame.FRAME_HEIGHT-38);
 		
+		add(clock);
 		add(sc);
 		add(totalPanel);
 	}
