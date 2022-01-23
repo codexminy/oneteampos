@@ -56,6 +56,8 @@ public class MemberDefaultJTableDAO {
     public boolean getPhoneNumChk (String phone_number) {
        boolean result = true;
        
+
+       
        try {
           ps = con.prepareStatement("SELECT * FROM members WHERE phone_number = ?");
           ps.setString(1, phone_number.trim());

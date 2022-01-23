@@ -56,6 +56,7 @@ public class MemberJDialogGUI extends JDialog implements ActionListener {
 	
 	public MemberJDialogGUI(MemberJPanel me, String index) {
 		this.me = me;
+		int num = 0;
 				
 		if(index.equals("회원등록")) {
 			confirm = new RoundedButton(index);
@@ -67,7 +68,19 @@ public class MemberJDialogGUI extends JDialog implements ActionListener {
 			member_id.setText(me.jt.getValueAt(row, 0).toString());
 			phone_number.setText(me.jt.getValueAt(row, 1).toString());
 			name.setText(me.jt.getValueAt(row, 2).toString());
-			grade_id.setText(me.jt.getValueAt(row, 3).toString());
+			// 등급 다시 ID로 받기
+			if(me.jt.getValueAt(row ,3).equals("silver")){
+				   num = 1;
+				} else if(me.jt.getValueAt(row ,3).equals("gold")){
+					num = 2;
+				} else if(me.jt.getValueAt(row ,3).equals("vip")) {
+					num = 3;
+				} else if(me.jt.getValueAt(row ,3).equals("vvip")) {
+					num = 4;
+				}
+			grade_id.setText(num+"");
+			
+			//grade_id.setText(me.jt.getValueAt(row, 3).toString());
 			sum_amount.setText(me.jt.getValueAt(row, 4).toString());
 			point.setText(me.jt.getValueAt(row, 5).toString());
 			
