@@ -16,6 +16,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import oneteampos.datamodel.Clock;
 import oneteampos.main.MainFrame;
 import oneteampos.members.action.MenuBar_clickAction;
 import oneteampos.members.action.MenuBar_homeAction;
@@ -55,11 +56,17 @@ public class MemberJPanel extends JPanel {
  
     MemberDefaultJTableDAO dao = new MemberDefaultJTableDAO();   
     
+    
     // 화면 구성 및 이벤트 등록
     public MemberJPanel(MainFrame mainFrame) {
     	   	
     	setLayout(null);
     	setBackground(Color.WHITE);
+    	    	
+    	// 시계 배치
+    	Clock clock = new Clock();
+    	add(clock);
+    	clock.setBounds(250, 30, 400, 30);
     	
     	// 로그인 정보 배치
     	loginInfo.add(getLoginInfo);
@@ -74,7 +81,7 @@ public class MemberJPanel extends JPanel {
     	btns.add(delete);
     	btns.add(home);
     	add(btns);
-    	btns.setBounds(810, 30, 370, 40);
+    	btns.setBounds(800, 30, 400, 40);
     	btns.setBackground(Color.WHITE);
 		   	
     	// 회원 정보창
