@@ -35,7 +35,7 @@ public class Cart_deleteAction extends MouseAdapter {
 			
 			if(cart.getSelectedColumn() == cart.getColumnCount()-1 && cart.getRowCount() > 0) {
 				int total = ChangeString.setErase(totalPrice.getText());
-				String delete = (String)cart.getValueAt(row, 2);
+				String delete = (String)cart.getValueAt(row, 3);
 				int current = ChangeString.setErase(delete);
 				
 				dtm.removeRow(row);

@@ -23,6 +23,8 @@ public class Member_turnOnAction extends MouseAdapter {
 	public void mouseClicked(MouseEvent e) {
 		if(mrp.getCart().getRowCount() == 0) {
 			JOptionPane.showMessageDialog(null, "선택한 메뉴가 없습니다.", "Message", JOptionPane.WARNING_MESSAGE);
+		} else if(mrp.getIsDiscnt()) { 
+			JOptionPane.showMessageDialog(null, "할인&적립을 취소해주세요!", "Message", JOptionPane.WARNING_MESSAGE);
 		} else {
 			mrp.setMemberInquiryDialog(new Member_inquiryDialog(mainFrame));
 			mrp.getMemberInquiryDialog().setVisible(true);

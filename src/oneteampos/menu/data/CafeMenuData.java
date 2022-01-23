@@ -19,8 +19,7 @@ public class CafeMenuData {
 	}
 
 	public void insertMenuData() {
-//		ArrayList<MenuData> list = new ArrayList<>();
-		String sql = "SELECT * FROM menu";
+		String sql = "SELECT * FROM menu ORDER BY menu_id";
 		menu.clear();
 		
 		try (
@@ -34,8 +33,6 @@ public class CafeMenuData {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-//		System.out.println("메뉴 돌아감");
 	}
 	
 	public ArrayList<MenuData> getMenuData() {

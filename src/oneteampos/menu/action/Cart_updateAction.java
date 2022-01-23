@@ -46,7 +46,8 @@ public class Cart_updateAction implements ActionListener {
 
 			for(JRadioButton rb : mdp.getTempBtns()) {
 				if(rb.isSelected()) {
-					list.add(rb.getText() + titleList.get(1).getText());
+					list.add(titleList.get(1).getText());
+					list.add(rb.getText());
 					addCartData(innerId, innerCnt, menuList, rb.getText(), cnt);
 				}
 			}

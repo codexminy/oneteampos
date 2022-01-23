@@ -80,7 +80,6 @@ public class MenuManage_insertAction implements ActionListener {
 		) {
 			for(int i=0; i<rsMenu.getColumnCount(); ++i) {
 				pstmt.setObject(i+1, rsMenu.getValueAt(0, i));
-//				pstmt.setObject(i+1, rsMenu.editCellAt(0, i));
 			}
 			pstmt.executeUpdate();
 		} catch (SQLException e) {

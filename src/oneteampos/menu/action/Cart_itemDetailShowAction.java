@@ -34,11 +34,11 @@ public class Cart_itemDetailShowAction extends MouseAdapter {
 		
 		int row = cart.getSelectedRow();
 		
-		String temp = cart.getValueAt(row, 0).toString().substring(0,3);
-		String name = cart.getValueAt(row, 0).toString().substring(3);
-		String size = cart.getValueAt(row, 1).toString();
+		String name = cart.getValueAt(row, 0).toString();
+		String temp = cart.getValueAt(row, 1).toString();
+		String size = cart.getValueAt(row, 2).toString();
 		
-		int price = ChangeString.setErase(cart.getValueAt(row, 2).toString());
+		int price = ChangeString.setErase(cart.getValueAt(row, 3).toString());
 		int originPrice = 0;
 		
 		if(!rp.getIsDiscnt()) {

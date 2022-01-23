@@ -58,7 +58,7 @@ public class MenuRightPanel extends JPanel {
 		this.prevSum = new ArrayList<>();
 
 		totalPanel.setLayout(new BoxLayout(totalPanel, BoxLayout.Y_AXIS));
-		model.setDataVector(new Object[][] {{"","","","",""}}, new Object[] {"메뉴이름","사이즈","금액","수량","선택"});
+		model.setDataVector(new Object[][] {{"","","","","", ""}}, new Object[] {"메뉴이름","온도","사이즈","금액","수량","선택"});
 		model.removeRow(0);
 		cart = new Cart_table(mainFrame, model);
 
@@ -101,8 +101,8 @@ public class MenuRightPanel extends JPanel {
 		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setBackground(Color.WHITE);
-//		setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
-		setBounds(leftPanel.getWidth(), 60, MainFrame.FRAME_WIDTH-leftPanel.getWidth()-15, MainFrame.FRAME_HEIGHT-88);
+		setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+		setBounds(leftPanel.getWidth(), 0, MainFrame.FRAME_WIDTH-leftPanel.getWidth()-15, MainFrame.FRAME_HEIGHT-38);
 		
 		add(sc);
 		add(totalPanel);

@@ -16,6 +16,7 @@ public class Cart_table extends All_Table {
 		setModel(dm);
 		
 		getColumn("메뉴이름").setPreferredWidth(130);
+		getColumn("온도").setPreferredWidth(50);
 		getColumn("사이즈").setPreferredWidth(60);
 		getColumn("금액").setPreferredWidth(80);
 		getColumn("수량").setPreferredWidth(40);
@@ -24,8 +25,8 @@ public class Cart_table extends All_Table {
 		tableAlign();
 		setHeader();
 		
-		getColumnModel().getColumn(4).setCellRenderer((TableCellRenderer) btn);
-		getColumnModel().getColumn(4).setCellEditor((TableCellEditor) btn);
+		getColumnModel().getColumn(5).setCellRenderer((TableCellRenderer) btn);
+		getColumnModel().getColumn(5).setCellEditor((TableCellEditor) btn);
 
 		addMouseListener(new Cart_itemDetailShowAction(mainFrame));
 		addMouseListener(new Cart_deleteAction(mainFrame));

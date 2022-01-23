@@ -14,16 +14,16 @@ public class MenuPanel extends JPanel {
 	private TreeSet<Integer> list;
 	private MenuLeftPanel leftPanel;
 	private MenuRightPanel rightPanel;
-	private Cart_holdPanel holdPanel;
+//	private Cart_holdPanel holdPanel;
 	
 	public MenuPanel(MainFrame mainFrame) {
 		this.list = new TreeSet<>();
 		this.leftPanel = new MenuLeftPanel(mainFrame);
 		this.rightPanel = new MenuRightPanel(mainFrame, leftPanel);
-		this.holdPanel = new Cart_holdPanel(mainFrame, leftPanel, rightPanel);
+//		this.holdPanel = new Cart_holdPanel(mainFrame, leftPanel, rightPanel);
 		
 		add(leftPanel);
-		add(holdPanel);
+//		add(holdPanel);
 		add(rightPanel);
 		
 		setLayout(null);
@@ -37,9 +37,9 @@ public class MenuPanel extends JPanel {
 		return this.rightPanel;
 	}
 	
-	public Cart_holdPanel getHoldPanel() {
-		return this.holdPanel;
-	}
+//	public Cart_holdPanel getHoldPanel() {
+//		return this.holdPanel;
+//	}
 	
 	public TreeSet<Integer> getList() {
 		return this.list;

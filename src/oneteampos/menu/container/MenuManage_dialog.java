@@ -32,6 +32,7 @@ import oneteampos.menu.action.Dialog_windowAction;
 import oneteampos.menu.action.MenuManage_checkBoxAction;
 import oneteampos.menu.action.MenuManage_deleteAction;
 import oneteampos.menu.action.MenuManage_insertAction;
+import oneteampos.menu.action.MenuManage_refreshAction;
 import oneteampos.menu.component.All_ScrollPane;
 import oneteampos.menu.component.All_Table;
 import oneteampos.menu.component.All_btn;
@@ -56,6 +57,7 @@ public class MenuManage_dialog extends JDialog {
 	private JButton registrationBtn;
 	public DefaultTableCellRenderer dtcr;
 	private JScrollPane menuSc;
+	private JButton updateBtn;
 	
 	public MenuManage_dialog(MainFrame mainFrame, MenuLeftPanel menuLeftPanel) {
 		super(mainFrame, "메뉴 관리", true);
@@ -68,6 +70,7 @@ public class MenuManage_dialog extends JDialog {
 		this.rsMenu = new All_Table(new Object[][] {{"","",""}}, col2);
 		this.registrationBtn = new All_btn("메뉴 등록");
 		this.deleteBtn = new All_btn("메뉴 삭제");
+		this.updateBtn = new All_btn("메뉴 수정");
 		this.dtcr = new All_checkBoxSetting(chkBox);
 		this.menuSc = new All_ScrollPane(menu);
 
@@ -82,7 +85,7 @@ public class MenuManage_dialog extends JDialog {
 		
 		All_label menuListLabel = new All_label("전체 메뉴", JLabel.CENTER);
 		All_label registerMenuLabel = new All_label("메뉴 등록", JLabel.CENTER);
-		
+
 		All_comboBox combo = new All_comboBox(col2);
 		
 		JTextField searchField = new JTextField(40);
@@ -105,13 +108,14 @@ public class MenuManage_dialog extends JDialog {
 		menuListPanel.add(menuListLabel);
 		registerMenuPanel.add(registerMenuLabel);
 		
+		btns.add(updateBtn);
 		btns.add(registrationBtn);
 		btns.add(deleteBtn);
 		
 		menuManagePanel.add(searchPanel, Gbl.setting(gbc, 0.1, 0.01, 0, 0));
-		menuManagePanel.add(menuListPanel, Gbl.setting(gbc, 0.1, 0.03, 0, 1));
+		menuManagePanel.add(menuListPanel, Gbl.setting(gbc, 0.1, 0.05, 0, 1));
 		menuManagePanel.add(menuSc, Gbl.setting(gbc, 0.1, 0.8, 0, 2));
-		menuManagePanel.add(registerMenuPanel, Gbl.setting(gbc, 0.1, 0.03, 0, 3));
+		menuManagePanel.add(registerMenuPanel, Gbl.setting(gbc, 0.1, 0.05, 0, 3));
 		menuManagePanel.add(rsMenuSc, Gbl.setting(gbc, 0.1, 0.1, 0, 4));
 		menuManagePanel.add(btns, Gbl.setting(gbc, 0.1, 0.001, 0, 5));
 
@@ -120,6 +124,7 @@ public class MenuManage_dialog extends JDialog {
 		chkBox.addActionListener(new MenuManage_checkBoxAction(mainFrame, menu, chkBox));
 		deleteBtn.addActionListener(new MenuManage_deleteAction(mainFrame));
 		registrationBtn.addActionListener(new MenuManage_insertAction(mainFrame));
+		updateBtn.addActionListener(new MenuManage_refreshAction(mainFrame));
 		
 		addWindowListener(new Dialog_windowAction(mainFrame));
 

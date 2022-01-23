@@ -33,8 +33,8 @@ import oneteampos.receipt.actions.ReceiptBtnListener;
 
 public class MenuLeftPanel extends JPanel implements CommonVariable {
 	
-	private final static String[] menuNames = new String[] {"세트메뉴", "신메뉴", "커피", "스무디&프라페", "에이드", "기타음료", "티", "주스", "디저트"};
-	private final static String[] menuConditions = new String[] {"coffee", "frappuccino", "dessert", "temperature", "coffee", "frappuccino", "dessert", "temperature", "coffee"};
+	private final static String[] menuNames = new String[] {"세트메뉴", "커피", "스무디", "프라페", "에이드", "기타음료", "티", "주스", "디저트"};
+	private final static String[] menuConditions = new String[] {"set", "coffee", "smoothie", "frappe", "ade", "etc", "tea", "juice", "dessert"};
 	private final static int menuSize = 12;
 	private MainFrame mainFrame;
 	private MenuManage_dialog menuManage_dialog;
@@ -48,6 +48,7 @@ public class MenuLeftPanel extends JPanel implements CommonVariable {
 	private JLabel infoId;
 	private JLabel infoName;
 	private HashMap<String, String> cartData;
+	private ArrayList<JRadioButton> categoryBtns;
 
 	public void setMenuManageDialog(MenuManage_dialog menuManage_dialog) {
 		this.menuManage_dialog = menuManage_dialog;
@@ -64,9 +65,16 @@ public class MenuLeftPanel extends JPanel implements CommonVariable {
 		this.infoId = new All_label();
 		this.infoName = new All_label();
 		this.cartData = new HashMap<>();
+		this.categoryBtns = new ArrayList<>();	
+		
+		UIManager.put("Button.background", new Color(135, 136, 138));
+		UIManager.put("Button.foreground", Color.WHITE);
 
-//		UIManager.put("Button.background", new Color(135, 136, 138));
-//		UIManager.put("Button.foreground", new Color(135, 136, 138));
+//		try {
+//		    UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+//		} catch (Exception e) {
+//		   
+//		}
 		
 		JPanel menuPanel = new JPanel(new GridLayout(1,1,5,5));
 		JPanel infoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT,0,0));
@@ -194,14 +202,14 @@ public class MenuLeftPanel extends JPanel implements CommonVariable {
 	
 	public void createSelectMenuBtn(JPanel menuPanel) {
 		for(int i=0; i<menuNames.length; ++i) {
-			JRadioButton btn = new Menu_categoryBtn(this, menuNames[i], mainFrame);
-			if(i == 0) btn.setSelected(true);
-			if(btn.isSelected()) {
+			categoryBtns.add(new Menu_categoryBtn(this, menuNames[i], mainFrame));
+			if(i == 0) categoryBtns.get(i).setSelected(true);
+			if(categoryBtns.get(i).isSelected()) {
 				CardLayout c = (CardLayout)cardMenuPanel.getLayout();
 				c.show(cardMenuPanel, menuNames[i]);
 			}
-			buttonGroup.add(btn);
-			menuPanel.add(btn);
+			buttonGroup.add(categoryBtns.get(i));
+			menuPanel.add(categoryBtns.get(i));
 		}
 	}
 
@@ -247,5 +255,9 @@ public class MenuLeftPanel extends JPanel implements CommonVariable {
 	
 	public HashMap<String, String> getCartData() {
 		return this.cartData;
+	}
+	
+	public ArrayList<JRadioButton> getCategoryBtns() {
+		return this.categoryBtns;
 	}
 }
