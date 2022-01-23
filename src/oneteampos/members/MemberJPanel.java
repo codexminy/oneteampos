@@ -19,18 +19,17 @@ import oneteampos.main.MainFrame;
 import oneteampos.members.action.MenuBar_clickAction;
 import oneteampos.members.action.MenuBar_homeAction;
 import oneteampos.members.action.Search_searchAction;
+import oneteampos.menu.component.All_ScrollPane;
 import oneteampos.menu.component.All_Table;
 import oneteampos.menu.etc.CommonVariable;
 
 
-public class MemberJPanel extends JPanel implements CommonVariable {
-	
-	private static final int GAP = 0;
+public class MemberJPanel extends JPanel {
 
 	private MainFrame mainFrame;
 	
 	// 로그인 정보
-	//JPanel loginInfo = new JPanel();
+	JPanel loginInfo = new JPanel();
 	JLabel getLoginInfo = new JLabel(); 
 	
 	// 상단 메뉴
@@ -44,10 +43,10 @@ public class MemberJPanel extends JPanel implements CommonVariable {
 	String[] name = { "멤버ID", "전화번호", "이름", "회원등급", "구매금액", "포인트" };   
 	DefaultTableModel dt = new DefaultTableModel(name, 0);
     JTable jt = new All_Table(dt);
-    JScrollPane jsp = new JScrollPane(jt);
+    JScrollPane jsp = new All_ScrollPane(jt);
     
     // 검색창
-    JPanel searchfield = new JPanel();
+    JPanel searchfield = new JPanel(new FlowLayout(FlowLayout.LEFT,0,0));
     String[] comboName = { "  ALL  ", "  PHONE_NUMBER  ", "  NAME  " };
     JComboBox combo = new JComboBox(comboName);
     RoundJTextField jtf = new RoundJTextField(20);
@@ -60,14 +59,20 @@ public class MemberJPanel extends JPanel implements CommonVariable {
     	   	
     	setLayout(new BorderLayout());
     	
+    	// 로그인 정보 배치
+    	loginInfo.add(getLoginInfo);
+    	add(loginInfo);
+    	loginInfo.setBounds(100, 30, 90, 25);
+    	loginInfo.setBackground(Color.WHITE);
+    	getLoginInfo.setFont(new Font("나눔스퀘어", Font.BOLD, 14));
+    	
     	// 상단 메뉴 배치
-    	btns.add(getLoginInfo);
     	btns.add(insert);
     	btns.add(update);
     	btns.add(delete);
     	btns.add(home);
     	add(btns, "North");	
-    	btns.setBorder(BorderFactory.createEmptyBorder(20,700,20,0));
+    	btns.setBorder(BorderFactory.createEmptyBorder(20,670,20,0));
     	btns.setBackground(Color.WHITE);
 		
 		// 검색창 배치
@@ -75,16 +80,17 @@ public class MemberJPanel extends JPanel implements CommonVariable {
     	searchfield.add(jtf);
     	searchfield.add(search);
     	searchfield.setBackground(Color.WHITE);
-    	searchfield.setBorder(BorderFactory.createEmptyBorder(20,0,20,0));
+    	searchfield.setBorder(BorderFactory.createEmptyBorder(20,400,20,0));
     	add(searchfield, "South");
     	
     	// 회원 정보창
     	add(jsp, "Center"); 
+    	jsp.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
     	jsp.setBorder(BorderFactory.createEmptyBorder(0,100,20,100));
     	jsp.setBackground(Color.WHITE);
-    	jt.setFont(new Font("나눔스퀘어", Font.PLAIN, 14));
-    	jt.setGridColor(Color.LIGHT_GRAY);
-    	jt.setForeground(Color.DARK_GRAY);
+//    	jt.setFont(new Font("나눔스퀘어", Font.PLAIN, 14));
+//    	jt.setGridColor(Color.LIGHT_GRAY);
+//    	jt.setForeground(Color.DARK_GRAY);
     	dao.memberSelectAll(dt);    	
     	if (dt.getRowCount() > 0) {
     		jt.setRowSelectionInterval(0, 0);
