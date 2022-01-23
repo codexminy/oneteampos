@@ -14,6 +14,6 @@ public class Cart_btn extends All_btn {
 		setContentAreaFilled(false);
 		setBorderPainted(false);
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
-		setPreferredSize(new Dimension(90, 30));
+		setPreferredSize(new Dimension(95, 30));
 	}
 }

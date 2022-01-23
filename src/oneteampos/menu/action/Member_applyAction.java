@@ -28,7 +28,7 @@ public class Member_applyAction extends MouseAdapter {
 		MenuRightPanel rp = mainFrame.getMainPanel().getMenuPanel().getRightPanel();
 		
 		if(choice == JOptionPane.YES_OPTION) {
-			int totalPrice = Integer.parseInt(ChangeString.setErase(rp.getTotalPrice().getText()));
+			int totalPrice = ChangeString.setErase(rp.getTotalPrice().getText());
 			int discnt = mcd.getDiscnt();
 			JLabel discountCash = mcd.getDiscountCash();
 			JLabel saveCash = mcd.getSaveCash();
@@ -41,18 +41,18 @@ public class Member_applyAction extends MouseAdapter {
 				mcd.setPoint(discnt - totalPrice);
 			}
 
-			int dis = Integer.parseInt(discountCash.getText());
+			int dis = ChangeString.setErase(discountCash.getText());
 			
 			if(dcBox.isSelected() && svBox.isSelected()) {
-				mcd.setPoint(discnt - Integer.parseInt(discountCash.getText()) + Integer.parseInt(saveCash.getText()));
+				mcd.setPoint(discnt - ChangeString.setErase(discountCash.getText()) + ChangeString.setErase(saveCash.getText()));
 				setText(rp, dis, totalPrice);
 			} else if(dcBox.isSelected()) {
-				mcd.setPoint(discnt - Integer.parseInt(discountCash.getText()));
+				mcd.setPoint(discnt - ChangeString.setErase(discountCash.getText()));
 				setText(rp, dis, totalPrice);
 			} else if(svBox.isSelected()) {
-				mcd.setPoint(discnt + Integer.parseInt(saveCash.getText()));
+				mcd.setPoint(discnt - ChangeString.setErase(saveCash.getText()));
 			}
-
+			
 			rp.getDiscountCash().setVisible(true);
 			rp.getCancelBtn().setVisible(true);
 			rp.setIsDisCnt(true);
@@ -62,7 +62,7 @@ public class Member_applyAction extends MouseAdapter {
 	}
 	
 	private void setText(MenuRightPanel rp, int dis, int totalPrice) {
-		rp.getDiscountCash().setText(dis+"");
+		rp.getDiscountCash().setText(ChangeString.setCashMark(dis));
 		rp.getTotalPrice().setText(ChangeString.setCashMark(totalPrice-dis));
 	}
 }

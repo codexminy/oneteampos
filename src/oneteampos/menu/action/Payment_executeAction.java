@@ -26,17 +26,17 @@ public class Payment_executeAction {
 		this.mrp = mrp;
 		
 		int row = 0;
-		int total = Integer.parseInt(ChangeString.setErase(mrp.getTotalPrice().getText()));
+		int total = ChangeString.setErase(mrp.getTotalPrice().getText());
 		int discnt;
 		int save;
 		
 		Object memberId = 0;
-		Member_inquiryDialog mcd = mrp.getMemeberCheckDialog();
+		Member_inquiryDialog mcd = mrp.getMemberInquiryDialog();
 
 		if(mcd != null) {
 			row = mcd.getTable().getSelectedRow();
-			discnt = Integer.parseInt(ChangeString.setErase(mrp.getDiscountCash().getText()));
-			save = Integer.parseInt(ChangeString.setErase(mcd.getSaveCash().getText()));
+			discnt = ChangeString.setErase(mrp.getDiscountCash().getText());
+			save = ChangeString.setErase(mcd.getSaveCash().getText());
 			memberId = mcd.getTable().getValueAt(row, 1);
 			updatePointData(mcd.getTable().getColumnName(5), mcd.getPoint(), (String)mcd.getTable().getValueAt(row, 2));
 			mcd.setPoint(0);
@@ -51,8 +51,9 @@ public class Payment_executeAction {
 		pd.orders = insertOrderData();
 		updateOrderDetailsData();
 		pd.orderDetail = insertOrderDetailData();
-		updatePaymentData(money, pd.cardNum.getText().replaceAll("-", ""));
+		updatePaymentData(money, pd.cardNumLabel.getText().replaceAll("-", ""));
 		excute();
+		
 		mrp.getDiscountCash().setText("0");
 		mrp.getTotalPrice().setText("0");
 		mrp.getDiscountCash().setVisible(false);
@@ -61,9 +62,10 @@ public class Payment_executeAction {
 		Vector<Vector<Object>> menuIdList = mrp.getMenuIdList();
 		Vector<Vector<Object>> menuCntList = mrp.getMenuCntList();
 
-		menuIdList.removeAll(menuIdList);
-		menuCntList.removeAll(menuCntList);
-
+		menuIdList.clear();
+		menuCntList.clear();
+		mrp.getPrevSum().clear();
+		
 		DefaultTableModel model = mrp.getModel();
 		
 		while(model.getRowCount() > 0) {

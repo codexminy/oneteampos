@@ -13,12 +13,15 @@ public class CafeMenuData {
 	private ArrayList<MenuData> menu;
 	
 	public CafeMenuData() {
-		this.menu = insertMenuData();
+		this.menu = new ArrayList<>();
+		
+		insertMenuData();
 	}
 
-	public ArrayList<MenuData> insertMenuData() {
-		ArrayList<MenuData> list = new ArrayList<>();
+	public void insertMenuData() {
+//		ArrayList<MenuData> list = new ArrayList<>();
 		String sql = "SELECT * FROM menu";
+		menu.clear();
 		
 		try (
 			Connection conn = DBConnector.getConnection();
@@ -26,12 +29,13 @@ public class CafeMenuData {
 			ResultSet rs = pstmt.executeQuery();
 		) {
 			while(rs.next()) {
-				list.add(new MenuData(rs));
+				menu.add(new MenuData(rs));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return list;
+		
+//		System.out.println("메뉴 돌아감");
 	}
 	
 	public ArrayList<MenuData> getMenuData() {

@@ -33,16 +33,17 @@ public class Cart_deleteAction extends MouseAdapter {
 			DefaultTableModel dtm = (DefaultTableModel)cart.getModel();
 			int row = cart.getSelectedRow();
 			
-			if(cart.getSelectedColumn() == 4 && cart.getRowCount() > 0) {
-				int total = Integer.parseInt(ChangeString.setErase(totalPrice.getText()));
+			if(cart.getSelectedColumn() == cart.getColumnCount()-1 && cart.getRowCount() > 0) {
+				int total = ChangeString.setErase(totalPrice.getText());
 				String delete = (String)cart.getValueAt(row, 2);
-				int current = Integer.parseInt(ChangeString.setErase(delete));
+				int current = ChangeString.setErase(delete);
 				
 				dtm.removeRow(row);
 				totalPrice.setText(ChangeString.setCashMark(total-current));
 
 				rp.getMenuIdList().remove(row);
 				rp.getMenuCntList().remove(row);
+				rp.getPrevSum().remove(row);
 			}
 		}
 

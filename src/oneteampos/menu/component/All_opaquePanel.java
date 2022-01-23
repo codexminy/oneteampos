@@ -1,5 +1,6 @@
 package oneteampos.menu.component;
 
+import java.awt.Color;
 import java.awt.LayoutManager;
 
 import javax.swing.JPanel;
@@ -7,11 +8,11 @@ import javax.swing.JPanel;
 public class All_opaquePanel extends JPanel {
 	
 	public All_opaquePanel() {
-		setOpaque(false);
+		setBackground(Color.WHITE);
 	}
 	
 	public All_opaquePanel(LayoutManager mgr) {
 		setLayout(mgr);
-		setOpaque(false);
+		setBackground(Color.WHITE);
 	}
 }

@@ -6,12 +6,14 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.UIManager;
 
 import oneteampos.main.MainFrame;
 import oneteampos.menu.action.MenuManage_turnOnAction;
@@ -45,7 +47,12 @@ public class MenuLeftPanel extends JPanel implements CommonVariable {
 	private JButton prevBtn;
 	private JLabel infoId;
 	private JLabel infoName;
+	private HashMap<String, String> cartData;
 
+	public void setMenuManageDialog(MenuManage_dialog menuManage_dialog) {
+		this.menuManage_dialog = menuManage_dialog;
+	}
+	
 	public MenuLeftPanel(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
 		this.menuManage_dialog = new MenuManage_dialog(mainFrame, this);
@@ -56,7 +63,11 @@ public class MenuLeftPanel extends JPanel implements CommonVariable {
 		this.nextBtn = new Menu_btn(" ▶ ");
 		this.infoId = new All_label();
 		this.infoName = new All_label();
+		this.cartData = new HashMap<>();
 
+//		UIManager.put("Button.background", new Color(135, 136, 138));
+//		UIManager.put("Button.foreground", new Color(135, 136, 138));
+		
 		JPanel menuPanel = new JPanel(new GridLayout(1,1,5,5));
 		JPanel infoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT,0,0));
 		JPanel settingPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT,6,0));
@@ -82,7 +93,7 @@ public class MenuLeftPanel extends JPanel implements CommonVariable {
 		movePanel.setBackground(Color.WHITE);
 
 		homeBtn.addMouseListener(new Menu_homeAction(mainFrame));
-		menuSettingBtn.addActionListener(new MenuManage_turnOnAction(menuManage_dialog));
+		menuSettingBtn.addActionListener(new MenuManage_turnOnAction(mainFrame, this));
 		receiptBtn.addMouseListener(new ReceiptBtnListener(mainFrame));
 
 		inputMenuPanel(menuNames, menuConditions);
@@ -113,26 +124,27 @@ public class MenuLeftPanel extends JPanel implements CommonVariable {
 		}
 	}
 	
-	public JPanel createMenuPanel(ArrayList<MenuData> list, String condition) {
+	public JPanel createMenuPanel(ArrayList<MenuData> arrayList, String condition) {
 		JPanel innerCardPanel = new JPanel(new CardLayout());
 		ArrayList<JPanel> gridPanel = new ArrayList<>();
 		
-		list.clear();
-		list = cafeMenuData.insertMenuData();
+		arrayList.clear();
+		cafeMenuData.insertMenuData();
+		arrayList = cafeMenuData.getMenuData();
 		
 		int cnt = 0;
 		int index = 0;
 		int loop = 1;
 		int total = 0;
 		
-		for(int i=0; i<list.size(); ++i) {
+		for(int i=0; i<arrayList.size(); ++i) {
 			if(i == 0 && cnt == 0) {
 				gridPanel.add(new JPanel(new GridLayout(3, 4, XGAP, HGAP)));
 				gridPanel.get(index).setBackground(Color.WHITE);
 			}
 			
-			total = condition.equals(list.get(i).getMenuType()) ? total+=1 : total;
-			cnt = condition.equals(list.get(i).getMenuType()) ? cnt+=1 : cnt;
+			total = condition.equals((arrayList.get(i)).getMenuType()) ? total+=1 : total;
+			cnt = condition.equals((arrayList.get(i)).getMenuType()) ? cnt+=1 : cnt;
 
 			if(cnt > menuSize) {
 				gridPanel.add(new JPanel(new GridLayout(3, 4, XGAP, HGAP)));
@@ -141,12 +153,13 @@ public class MenuLeftPanel extends JPanel implements CommonVariable {
 				cnt = 1;
 			}
 
-			if(condition.equals(list.get(i).getMenuType())) {
+			if(condition.equals((arrayList.get(i)).getMenuType())) {
 				JPanel innerPanel = new JPanel(new BorderLayout());
-				JLabel menuName = new All_label(list.get(i).getMenuName(), JLabel.CENTER, 13);
-				JLabel menuPrice = new All_label(ChangeString.setCashMark(list.get(i).getPrice()), JLabel.RIGHT, 13);
-				menuDetail_dialog = new MenuDetail_dialog(mainFrame, list.get(i), list);
-				JButton btn = new Menu_itemBtn(menuDetail_dialog, menuName, menuPrice);
+				JLabel menuName = new All_label((arrayList.get(i)).getMenuName(), JLabel.CENTER);
+				JLabel menuPrice = new All_label(ChangeString.setCashMark((arrayList.get(i)).getPrice()), JLabel.RIGHT);
+				cartData.put(menuName.getText(), menuPrice.getText());
+				menuDetail_dialog = new MenuDetail_dialog(mainFrame, menuName.getText(), ChangeString.setErase(menuPrice.getText()), arrayList);
+				JButton btn = new Menu_itemBtn(mainFrame, menuName, menuPrice, arrayList);
 				
 				innerPanel.setOpaque(false);
 				innerPanel.add(menuName, "Center");
@@ -220,11 +233,19 @@ public class MenuLeftPanel extends JPanel implements CommonVariable {
 		return this.infoName;
 	}
 	
+	public void setMenuDetailDialog(MenuDetail_dialog menuDetail_dialog) {
+		this.menuDetail_dialog = menuDetail_dialog;
+	}
+	
 	public MenuDetail_dialog getMenuDetail_dialog() {
 		return this.menuDetail_dialog;
 	}
 	
 	public CafeMenuData getCafeMenuData() {
 		return this.cafeMenuData;
+	}
+	
+	public HashMap<String, String> getCartData() {
+		return this.cartData;
 	}
 }

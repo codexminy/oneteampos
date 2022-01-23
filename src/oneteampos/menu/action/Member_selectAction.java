@@ -34,28 +34,28 @@ public class Member_selectAction extends MouseAdapter {
 		membershipCash.setVisible(true);
 		membershipCash.setText(table.getValueAt(row, 2)+"");
 		
-		int total = Integer.parseInt(ChangeString.setErase(mrp.getTotalPrice().getText()));
+		int total = ChangeString.setErase(mrp.getTotalPrice().getText());
 		double save = (double) table.getValueAt(row, 7);
 		int discnt = (int) table.getValueAt(row, 5);
 		
 		if(mcd.getSvBox().isSelected()) {
 			saveCash.setVisible(true);
-			saveCash.setText((int)(total*(save/100))+"");
+			saveCash.setText(ChangeString.setCashMark((int)(total*(save/100))));
 		} else {
 			saveCash.setVisible(false);
 		}
 		
 		if(mcd.getDcBox().isSelected()) {
 			discountCash.setVisible(true);
-			discountCash.setText(discnt+"");
+			discountCash.setText(ChangeString.setCashMark(discnt));
 		} else {
 			discountCash.setVisible(false);
 		}
 		
 		if(total >= discnt) {
-			discountCash.setText(discnt+"");
+			discountCash.setText(ChangeString.setCashMark(discnt));
 		} else {
-			discountCash.setText(total+"");
+			discountCash.setText(ChangeString.setCashMark(total));
 		}
 	}
 }

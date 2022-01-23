@@ -20,7 +20,7 @@ public class Payment_cashProcessAction extends MouseAdapter {
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(pd.cashGo.isEnabled()) {
+		if(pd.getCashGo().isEnabled()) {
 			new Payment_executeAction(pd, mrp, "cash");
 			JOptionPane.showMessageDialog(null, "결제가 완료되었습니다.");
 			pd.dispose();

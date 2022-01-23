@@ -10,8 +10,8 @@ public class ChangeString {
 		return String.format("￦ %,d", text);
 	}
 	
-	public static String setErase(String text) {
-		return text.replaceAll("\\D", "");
+	public static int setErase(String text) {
+		return Integer.parseInt(text.replaceAll("\\D", ""));
 	}
 	
 }

@@ -1,6 +1,5 @@
 package oneteampos.menu.container;
 
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +11,6 @@ import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -29,13 +27,15 @@ import oneteampos.menu.action.Member_dcBoxAction;
 import oneteampos.menu.action.Member_searchAction;
 import oneteampos.menu.action.Member_selectAction;
 import oneteampos.menu.action.Member_svBoxAction;
+import oneteampos.menu.component.All_ScrollPane;
+import oneteampos.menu.component.All_Table;
 import oneteampos.menu.component.All_boxPanel;
 import oneteampos.menu.component.All_btn;
 import oneteampos.menu.component.All_checkBox;
+import oneteampos.menu.component.All_comboBox;
 import oneteampos.menu.component.All_label;
 import oneteampos.menu.component.All_numberPad;
 import oneteampos.menu.component.All_opaquePanel;
-import oneteampos.menu.component.MenuManage_Table;
 import oneteampos.menu.data.MemberData;
 import oneteampos.menu.etc.CommonVariable;
 
@@ -45,7 +45,7 @@ public class Member_inquiryDialog extends JDialog implements CommonVariable {
 	private Vector<Object> col2;
 	private Vector<MemberData> memberList;
 	private Vector<Vector<Object>> row;
-	private JTable table;
+	private All_Table table;
 	private JLabel saveCash;
 	private JLabel membershipNum;
 	private JLabel discountCash;
@@ -65,7 +65,7 @@ public class Member_inquiryDialog extends JDialog implements CommonVariable {
 		this.row = insertRow();
 		this.searchField = new JTextField();
 		this.model = new DefaultTableModel(row, col) { public boolean isCellEditable(int row, int column) {return false;} };
-		this.table = new MenuManage_Table(model);
+		this.table = new All_Table(model);
 		this.membershipNum = new All_label("");
 		this.saveCash = new All_label("0");
 		this.discountCash = new All_label("0");
@@ -85,19 +85,16 @@ public class Member_inquiryDialog extends JDialog implements CommonVariable {
 		JButton searchBtn = new All_btn("검색");
 		JButton apply = new All_btn("적용");
 		
-		JComboBox<Object> combo = new JComboBox<>(col2);
-		this.item = (String)combo.getSelectedItem();
+		All_comboBox combo = new All_comboBox(col2);
 
-		JScrollPane sc = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		JScrollPane sc = new All_ScrollPane(table);
 		
 		JLabel membership = new All_label("멤버십");
 		JLabel save = new All_label("적립금");
 		JLabel discount = new All_label("할인금액");
-
+		
 		saveCash.setVisible(false);
 		discountCash.setVisible(false);
-		
-		sc.getViewport().setBackground(Color.WHITE);
 		
 		combo.addActionListener(new Member_comboBoxAcion(this));
 		searchBtn.addMouseListener(new Member_searchAction(this));
@@ -143,7 +140,8 @@ public class Member_inquiryDialog extends JDialog implements CommonVariable {
 		add(bgBoxPanel);
 		
 		setSize(DIALOG_W, DIALOG_H);
-		setLocationRelativeTo(null);	
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 	
 	private Vector<Vector<Object>> insertRow() {
@@ -196,7 +194,7 @@ public class Member_inquiryDialog extends JDialog implements CommonVariable {
 		}
 		return list;
 	}
-
+	
 	public void searchData(String columnName, String condition, DefaultTableModel model, JTable table) {
 		String sql = String.format("SELECT * FROM members INNER JOIN member_grade USING (grade_id) WHERE %s LIKE '%%%s%%'", columnName, condition);
 		Vector<Vector<Object>> row = new Vector<>();
@@ -220,6 +218,7 @@ public class Member_inquiryDialog extends JDialog implements CommonVariable {
 				row.add(innerRow);
 			}
 			model.setDataVector(row, col);
+			this.table.tableAlign();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -281,61 +280,3 @@ public class Member_inquiryDialog extends JDialog implements CommonVariable {
 		this.item = item;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

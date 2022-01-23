@@ -7,6 +7,7 @@ import javax.swing.table.TableModel;
 
 import oneteampos.main.MainFrame;
 import oneteampos.menu.action.Cart_deleteAction;
+import oneteampos.menu.action.Cart_itemDetailShowAction;
 
 public class Cart_table extends All_Table {
 
@@ -26,11 +27,8 @@ public class Cart_table extends All_Table {
 		getColumnModel().getColumn(4).setCellRenderer((TableCellRenderer) btn);
 		getColumnModel().getColumn(4).setCellEditor((TableCellEditor) btn);
 
+		addMouseListener(new Cart_itemDetailShowAction(mainFrame));
 		addMouseListener(new Cart_deleteAction(mainFrame));
-//		setOpaque(false);
-//		((DefaultTableCellRenderer)getDefaultRenderer(Object.class)).setOpaque(false);
-//		setShowGrid(false);
-//		setFocusable(false);
 	}
 	
 }

@@ -5,21 +5,25 @@ import java.util.TreeSet;
 import javax.swing.JPanel;
 
 import oneteampos.main.MainFrame;
+import oneteampos.menu.container.Cart_holdPanel;
 import oneteampos.menu.container.MenuLeftPanel;
 import oneteampos.menu.container.MenuRightPanel;
 
 public class MenuPanel extends JPanel {
 	
 	private TreeSet<Integer> list;
-	private MenuLeftPanel leftPanel; // 메뉴 왼쪽 패널
-	private MenuRightPanel rightPanel; // 메뉴 오른쪽 패널(카트)
-
+	private MenuLeftPanel leftPanel;
+	private MenuRightPanel rightPanel;
+	private Cart_holdPanel holdPanel;
+	
 	public MenuPanel(MainFrame mainFrame) {
 		this.list = new TreeSet<>();
 		this.leftPanel = new MenuLeftPanel(mainFrame);
 		this.rightPanel = new MenuRightPanel(mainFrame, leftPanel);
+		this.holdPanel = new Cart_holdPanel(mainFrame, leftPanel);
 		
 		add(leftPanel);
+		add(holdPanel);
 		add(rightPanel);
 		
 		setLayout(null);

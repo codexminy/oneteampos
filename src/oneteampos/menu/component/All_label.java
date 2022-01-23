@@ -18,19 +18,21 @@ public class All_label extends JLabel {
 	public All_label(String text) {
 		settings(text);
 	}
-	
-	public All_label(String text, int size) {
-		settings(text);
-	}
-	
+
 	public All_label(String text, String name) {
 		setName(name);
 		settings(text);
 	}
 	
-	public All_label(String text, int horizontalAlignment, int size) {
+	public All_label(String text, int horizontalAlignment) {
 		settings(text);
 		setHorizontalAlignment(horizontalAlignment);
+	}
+	
+	public All_label(String text, int horizontalAlignment, int verticalAlignment) {
+		settings(text);
+		setHorizontalAlignment(horizontalAlignment);
+		setVerticalAlignment(verticalAlignment);
 	}
 	
 	private void settings(String text) {

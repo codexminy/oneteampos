@@ -1,8 +1,10 @@
 package oneteampos.menu.container;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -18,13 +20,15 @@ import oneteampos.main.MainFrame;
 import oneteampos.menu.action.Cart_discountSaveCancelAction;
 import oneteampos.menu.action.Member_turnOnAction;
 import oneteampos.menu.action.Payment_turnOnAcion;
+import oneteampos.menu.component.All_ScrollPane;
+import oneteampos.menu.component.All_btn;
 import oneteampos.menu.component.All_label;
 import oneteampos.menu.component.All_opaquePanel;
 import oneteampos.menu.component.Cart_btn;
 import oneteampos.menu.component.Cart_table;
 import oneteampos.menu.etc.CommonVariable;
 
-public class MenuRightPanel extends JPanel implements CommonVariable {
+public class MenuRightPanel extends JPanel {
 	
 	private Vector<Vector<Object>> menuIdList;
 	private Vector<Vector<Object>> menuCntList;
@@ -39,29 +43,27 @@ public class MenuRightPanel extends JPanel implements CommonVariable {
 	private JTable cart;
 	private boolean isDiscnt;
 	private JButton cancelBtn;
+	private ArrayList<Integer> prevSum;
 
 	public MenuRightPanel(MainFrame mainFrame, MenuLeftPanel leftPanel) {
 		this.totalPanel = new All_opaquePanel();
 		this.totalPricePanel = new All_opaquePanel(new GridLayout());
-		this.totalPrice = new All_label("0");
+		this.totalPrice = new All_label("0", JLabel.RIGHT);
 		this.payPanel = new All_opaquePanel(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 		this.model = new DefaultTableModel() {@Override public boolean isCellEditable(int row, int column) {return false;}};
 		this.disPanel = new All_opaquePanel(new GridLayout());
-		this.discountCash = new All_label("0");
+		this.discountCash = new All_label("0", JLabel.RIGHT);
 		this.menuIdList = new Vector<>();
 		this.menuCntList = new Vector<>();
-		
+		this.prevSum = new ArrayList<>();
+
 		totalPanel.setLayout(new BoxLayout(totalPanel, BoxLayout.Y_AXIS));
 		model.setDataVector(new Object[][] {{"","","","",""}}, new Object[] {"메뉴이름","사이즈","금액","수량","선택"});
 		model.removeRow(0);
 		cart = new Cart_table(mainFrame, model);
 
-		JScrollPane sc = new JScrollPane(cart, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		
-		sc.getViewport().setBackground(Color.WHITE);
-		cart.setGridColor(Color.LIGHT_GRAY);
-		
-		JLabel title = new All_label("선택한 메뉴");
+		JScrollPane sc = new All_ScrollPane(cart);
+
 		JLabel discount = new All_label("할인 금액");
 		JLabel total = new All_label("결제 금액");
 		
@@ -72,9 +74,6 @@ public class MenuRightPanel extends JPanel implements CommonVariable {
 		cancelBtn.setVisible(false);
 		discountCash.setVisible(false);
 		totalPrice.setVisible(false);
-
-		totalPrice.setHorizontalAlignment(JLabel.RIGHT);
-		discountCash.setHorizontalAlignment(JLabel.RIGHT);
 
 		disPanel.add(discount);
 		disPanel.add(discountCash);
@@ -97,21 +96,14 @@ public class MenuRightPanel extends JPanel implements CommonVariable {
 		payBtn.addMouseListener(new Payment_turnOnAcion(mainFrame, this));
 		memberCheck.addMouseListener(new Member_turnOnAction(mainFrame, this));
 
-		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT,0,0));
-		
-		titlePanel.setOpaque(false);
-		titlePanel.add(title);
-		
-		titlePanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
 		sc.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 		totalPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
-
+		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
 		setBackground(Color.WHITE);
-		setBounds(leftPanel.getWidth(), 0, MainFrame.FRAME_WIDTH-leftPanel.getWidth()-15, MainFrame.FRAME_HEIGHT-38);
-
-		add(titlePanel);
+//		setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+		setBounds(leftPanel.getWidth(), 60, MainFrame.FRAME_WIDTH-leftPanel.getWidth()-15, MainFrame.FRAME_HEIGHT-88);
+		
 		add(sc);
 		add(totalPanel);
 	}
@@ -128,7 +120,7 @@ public class MenuRightPanel extends JPanel implements CommonVariable {
 		return this.discountCash;
 	}
 	
-	public Member_inquiryDialog getMemeberCheckDialog() {
+	public Member_inquiryDialog getMemberInquiryDialog() {
 		return this.mcd;
 	}
 
@@ -152,39 +144,15 @@ public class MenuRightPanel extends JPanel implements CommonVariable {
 		return this.menuCntList;
 	}
 	
+	public ArrayList<Integer> getPrevSum() {
+		return this.prevSum;
+	}
+	
 	public void setIsDisCnt(boolean b) {
 		this.isDiscnt = b;
 	}
 	
-	public void setMemberCheckDialog(Member_inquiryDialog mcd) {
+	public void setMemberInquiryDialog(Member_inquiryDialog mcd) {
 		this.mcd = mcd;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

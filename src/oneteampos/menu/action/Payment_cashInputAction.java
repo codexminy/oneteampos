@@ -4,6 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import oneteampos.menu.container.Payment_dialog;
 import oneteampos.menu.etc.ChangeString;
@@ -19,19 +20,20 @@ public class Payment_cashInputAction extends MouseAdapter {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		int current = 0;
-		int total = Integer.parseInt(ChangeString.setErase(pd.totalCash.getText()));
-		
-		if(pd.takeCash.getText().length() != 0) {
-			current = Integer.parseInt(pd.takeCash.getText());
-		}
+		int total = ChangeString.setErase(pd.getTotalCash().getText());
+		JTextField takeCash = pd.getTakeCash();
 
-		if(pd.takeCash.getText().length() == 0) {
+		if(takeCash.getText().length() != 0) {
+			current = Integer.parseInt(takeCash.getText());
+		}
+		
+		if(takeCash.getText().length() == 0) {
 			JOptionPane.showMessageDialog(null, "받은 금액을 적어주세요!", "Message", JOptionPane.WARNING_MESSAGE);
 		} else if(current < total) {
 			JOptionPane.showMessageDialog(null, "받은 금액이 적습니다!", "Message", JOptionPane.WARNING_MESSAGE);
 		} else {
-			pd.changeCash.setText((current - total)+"");
-			pd.cashGo.setEnabled(true);
+			pd.getChangeCash().setText(ChangeString.setCashMark(current-total));
+			pd.getCashGo().setEnabled(true);
 		}
 	}
 	

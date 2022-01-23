@@ -23,13 +23,13 @@ public class MenuDetail_minusAction implements ActionListener {
 		JButton btn = (JButton)e.getSource();
 		ArrayList<JLabel> titleList = mdd.getTitleList();
 		ArrayList<JLabel> amountLabels = mdd.getAmountLabels();
-		int sum = Integer.parseInt(ChangeString.setErase(titleList.get(titleList.size()-1).getText()));
+		int sum = ChangeString.setErase(titleList.get(titleList.size()-1).getText());
 		
 		for(int i=0; i<amountLabels.size(); ++i) {
 			if(btn.getName().equals(mdd.getExtraLabels().get(i).getText())) {
 				JLabel label = amountLabels.get(i);
 				int cnt = Integer.parseInt(label.getText());
-				int sum2 = Integer.parseInt(ChangeString.setErase(mdd.getExtraAmountLabels().get(i).getText()));
+				int sum2 = ChangeString.setErase(mdd.getExtraAmountLabels().get(i).getText());
 				
 				if(Integer.parseInt(label.getText()) > 0) {
 					titleList.get(titleList.size()-1).setText(ChangeString.setCashMark(sum-sum2));

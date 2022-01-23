@@ -2,17 +2,18 @@ package oneteampos.menu.component;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 
+import oneteampos.main.MainFrame;
 import oneteampos.menu.action.MenuDetail_turnOnAction;
 import oneteampos.menu.action.Menu_itemRolloverAction;
+import oneteampos.menu.data.MenuData;
 
 public class Menu_itemBtn extends JButton {
 	
@@ -20,12 +21,12 @@ public class Menu_itemBtn extends JButton {
 		
 	}
 	
-	public Menu_itemBtn(JDialog menuDetailsPanel, JLabel menuName, JLabel menuPrice) {
+	public Menu_itemBtn(MainFrame mainFrame, JLabel menuName, JLabel menuPrice, ArrayList<MenuData> arrayList) {
 		setContentAreaFilled(false);
 		setBorderPainted(false);
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
 		addMouseListener(new Menu_itemRolloverAction(menuName, menuPrice));
-		addActionListener(new MenuDetail_turnOnAction(menuDetailsPanel));
+		addActionListener(new MenuDetail_turnOnAction(mainFrame, menuName, menuPrice, arrayList));
 	}
 	
 	@Override

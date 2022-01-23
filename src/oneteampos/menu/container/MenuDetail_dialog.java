@@ -14,6 +14,7 @@ import javax.swing.JRadioButton;
 
 import oneteampos.main.MainFrame;
 import oneteampos.menu.action.Cart_addAction;
+import oneteampos.menu.action.Cart_updateAction;
 import oneteampos.menu.action.Dialog_windowAction;
 import oneteampos.menu.action.MenuDetail_cntMinusAction;
 import oneteampos.menu.action.MenuDetail_cntPlusAction;
@@ -48,8 +49,11 @@ public class MenuDetail_dialog extends JDialog {
 	private int originPrice;
 	private JLabel cntName;
 	private JLabel cnt;
+	private boolean isClick;
+	private JPanel btnPanel;
+	private JButton updateBtn;
 
-	public MenuDetail_dialog(MainFrame mainFrame, MenuData list, ArrayList<MenuData> lists) {
+	public MenuDetail_dialog(MainFrame mainFrame, String name, int price, ArrayList<MenuData> arrayList) {
 		super(mainFrame, "메뉴 상세 선택", true);
 		this.tempBtns = new ArrayList<>();
 		this.sizeBtns = new ArrayList<>();
@@ -59,14 +63,15 @@ public class MenuDetail_dialog extends JDialog {
 		this.amountLabels = new ArrayList<>();
 		this.extraLabels = new ArrayList<>();
 		this.extraAmountLabels = new ArrayList<>();
-		this.lists = lists;
-		this.tempPrice = list.getPrice();
-		this.titles = new String[] {"메뉴명", list.getMenuName(), "온도", "사이즈", "추가", ChangeString.setCashMark(tempPrice)};
+		this.lists = arrayList;
+		this.tempPrice = price;
+		this.titles = new String[] {"메뉴명", name, "온도", "사이즈", "추가", ChangeString.setCashMark(tempPrice)};
 		this.titleList = createLabel();
 		this.order = 0;
-		this.originPrice = list.getPrice();
+		this.originPrice = price;
 		this.cntName = new All_label("수량");
 		this.cnt = new All_label("1");
+		this.isClick = false;
 
 		All_boxPanel bgBoxPanel = new All_boxPanel("Y", LEFT_ALIGNMENT);
 		All_boxPanel menuNameBoxPanel = new All_boxPanel("Y", LEFT_ALIGNMENT);
@@ -85,14 +90,15 @@ public class MenuDetail_dialog extends JDialog {
 		
 		JPanel cntPanel = new All_opaquePanel(new FlowLayout(FlowLayout.RIGHT,0,0));
 		JPanel totalPanel = new All_opaquePanel(new FlowLayout(FlowLayout.LEFT,0,0));
-		JPanel btnPanel = new All_opaquePanel(new FlowLayout(FlowLayout.RIGHT,0,0));
+		this.btnPanel = new All_opaquePanel(new FlowLayout(FlowLayout.RIGHT,0,0));
 		JPanel chkPanel = new All_opaquePanel(new GridLayout(minusBtns.size(), 1, 0, 0));
 		ArrayList<JPanel> linePanels = getLinePanel();
 		
 		JButton cntLeftBtn = new All_btn("◀");
 		JButton cntRightBtn = new All_btn("▶");
 		JButton addBtn = new All_btn("추가");
-
+		this.updateBtn = new All_btn("수정");
+		
 		ButtonGroup tempBtnGroup = new ButtonGroup();
 		ButtonGroup sizeBtnGroup = new ButtonGroup();
 		
@@ -115,6 +121,7 @@ public class MenuDetail_dialog extends JDialog {
 		this.isSelect = new boolean[sizeBtns.size()];
 		
 		addBtn.addActionListener(new Cart_addAction(mainFrame, this));
+		updateBtn.addActionListener(new Cart_updateAction(mainFrame, this));
 		cntLeftBtn.addMouseListener(new MenuDetail_cntPlusAction(this));
 		cntRightBtn.addMouseListener(new MenuDetail_cntMinusAction(this));
 
@@ -143,7 +150,7 @@ public class MenuDetail_dialog extends JDialog {
 		btnPanel.add(addBtn);
 		totalBtnPanel.add(totalPanel);
 		totalBtnPanel.add(btnPanel);
-		
+
 		sizeSurroundBoxPanel.add(sizeBoxPanel);
 		sizeSurroundBoxPanel.add(sizeNameBoxPanel);
 		
@@ -162,9 +169,12 @@ public class MenuDetail_dialog extends JDialog {
 		bgBoxPanel.add(totalBtnPanel);
 		
 		add(bgBoxPanel);
+		
 		addWindowListener(new Dialog_windowAction(mainFrame));
+		
 		setSize(400, 650);
 		setLocationRelativeTo(null);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 	
 	public void inputBtn(All_boxPanel panel, ArrayList<JRadioButton> btns, ButtonGroup bg) {
@@ -177,7 +187,7 @@ public class MenuDetail_dialog extends JDialog {
 	private ArrayList<JLabel> createLabel() {
 		ArrayList<JLabel> titleList = new ArrayList<>();
 		for(int i=0; i<titles.length; ++i) {
-			titleList.add(new All_label(titles[i], 13));
+			titleList.add(new All_label(titles[i]));
 		}
 		return titleList;
 	}
@@ -231,9 +241,9 @@ public class MenuDetail_dialog extends JDialog {
 			} else if(data.equals(extra)) {
 				plusBtns.add(new MenuDetail_plusBtn(this, list.getMenuName()));
 				minusBtns.add(new MenuDetail_minusBtn(this, list.getMenuName()));
-				amountLabels.add(new All_label("0",13));
-				extraLabels.add(new All_label(list.getMenuName(),13));
-				extraAmountLabels.add(new All_label("+ " + list.getPrice(),13));
+				amountLabels.add(new All_label("0"));
+				extraLabels.add(new All_label(list.getMenuName()));
+				extraAmountLabels.add(new All_label("+ " + list.getPrice()));
 			}
 		}
 	}
@@ -277,13 +287,33 @@ public class MenuDetail_dialog extends JDialog {
 	public int getOriginPrice() {
 		return this.originPrice;
 	}
-
+	
 	public ArrayList<MenuData> getMenuData() {
 		return this.lists;
 	}
 	
 	public JLabel getCnt() {
 		return this.cnt;
+	}
+	
+	public boolean getIsClick() {
+		return this.isClick;
+	}
+	
+	public JPanel getBtnPanel() {
+		return this.btnPanel;
+	}
+	
+	public JButton getUpdateBtn() {
+		return this.updateBtn;
+	}
+	
+	public void setIsClick(boolean isClick) {
+		this.isClick = isClick;
+	}
+	
+	public void setOriginPrice(int originPrice) {
+		this.originPrice = originPrice;
 	}
 	
 	public void setOrder(int num) {

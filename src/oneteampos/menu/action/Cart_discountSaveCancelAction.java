@@ -25,10 +25,10 @@ public class Cart_discountSaveCancelAction extends MouseAdapter {
 		if(choice == JOptionPane.YES_OPTION) {
 			JLabel totalPrice = mrp.getTotalPrice();
 			JLabel discountCash = mrp.getDiscountCash();
-			Member_inquiryDialog mid = mrp.getMemeberCheckDialog();
+			Member_inquiryDialog mid = mrp.getMemberInquiryDialog();
 			
 			mid.setPoint(0);
-			totalPrice.setText(ChangeString.setCashMark(Integer.parseInt(ChangeString.setErase(totalPrice.getText())) + Integer.parseInt(ChangeString.setErase(discountCash.getText()))));
+			totalPrice.setText(ChangeString.setCashMark(ChangeString.setErase(totalPrice.getText()) + ChangeString.setErase(discountCash.getText())));
 			mid.getSaveCash().setText("");
 			
 			discountCash.setText("0");

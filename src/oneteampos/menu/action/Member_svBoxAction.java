@@ -37,11 +37,12 @@ public class Member_svBoxAction implements ActionListener {
 			svBox.setSelected(false);
 		} else if (svBox.isSelected()) {
 			mcd.setDiscnt((int)table.getValueAt(row, 5));
-			int total = Integer.parseInt(ChangeString.setErase(mrp.getTotalPrice().getText()));
+			int total = ChangeString.setErase(mrp.getTotalPrice().getText());
 			double save = (double)table.getValueAt(row, 7);
 			
 			saveCash.setVisible(true);
-			saveCash.setText((int)(total*(save/100))+"");
+			
+			saveCash.setText(ChangeString.setCashMark((int)(total*(save/100))));
 		} else {
 			saveCash.setVisible(false);
 		}

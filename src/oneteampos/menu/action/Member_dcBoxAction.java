@@ -36,15 +36,15 @@ public class Member_dcBoxAction implements ActionListener {
 			JOptionPane.showMessageDialog(null, "회원을 선택해주세요!", "Message", JOptionPane.WARNING_MESSAGE);
 			dcBox.setSelected(false);
 		} else if(dcBox.isSelected()) {
-			int total = Integer.parseInt(ChangeString.setErase(mrp.getTotalPrice().getText()));
+			int total = ChangeString.setErase(mrp.getTotalPrice().getText());
 			
 			mcd.setDiscnt((int)table.getValueAt(row, 5));
 			int discnt = mcd.getDiscnt();
 			
 			if(total >= discnt) {
-				discountCash.setText(discnt+"");
+				discountCash.setText(ChangeString.setCashMark(discnt));
 			} else {
-				discountCash.setText(total+"");
+				discountCash.setText(ChangeString.setCashMark(total));
 			}
 			discountCash.setVisible(true);
 		} else {

@@ -70,8 +70,10 @@ public class Cart_addAction implements ActionListener {
 
 				list.add(titleList.get(5).getText());
 				
-				int sum = Integer.parseInt(ChangeString.setErase(titleList.get(5).getText()));
-				int total = Integer.parseInt(ChangeString.setErase(totalPrice.getText()));
+				int sum = ChangeString.setErase(titleList.get(5).getText());
+				int total = ChangeString.setErase(totalPrice.getText());
+				
+				rp.getPrevSum().add(sum);
 
 				totalPrice.setVisible(true);
 				totalPrice.setText(ChangeString.setCashMark(sum+total));

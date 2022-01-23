@@ -17,7 +17,7 @@ public class MenuDetail_cntPlusAction extends MouseAdapter {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		int cnt2 = Integer.parseInt(mdd.getCnt().getText());
-		int sum = Integer.parseInt(ChangeString.setErase(mdd.getTitleList().get(5).getText()));
+		int sum = ChangeString.setErase(mdd.getTitleList().get(5).getText());
 		if(cnt2 > 1) {
 			mdd.getTitleList().get(5).setText(ChangeString.setCashMark(sum-mdd.getOriginPrice()));
 			mdd.getCnt().setText((cnt2 - 1) + "");
