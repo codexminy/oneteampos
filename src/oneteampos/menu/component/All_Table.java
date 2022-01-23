@@ -4,12 +4,12 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
@@ -22,6 +22,13 @@ public class All_Table extends JTable {
 	}
 	
 	public All_Table(Object[][] row, Object[] col) {
+		super(row, col);
+		settings();
+		tableAlign();
+		setHeader();
+	}
+	
+	public All_Table(Vector<Vector<Object>> row, Vector<Object> col) {
 		super(row, col);
 		settings();
 		tableAlign();

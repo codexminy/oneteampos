@@ -25,17 +25,19 @@ public class Cart_holdBtnAction extends MouseAdapter {
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		MenuRightPanel rp = mainFrame.getMainPanel().getMenuPanel().getRightPanel();
 		ArrayList<MenuRightPanel> mrp = holdPanel.getMrpList();
-		
-		mrp.add(rp);
+
 		mrp.add(new MenuRightPanel(mainFrame, leftPanel));
-		mrp.get(0).setVisible(false);
 		
-		mainFrame.getMainPanel().getMenuPanel().add(mrp.get(1));
-		
-		mrp.get(1).setVisible(true);
-		
+		for(int i=0; i<mrp.size(); ++i) {
+			if(i != mrp.size()-1) {
+				mrp.get(i).setVisible(false);
+			} else {
+				mainFrame.getMainPanel().getMenuPanel().add(mrp.get(i));
+				mrp.get(i).setVisible(true);
+			}
+		}
+
 		JOptionPane.showMessageDialog(null, "보류가 완료되었습니다.");
 	}
 	

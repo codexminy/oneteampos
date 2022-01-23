@@ -1,5 +1,6 @@
 package oneteampos.menu.container;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JDialog;
@@ -25,11 +26,21 @@ public class Cart_holdDialog extends JDialog {
 	public Cart_holdDialog(MainFrame mainFrame) {
 		super(mainFrame, "카트 보류 목록", true);
 		this.model = new DefaultTableModel() {@Override public boolean isCellEditable(int row, int column) {return false;}};
-		this.cart = new All_Table();
+		this.cart = new All_Table(row, col);
 		this.col = new Vector<>();
 		
 		inputColumn();
 		
+//		ArrayList<MenuRightPanel> mrp = mainFrame.getMainPanel().getMenuPanel().getHoldPanel().getMrpList();
+		
+//		for(int i=0; i<mrp.size(); ++i) {
+//			JTable cart = mrp.get(i).getCart();
+//			
+//			if(cart.getRowCount() > 0) {
+//				
+//			}
+//		}
+
 		setSize(D_WIDTH, D_HEIGHT);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);

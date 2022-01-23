@@ -19,15 +19,17 @@ public class Cart_holdPanel extends All_opaquePanel {
 	private JButton holdList;
 	private ArrayList<MenuRightPanel> mrp;
 	
-	public Cart_holdPanel(MainFrame mainFrame, MenuLeftPanel leftPanel) {
+	public Cart_holdPanel(MainFrame mainFrame, MenuLeftPanel leftPanel, MenuRightPanel rightPanel) {
 		this.holdDialog = new Cart_holdDialog(mainFrame);
 		this.holdBtn = new All_btn("보류");
 		this.holdList = new All_btn("보류 목록");
 		this.mrp = new ArrayList<>();
 		
-		holdBtn.addMouseListener(new Cart_holdBtnAction(mainFrame, leftPanel, this));
-		holdList.addMouseListener(new Cart_holdListBtnAction(this, holdDialog));
+		mrp.add(rightPanel);
 		
+//		holdBtn.addMouseListener(new Cart_holdBtnAction(mainFrame, leftPanel, this));
+//		holdList.addMouseListener(new Cart_holdListBtnAction(this, holdDialog));
+
 		add(holdList);
 		add(holdBtn);
 		

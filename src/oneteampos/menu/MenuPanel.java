@@ -20,7 +20,7 @@ public class MenuPanel extends JPanel {
 		this.list = new TreeSet<>();
 		this.leftPanel = new MenuLeftPanel(mainFrame);
 		this.rightPanel = new MenuRightPanel(mainFrame, leftPanel);
-		this.holdPanel = new Cart_holdPanel(mainFrame, leftPanel);
+		this.holdPanel = new Cart_holdPanel(mainFrame, leftPanel, rightPanel);
 		
 		add(leftPanel);
 		add(holdPanel);
@@ -35,6 +35,10 @@ public class MenuPanel extends JPanel {
 	
 	public MenuRightPanel getRightPanel() {
 		return this.rightPanel;
+	}
+	
+	public Cart_holdPanel getHoldPanel() {
+		return this.holdPanel;
 	}
 	
 	public TreeSet<Integer> getList() {
