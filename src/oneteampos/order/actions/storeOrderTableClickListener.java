@@ -3,15 +3,19 @@ package oneteampos.order.actions;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -78,6 +82,14 @@ public class storeOrderTableClickListener implements MouseListener {
 							JFrame detailsFrame = new JFrame("발주 상세내역");
 							detailsFrame.setLayout(null);
 							detailsFrame.getContentPane().setBackground(Color.WHITE);
+							
+							Image image = null; 
+							try { 
+								image = ImageIO.read(new File("image\\icon4.png")); 
+							} catch (IOException e1) { 
+								e1.printStackTrace(); 
+							} 
+							detailsFrame.setIconImage(image);
 						
 							// 테이블 생성 
 							// order_list 아이디로 목록 가져오기

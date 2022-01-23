@@ -3,13 +3,17 @@ package oneteampos.order.actions;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -56,6 +60,14 @@ public class ItemQtyUpdate implements MouseListener{
 		JFrame qtyframe = new JFrame(stockTable.getValueAt(row, 2)+"수량 관리");
 		qtyframe.setSize(300, 200);
 		qtyframe.setLocationRelativeTo(null);
+		
+		Image image = null; 
+		try { 
+			image = ImageIO.read(new File("image\\icon4.png")); 
+		} catch (IOException e1) { 
+			e1.printStackTrace(); 
+		} 
+		qtyframe.setIconImage(image);
 		
 		JPanel qtypanel = new JPanel();
 		qtypanel.setBounds(0, 0, 300, 200);
