@@ -9,15 +9,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
 import oneteampos.database.DBConnector;
 import oneteampos.datamodel.Staff;
-import oneteampos.login.components.LoginStaffIDJLabel;
-import oneteampos.login.components.LoginStaffNameJLabel;
 import oneteampos.main.MainFrame;
 import oneteampos.main.mainContainer.MainPanel;
 
@@ -122,7 +118,7 @@ public class LoginNumberkeyAction implements MouseListener{
 					mainframe.getStaffNameJLabel().setText(staff.get(0).getStfName());
 					mainPanel.getMenuPanel().getLeftPanel().getInfoIdLabel().setText(id);
 					mainPanel.getMenuPanel().getLeftPanel().getInfoNameLabel().setText("  " + staff.get(0).getStfName());
-					
+					mainPanel.getMember().getLoginInfo().setText(id + " " + staff.get(0).getStfName());
 					System.out.println("로그인 성공!");
 					return;
 				}

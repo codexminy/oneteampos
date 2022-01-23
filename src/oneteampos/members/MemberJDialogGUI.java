@@ -20,11 +20,11 @@ import oneteampos.main.MainFrame;
 
 public class MemberJDialogGUI extends JDialog implements ActionListener {
 
+	// 회원정보관리창
 	private static MainFrame mainFrame;
 	
 	JPanel pw = new JPanel(new GridLayout(6,1,0,40));
     JPanel pc = new JPanel(new GridLayout(6,1,0,40));
-    //JPanel pc=new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 35));
     JPanel ps = new JPanel();
     JPanel title = new JPanel();
  

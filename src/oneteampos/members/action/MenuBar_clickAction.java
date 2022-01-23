@@ -9,6 +9,7 @@ import oneteampos.main.MainFrame;
 import oneteampos.members.MemberDefaultJTableDAO;
 import oneteampos.members.MemberJDialogGUI;
 import oneteampos.members.MemberJPanel;
+import oneteampos.members.RoundedButton;
 
 public class MenuBar_clickAction implements ActionListener {
 	
@@ -22,7 +23,7 @@ public class MenuBar_clickAction implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JMenuItem menu = (JMenuItem)e.getSource();
+		RoundedButton menu = (RoundedButton)e.getSource();
 		
 		if (menu == mjp.getInsert()) {			// 메뉴 > 등록 
 			new MemberJDialogGUI(mjp, "회원등록");
