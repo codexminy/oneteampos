@@ -54,7 +54,8 @@ public class ItemQtyUpdate implements MouseListener{
 		int column = 1; // 수량 컬럼
 		// 프레임 띄우기
 		JFrame qtyframe = new JFrame(stockTable.getValueAt(row, 2)+"수량 관리");
-		qtyframe.setBounds(700 ,400, 300, 200);
+		qtyframe.setSize(300, 200);
+		qtyframe.setLocationRelativeTo(null);
 		
 		JPanel qtypanel = new JPanel();
 		qtypanel.setBounds(0, 0, 300, 200);

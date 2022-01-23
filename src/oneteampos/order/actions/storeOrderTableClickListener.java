@@ -175,7 +175,8 @@ public class storeOrderTableClickListener implements MouseListener {
 							detailsFrame.add(exitBtn);
 							
 							// 프레임 속성 
-							detailsFrame.setBounds(x, y , 1000, 270 + detailsTable.getRowCount() * 20 );
+							detailsFrame.setSize(1000, 270 + detailsTable.getRowCount() * 20 );
+							detailsFrame.setLocationRelativeTo(null);
 							orderPanel.getOrderListJPanel().setDetailsFrame(detailsFrame);
 							orderPanel.getOrderListJPanel().getDetailsFrame().setVisible(true);
 							
