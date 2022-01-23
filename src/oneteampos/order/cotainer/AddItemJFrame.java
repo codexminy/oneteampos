@@ -3,11 +3,15 @@ package oneteampos.order.cotainer;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -48,6 +52,14 @@ public class AddItemJFrame extends JFrame {
 		add(countLabel); // 추가할 수량 라벨 
 		this.addOrderBtn = new AddOrderBtn(orderListPanel, this); // 추가 버튼
 		add(addOrderBtn);
+		
+		Image image = null; 
+		try { 
+			image = ImageIO.read(new File("image\\icon4.png")); 
+		} catch (IOException e) { 
+			e.printStackTrace(); 
+		} 
+		this.setIconImage(image);
 
 	}
 	

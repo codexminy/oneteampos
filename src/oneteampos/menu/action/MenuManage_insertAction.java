@@ -36,7 +36,17 @@ public class MenuManage_insertAction implements ActionListener {
 			Object data = mlp.getMenuManage_dialog().getRsMenu().getValueAt(0, i);
 			
 			if(data.equals("")) {
-				JOptionPane.showMessageDialog(null, "메뉴를 입력해주세요!", "information", JOptionPane.CANCEL_OPTION);
+				JOptionPane.showMessageDialog(null, "메뉴를 입력해주세요!", "Message", JOptionPane.CANCEL_OPTION);
+				return;
+			}
+		}
+		
+		CafeMenuData menuData = mlp.getCafeMenuData();
+		ArrayList<MenuData> menuList = menuData.getMenuData();
+		
+		for(int i=0; i<menuList.size(); ++i) {
+			if(rsMenu.getValueAt(0, 0).toString().equals(menuList.get(i).getMenuName())) {
+				JOptionPane.showMessageDialog(null, "이미 존재하는 메뉴입니다!", "Message", JOptionPane.CANCEL_OPTION);
 				return;
 			}
 		}
@@ -44,12 +54,10 @@ public class MenuManage_insertAction implements ActionListener {
 		int check = JOptionPane.showOptionDialog(null, "메뉴를 추가하겠습니까?", "Message", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 		
 		if(check == JOptionPane.YES_OPTION) {
-			
 			insertMenu(rsMenu);
 			
 			Vector<Object> vec = new Vector<>();
-			CafeMenuData menuData = mlp.getCafeMenuData();
-			ArrayList<MenuData> menuList = menuData.getMenuData();
+			menuList = menuData.getMenuData();
 			
 			menuData.insertMenuData();
 
