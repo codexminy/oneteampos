@@ -35,3 +35,4 @@
 > ### 프로그램 실행 화면&코드
 #### :pushpin: 로그인 :point_right: [로그인 화면&코드 보러가기](https://github.com/codexminy/oneteampos/tree/main/src/oneteampos/login)
 #### :pushpin: 메인 :point_right: [메인 화면&코드 보러가기](https://github.com/codexminy/oneteampos/tree/main/src/oneteampos/main)
+#### :pushpin: 메뉴 관리 :point_right: [메뉴 관리 화면&코드 보러가기](https://github.com/codexminy/oneteampos/tree/main/src/oneteampos/menu)
