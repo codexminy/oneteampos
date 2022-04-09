@@ -32,11 +32,6 @@
 ![image](https://user-images.githubusercontent.com/85227582/162565008-69d2ed15-1de1-4612-bc3f-6fbe9a623969.png)
 <br>
 
-> ### 유스케이스 다이어그램
-
-![image](https://user-images.githubusercontent.com/85227582/162565167-f3b35e84-06cb-4990-9aa3-2abc6d60918c.png)
-<br>
-
 > ### 프로그램 실행 화면
 #### :pushpin: 로그인
 매니저급만 로그인 가능하도록 설정함
