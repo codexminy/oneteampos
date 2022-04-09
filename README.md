@@ -218,3 +218,50 @@
 * 삭제는 사원 정보 테이블을 클릭하여 삭제할 수 있도록 구현하였습니다.
 ```
 ![image](https://user-images.githubusercontent.com/85227582/162579250-6b735ecd-1c93-4996-b9b0-ebf76c8314a4.png)
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+## :pushpin: 회원
+```
+* 회원 관리창 기본 화면입니다.
+* 다른 페이지와 마찬가지로 로그인한 계정의 정보와 시간을 제공합니다.
+* 상단 우측 버튼을 클릭하여 회원 등록, 수정, 삭제를 할 수 있습니다.
+```
+![image](https://user-images.githubusercontent.com/85227582/162580688-ccba37f8-9db3-403a-aa0d-971afa6f31bd.png)
+<br>
+<br>
+<br>
+
+---
+### :point_down: 회원 등록
+```
+* 멤버ID는 시퀀스를 사용하여 자동 생성되므로 입력하지 못하게 설정했습니다.
+* 전화번호 또한 중복값이 발생하지 않기 때문에 중복 확인을 통해 기존에 이미 가입한 회원인지 확인할 수 있게 했습니다.
+```
+![image](https://user-images.githubusercontent.com/85227582/162580774-d7062982-01bb-4a59-b95b-5a670aa84ca6.png)
+<br>
+<br>
+<br>
+
+---
+### :point_down: 회원 수정
+```
+* 선택한 회원의 정보를 그대로 불러와 수정 가능하게 했습니다.
+* 멤버ID는 PK이기 때문에 회원등록과 마찬가지로 수정이 불가능하게 했습니다.
+```
+![image](https://user-images.githubusercontent.com/85227582/162580876-b580e2ab-5ca5-44a4-a4fe-1c4d41cfd01d.png)
+<br>
+<br>
+<br>
+
+---
+### :point_down: 회원 삭제
+```
+* 회원을 선택한 후 회원 삭제 버튼을 누르면 바로 데이터가 삭제됩니다.
+```
+![image](https://user-images.githubusercontent.com/85227582/162580939-0a8c4f59-1993-40f1-a0cf-280912642215.png)
